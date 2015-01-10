@@ -23,11 +23,18 @@ gem "simple_form"
 gem "title"
 gem "uglifier"
 gem "unicorn"
+gem 'haml', '~> 4.0.6'
+gem 'haml-rails', '~> 0.6.0'
+gem "wysiwyg-rails"
+gem "mandrill-api"
+gem "instagram"
 
 group :development do
   gem "bundler-audit"
   gem "spring"
   gem "spring-commands-rspec"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :development, :test do
