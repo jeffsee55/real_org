@@ -28,6 +28,7 @@ gem 'haml-rails', '~> 0.6.0'
 gem "wysiwyg-rails"
 gem "mandrill-api"
 gem "instagram"
+gem "font-awesome-rails"
 
 group :development do
   gem "bundler-audit"
@@ -35,6 +36,9 @@ group :development do
   gem "spring-commands-rspec"
   gem "better_errors"
   gem "binding_of_caller"
+  gem "guard"
+  gem 'guard-livereload', require: false
+  gem 'guard-rspec', require: false
 end
 
 group :development, :test do

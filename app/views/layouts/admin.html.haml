@@ -1,0 +1,64 @@
+!!!
+%html
+%head
+%meta{:charset => "utf-8"}/
+%meta{:content => "NOODP", :name => "ROBOTS"}/
+%meta{:content => "initial-scale=1", :name => "viewport"}/
+%title= title
+= stylesheet_link_tag :admin, media: "all"
+= csrf_meta_tags
+%body{:class => body_class}
+= render "flashes"
+.nav
+  .wrapper
+    %h3= title
+.sidebar
+  %ul
+    =link_to admin_path do
+      %li
+        %i.fa.fa-area-chart
+        DASHBOARD
+    =link_to admin_posts_path do
+      %li
+        %i.fa.fa-pencil
+        POSTS
+        %i.fa.fa-angle-down
+        %ul.dropdown
+          %li NEW
+          %li ALL POSTS
+          %li NEW
+    =link_to admin_categories_path do
+      %li
+        %i.fa.fa-list
+        CATEGORIES
+        %i.fa.fa-angle-down
+        %ul.dropdown
+          %li NEW
+          %li ALL CATEGORIES
+    =link_to admin_categories_path do
+      %li
+        %i.fa.fa-cogs
+        SETTINGS
+        %i.fa.fa-angle-down
+        %ul.dropdown
+          %li NEW
+          %li ALL CATEGORIES
+    =link_to admin_authors_path do
+      %li
+        %i.fa.fa-user
+        PROFILE
+        %i.fa.fa-angle-down
+        %ul.dropdown
+          %li NEW
+          %li ALL CATEGORIES
+    =link_to admin_comments_path do
+      %li
+        %i.fa.fa-comments-o
+        COMMENTS
+        %i.fa.fa-angle-down
+        %ul.dropdown
+          %li NEW
+          %li ALL CATEGORIES
+.main
+  = yield
+= render "javascript"

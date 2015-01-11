@@ -1,0 +1,55 @@
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  background: $light-gray;
+  z-index: 20;
+  height: 50px;
+  .wrapper {
+    @include outer-container;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 50px;
+  bottom: 0;
+  background: $dark-gray;
+  z-index: 10;
+  width: 20%;
+  color: white;
+  li {
+    padding: 10px 0 10px 15px;
+    font-size: 20px;
+    font-weight: 300;
+    &:hover {
+      background: lighten($dark-gray, 20)
+    }
+    .dropdown {
+      font-size: 0.8em;
+      display: none;
+    }
+  }
+}
+
+.main {
+  @include outer-container;
+  position: relative;
+  margin-left: 20%;
+  margin-top: 1em;
+  top: 70px;
+  .header {
+    @include row();
+    .title {
+      float:left;
+    }
+    .new {
+      float: right;
+    }
+  }
+  .body {
+
+  }
+}

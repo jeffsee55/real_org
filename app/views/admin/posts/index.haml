@@ -1,0 +1,7 @@
+.header
+  %h2.title Posts
+  = button_to "New Post", new_admin_post_path, method: :get, class: "new"
+%hr
+.body
+  - @posts.each do |p|
+    = link_to p.title, admin_post_path(p.id)
