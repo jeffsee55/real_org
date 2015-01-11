@@ -350,6 +350,7 @@ DEPENDENCIES
   mandrill-api
   neat (~> 1.5.1)
   newrelic_rpm
+  nokogiri
   normalize-rails (~> 3.0.0)
   pg
   pry-rails

@@ -1,0 +1,20 @@
+.nav
+  .title
+    %span.thin THE
+    %span.fat REALISTIC
+    %br
+    %span.fat ORGANIZER
+  .tagline
+    Adventures in Organizing and Attempts at Creativity
+  %i.fa.fa-2x.fa-bars
+  %ul
+    = link_to root_url do
+      %li HOME
+    = link_to about_path do
+      %li ABOUT
+    = link_to category_path(4) do
+      %li ORGANZING
+    = link_to root_url do
+      %li WEDDINGS
+    = link_to root_url do
+      %li DIY

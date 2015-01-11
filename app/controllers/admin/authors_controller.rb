@@ -14,7 +14,7 @@ class Admin::AuthorsController < AdminController
 
   def create
     @author = Author.create(author_params)
-    redirect_to @author
+    redirect_to admin_author_path(@author.id)
   end
 
   def edit
@@ -29,7 +29,7 @@ class Admin::AuthorsController < AdminController
   private
 
   def author_params
-    params.require(:author).permit(:name, :email, :bio)
+    params.require(:author).permit(:first_name, :last_name, :email, :bio)
   end
 
 end

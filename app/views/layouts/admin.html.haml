@@ -43,18 +43,10 @@
         %ul.dropdown
           %li NEW
           %li ALL CATEGORIES
-    =link_to admin_authors_path do
+    =link_to admin_author_path(Author.first.id) do
       %li
         %i.fa.fa-user
         PROFILE
-        %i.fa.fa-angle-down
-        %ul.dropdown
-          %li NEW
-          %li ALL CATEGORIES
-    =link_to admin_comments_path do
-      %li
-        %i.fa.fa-comments-o
-        COMMENTS
         %i.fa.fa-angle-down
         %ul.dropdown
           %li NEW

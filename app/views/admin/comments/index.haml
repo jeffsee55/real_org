@@ -1,9 +1,0 @@
-.header
-  %h2.title Comments
-%hr
-.body
-  %ul
-    - @comments.each do |c|
-      %li
-        %h4= link_to c.name, admin_category_path(c.id)
-        %p= c.description

@@ -17,6 +17,16 @@ class Admin::CategoriesController < AdminController
     @category = Category.find(params[:id])
   end
 
+  def update
+    @category = Category.find(params[:id])
+
+    if @category.update(category_params)
+      redirect_to admin_categories_path, notice: "#{@category.name} was successfully updated"
+    else
+      redirect_to :back
+    end
+  end
+
   def index
     @categories = Category.all
     @category = Category.new
@@ -27,12 +37,16 @@ class Admin::CategoriesController < AdminController
   end
 
   def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+
+    redirect_to admin_categories_path, notice: "#{@category.name} was successfully deleted"
   end
 
   private
 
   def category_params
-    params.require(:category).permit(:name, :description)
+    params.require(:category).permit(:name, :description, :tag_color)
   end
 
 end

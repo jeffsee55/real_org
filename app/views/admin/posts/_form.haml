@@ -1,5 +1,9 @@
 = simple_form_for [:admin, @post] do |p|
   = p.input :title, placeholder: "Title", label: false
+  %label Categories
+  - @categories.each do |cat|
+    = cat.name
+    = check_box_tag 'category_ids[]', cat.id
   = p.input :body
-  = p.input :author_id
+  = p.input :author_id, as: :hidden, value: Author.last.id
   = p.submit

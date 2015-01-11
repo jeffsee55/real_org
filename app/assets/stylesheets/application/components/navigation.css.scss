@@ -1,0 +1,45 @@
+.nav {
+  @include clearfix();
+  .title {
+    float: left;
+    font-size: 1.2em;
+  }
+  .tagline {
+    display: none;
+  }
+  i {
+    float: right;
+  }
+  @include media($large-screen) {
+    text-align: center;
+    float: none;
+    br {
+      display: none;
+    }
+    .title {
+      font-size: 4em;
+      float: none;
+    }
+    .tagline {
+      display: inline;
+      font-size: 2em;
+      font-weight: 300;
+    }
+    i {
+      display: none;
+    }
+  }
+  ul {
+    border-top: 1px solid;
+    padding: 1em 0;
+    display: none;
+    @include media($large-screen) {
+      display: block;
+    }
+    li {
+      display: inline-block;
+      width: percentage(1/6);
+      font-size: 1.3em;
+    }
+  }
+}

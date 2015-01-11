@@ -3,5 +3,8 @@
   = button_to "New Post", new_admin_post_path, method: :get, class: "new"
 %hr
 .body
-  - @posts.each do |p|
-    = link_to p.title, admin_post_path(p.id)
+  %ul
+    - @posts.each do |p|
+      %li
+        = link_to p.title, admin_post_path(p.id)
+        = link_to "Delete", admin_post_path(p.id), method: :delete, confirm: "Are you sure?"

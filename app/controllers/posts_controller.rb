@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @categories = Category.all
   end
 
   def new
@@ -15,6 +16,10 @@ class PostsController < ApplicationController
     else
       redirect_to :new, notice: "There was a problem creating your post"
     end
+  end
+
+  def index
+    @categories = Category.all
   end
 
   def edit

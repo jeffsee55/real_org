@@ -1,3 +1,23 @@
-%h2= @post.title
-
-= @post.body.html_safe
+.container
+  = render "nav"
+  .main
+    .poster{style: "background-image: url('#{asset_path "unsplash-3.jpg"}')"}
+      .overlay
+        .content
+          %span.tag{style: "background: #{@post.categories.first.tag_color}"}= @post.categories.first.name.upcase
+          .text
+            %h2= @post.title
+          .buttons
+            = button_to "TEST", "", class: "button-primary"
+            = button_to "TEST AGAIN", "", class: "button-secondary"
+    .blog.card
+      = @post.body.html_safe
+    .comment.card
+      .comment-header
+        %h2 COMMENTS
+      %hr
+      #disqus_thread
+        :javascript
+          var disqus_shortname = 'therealisticorganizer';
+  = render partial: "sidebar", locals: { p: @post }
+= render "footer"

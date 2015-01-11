@@ -12,4 +12,6 @@
     - @categories.each do |c|
       %li
         %h4= link_to c.name, admin_category_path(c.id)
+        =link_to 'Edit', edit_admin_category_path(c.id)
+        =link_to 'Delete', admin_category_path(c.id), method: :delete, confirm: "Are you sure?"
         %p= c.description

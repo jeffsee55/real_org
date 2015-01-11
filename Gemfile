@@ -29,6 +29,7 @@ gem "wysiwyg-rails"
 gem "mandrill-api"
 gem "instagram"
 gem "font-awesome-rails"
+gem "nokogiri"
 
 group :development do
   gem "bundler-audit"

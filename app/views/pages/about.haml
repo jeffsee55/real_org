@@ -1,0 +1,14 @@
+.container
+  =render "nav"
+  .poster.content-poster{style: "background: url('#{asset_path "unsplash-11.jpg"}') no-repeat center"}
+    .overlay
+    .content
+      .contact-form
+        %h2 WORK WITH ME
+        %input.name(placeholder="NAME")
+        %input.email(placeholder="EMAIL")
+        %textarea.message(rows="3" placeholder="MESSAGE")
+      .buttons
+        = button_to "TEST", "", class: "button-primary"
+        = button_to "TEST AGAIN", "", class: "button-secondary"
+= render "footer"

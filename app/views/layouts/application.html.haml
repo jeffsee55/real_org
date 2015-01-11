@@ -7,8 +7,7 @@
 %title= title
 = stylesheet_link_tag :application, media: "all"
 = csrf_meta_tags
-%body{:class => body_class}
+%body{ class: body_class}
 = render "flashes"
-%h3 App layout
 = yield
 = render "javascript"
