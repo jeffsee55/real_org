@@ -1,17 +1,24 @@
-.header
-  %h2.title Categories
-%hr
+=render "nav"
 .body
-  %h2 New Category
-  = simple_form_for [:admin, @category] do |cat|
-    = cat.input :name, placeholder: "Name", label: false
-    = cat.input :description, placeholder: "Description", label: false
-    = cat.submit
-  %hr
-  %ul
+  .index
     - @categories.each do |c|
-      %li
-        %h4= link_to c.name, admin_category_path(c.id)
-        =link_to 'Edit', edit_admin_category_path(c.id)
-        =link_to 'Delete', admin_category_path(c.id), method: :delete, confirm: "Are you sure?"
-        %p= c.description
+      .card
+        =link_to admin_category_path(c) do
+          -if c.image
+            .image{style: "background: url('#{attachment_url(c.posts.last, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
+          -else
+            .image
+          .content
+            .title
+              %strong=c.nice_name
+            = c.posts.count
+        %ul.action
+          %li
+            =link_to category_path(c) do
+              %i.fa.fa-link
+          %li
+            =link_to edit_admin_category_path(c) do
+              %i.fa.fa-pencil
+          %li
+            =link_to admin_category_path(c), method: :delete do
+              %i.fa.fa-trash

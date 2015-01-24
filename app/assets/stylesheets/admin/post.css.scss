@@ -1,3 +1,60 @@
-body {
-  @include outer-container;
+.post {
+  .body {
+    @include span-columns(9);
+  }
+  .toolbar {
+    @include span-columns(3);
+    @include omega();
+    height: 100%;
+    #post_image {
+      padding: 10px;
+    }
+    #image {
+      height: 200px;
+      width: 100%;
+      background: $light-gray;
+      overflow: hidden;
+      position: relative;
+      img {
+        width: 100%;
+      }
+      i {
+        position: absolute;
+        top: 45%;
+        left: 43%;
+        color: $aqua;
+      }
+    }
+  }
+}
+
+.pagination {
+  $pagination-border-color: $base-border-color;
+  $pagination-border: 1px solid $pagination-border-color;
+  $pagination-background: lighten($pagination-border-color, 10);
+  $pagination-hover-background: lighten($pagination-background, 5);
+  $pagination-color: $base-font-color;
+
+  text-align: center;
+  span {
+    @include transition (all 0.2s ease-in-out);
+    background: $pagination-background;
+    border-radius: $base-border-radius;
+    border: $pagination-border;
+    color: $pagination-color;
+    outline: none;
+    padding: ($base-spacing / 4) ($gutter / 2);
+    display: inline;
+    list-style: none;
+    margin: 0 5px;
+    &:hover,
+    &:focus {
+      background: $pagination-hover-background;
+      color: $base-link-color;
+    }
+
+    &:active {
+      background: $pagination-background;
+    }
+  }
 }

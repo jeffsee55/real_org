@@ -1,0 +1,24 @@
+.index
+  - posts.sort { |a,b| b.updated_at <=> a.updated_at }.each do |p|
+    .card
+      -unless p.published?
+        .unpublished.fa-2x.fa.fa-bookmark
+      =link_to edit_admin_post_path(p) do
+        -if p.image_id?
+          .image{style: "background: url('#{attachment_url(p, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
+        -else
+          .image
+        .content
+          .title
+            %strong=p.title
+          = "#{time_ago_in_words(p.updated_at)} ago"
+      %ul.action
+        %li
+          =link_to post_path(p) do
+            %i.fa.fa-link
+        %li
+          =link_to edit_admin_post_path(p) do
+            %i.fa.fa-pencil
+        %li
+          =link_to admin_post_path(p), method: :delete do
+            %i.fa.fa-trash

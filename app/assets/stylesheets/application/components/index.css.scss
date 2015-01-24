@@ -2,33 +2,82 @@
   > h3 {
     font-weight: 300;
   }
+  .category-tag {
+    position: relative;
+    z-index: 50;
+    left: -20px;
+    top: 20px;
+  }
 }
 
 ul.index_row {
   @include clearfix();
-  a {
+  li {
     @include media($large-screen) {
       @include span-columns(4);
       &:nth-child(3n) {
         @include omega();
       }
     }
-    &:hover h3 {
-      color: red;
+  }
+}
+.tile {
+  padding: 1em;
+  position: relative;
+  min-height: 200px;
+  background-size: cover !important; // This is necessary because the image is added via inline styling
+  .content {
+    padding: 1em;
+    height: 100%;
+    z-index: 30;
+    h3 {
+      color: #FFF;
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      transform: translate(-10%, -50%);
     }
   }
-  li {
-    padding: 1em;
-    position: relative;
-    min-height: 200px;
-    background-size: cover !important; // This is necessary because the image is added via inline styling
-    .content {
-      padding: 1em;
+  .plus {
+    transition: all 350ms ease-in-out;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 40;
+    bottom: -10px;
+    right: 10px;
+    z-index: 50;
+    color: $dark-gray;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    cursor: pointer;
+    .plus-inner {
       position: relative;
-      z-index: 30;
-      h3 {
-        color: #FFF;
-        margin-top: 0.5em;
+      top: -12px;
+      color: white;
+      font-size: 48px
+    }
+  }
+  .rotate {
+    transition: all 350ms ease-in-out;
+    transform: rotate(405deg);
+    background: #54938f !important;
+  }
+  .popout {
+    z-index: 40;
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $light-gray;
+    padding: 0 10px;
+    font-size: 2em;
+    i, a {
+      color: white;
+      &:hover {
+        color: darken(white, 15);
       }
     }
   }

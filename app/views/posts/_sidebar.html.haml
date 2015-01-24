@@ -1,10 +1,10 @@
 .sidebar
   .welcome.card
-    =image_tag "stefanie.jpg", class: "welcome-picture"
+    = image_tag attachment_url(Author.last, :avatar, :fill, 300, 300), class: 'welcome-picture'
     .greeting
       %span.meet MEET
       %span.name= Author.last.first_name.upcase
-      %p= Author.last.bio
+      %p= Author.last.short_bio(30)
     .call-to-action
       %h3 NEVER MISS A POST
       %input
@@ -16,23 +16,16 @@
         - @categories.each do |cat|
           - i += 1
           = link_to cat do
-            %li{style: "background: url('#{asset_path "unsplash-#{i}.jpg"}') no-repeat center"}
+            %li{style: "background: url('#{attachment_url(cat.posts.last, :image, :fill, 200, 200)}') no-repeat center"}
               %span.overlay
               %h3= cat.nice_name.upcase
-  .related-blogs-block.card-full
+  .related-blogs-block
     %ul
       - i = 0
       - p.categories.each do |cat|
         - if i < 3
           - cat.posts.last(3).each do |post|
-            =link_to do
-              %li{style: "background: url('#{asset_path "unsplash-11.jpg"}') no-repeat center"}
-                %span.overlay
-                .content
-                  %span.tag{style: "background: #{post.categories.last.tag_color}"}= post.categories.last.name
-                  %h3= post.title
-                .plus
-                  .fa.fa-2x.fa-angle-double-down.plus-inner
+            = render partial: "shared/tile", locals: { p: post, cat: cat }
             - i += 1
   .blog-archive-block.card
     %h3 BLOG ARCHIVE

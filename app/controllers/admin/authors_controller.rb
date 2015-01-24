@@ -18,9 +18,13 @@ class Admin::AuthorsController < AdminController
   end
 
   def edit
+    @author = Author.find(params[:id])
   end
 
   def update
+    @author = Author.find(params[:id])
+    @author.update(author_params)
+    redirect_to admin_author_path(@author.id)
   end
 
   def destroy
@@ -29,7 +33,7 @@ class Admin::AuthorsController < AdminController
   private
 
   def author_params
-    params.require(:author).permit(:first_name, :last_name, :email, :bio)
+    params.require(:author).permit(:first_name, :last_name, :email, :bio, :avatar, :remove_avatar, :avatar_cache_id)
   end
 
 end

@@ -1,0 +1,38 @@
+#= require froala_editor.min.js
+
+$ ->
+  $("#post_body").editable(
+    height: 500
+    inlineMode: false
+    imageUploadURL: "<%= Rails.application.routes.url_helpers.admin_create_image_path %>"
+    imageDeleteURL: "<%= Rails.application.routes.url_helpers.admin_destroy_image_path %>"
+    )
+    .on "editable.imageError", (e, editor, error) ->
+      # Custom error message returned from the server.
+      if error.code is 0
+        console.log error
+      # Bad link.
+      else if error.code is 1
+        console.log error
+      # No link in upload response.
+      else if error.code is 2
+        console.log error
+      # Error during image upload.
+      else if error.code is 3
+        console.log error
+      # Parsing response failed.
+      else if error.code is 4
+        console.log error
+      # Image too large.
+      else if error.code is 5
+        console.log error
+      # Invalid image type.
+      else if error.code is 6
+        console.log error
+    .on "editable.afterRemoveImage", (e, editor, $img) ->
+      editor.options.imageDeleteParams = {src: $img.attr('src')}
+      editor.deleteImage($img)
+    .on 'editable.imageDeleteSuccess', (e, editor, data) ->
+      console.log data
+    .on 'editable.imageDeleteError', (e, editor, error) ->
+      console.log error

@@ -1,5 +1,6 @@
 %h2= @post.title
 
 = @post.body
+= image_tag attachment_url(@post, :image, :fill, 200, 200)
 :javascript
   disqus_shortname = "therealisticorganizer"

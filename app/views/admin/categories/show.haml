@@ -1,5 +1,4 @@
-%ul
-  - @category.posts.each do |p|
-    %li
-      =link_to p.title, edit_admin_post_path(p.id)
-      =link_to 'Delete', admin_post_path(p.id), method: :delete, confirm: "Are you sure?"
+=render "nav"
+%h3= @category.nice_name
+%br
+=render partial: "admin/posts/index", locals: { posts: @category.posts }

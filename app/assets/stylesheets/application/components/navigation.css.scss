@@ -1,5 +1,9 @@
 .nav {
   @include clearfix();
+  .banner {
+    @include span-columns(12);
+    @include clearfix();
+  }
   .title {
     float: left;
     font-size: 1.2em;
@@ -17,20 +21,21 @@
       display: none;
     }
     .title {
-      font-size: 4em;
+      font-size: 2.4em;
       float: none;
+      letter-spacing: 4px;
     }
     .tagline {
       display: inline;
-      font-size: 2em;
+      font-size: 1.3em;
       font-weight: 300;
+      float: none;
     }
     i {
       display: none;
     }
   }
   ul {
-    border-top: 1px solid;
     padding: 1em 0;
     display: none;
     @include media($large-screen) {

@@ -1,7 +1,10 @@
 .header
-  %h2.title Posts
-  = button_to "New Post", new_admin_post_path, method: :get, class: "new"
+  %h2.page= "Welcome Back, #{Author.last.first_name}"
+  .actions
+    =link_to "View Site", root_url
+    =link_to admin_author_path(Author.last), class: "item" do
+      =image_tag attachment_url(Author.last, :avatar, :fill, 50, 50), class: "avatar circle"
 %hr
-.body
-  - @posts.each do |p|
-    = link_to p.title, admin_post_path(p.id)
+%h3 Latest Posts
+%br
+=render partial: "admin/posts/index", locals: { posts: @posts }

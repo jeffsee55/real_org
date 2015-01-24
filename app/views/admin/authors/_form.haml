@@ -1,4 +1,10 @@
 = simple_form_for [:admin, @author] do |f|
+  - if @author.avatar_id?
+    = image_tag attachment_url(@author, :avatar, :fill, 50, 50), class: "circle avatar"
+    %label Remove Image
+    = f.check_box :remove_avatar
+  = f.attachment_field :avatar, direct: true
+  #image
   = f.input :first_name
   = f.input :last_name
   = f.input :email

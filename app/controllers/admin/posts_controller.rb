@@ -21,7 +21,7 @@ class Admin::PostsController < AdminController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.order(:updated_at).page params[:page]
   end
 
   def edit
@@ -32,20 +32,35 @@ class Admin::PostsController < AdminController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to admin_post_path(@post.id), notice: "#{@post.title} was susccessfully updated"
+    params[:category_ids].each do |category_id|
+    PostCategory.where(post_id: @post.id).delete_all
+    PostCategory.create(
+      post_id: @post.id,
+      category_id: category_id
+      )
+    end
+    if @post.published == true
+      redirect_to @post, notice: "#{@post.title} was susccessfully updated"
+    else
+      redirect_to admin_post_path(@post)
+    end
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
 
-    redirect_to :back, notice: "#{@post.title} was successfully deleted"
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "#{@post.title} was successfully deleted" }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
+    end
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :author_id, post_categories_attributes: [:post_id])
+    params.require(:post).permit(:title, :body, :author_id, :published, :image, :remove_image, post_categories_attributes: [:post_id])
   end
 
 end

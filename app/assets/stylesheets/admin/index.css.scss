@@ -1,0 +1,81 @@
+.load {
+  position: fixed;
+  z-index: 100;
+  top: 0; right: 0; left: 0; bottom: 0;
+  background: #dddddd;
+  .fa {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    color: white;
+  }
+}
+.header {
+  @include row();
+  padding-top: 1em;
+  .page {
+    float: left;
+    padding-top: 0.25em;
+  }
+  .actions {
+    float: right;
+    i {
+      vertical-align: middle;
+    }
+    .item {
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+}
+
+.index {
+  @include row();
+  & > div {
+    &:nth-child(4n) {
+      @include omega();
+    }
+    &:nth-child(4n+1) {
+      clear:left;
+    }
+  }
+}
+
+.card {
+  @include span-columns(3);
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  &:hover {
+    background: $light-gray;
+    .action {
+      display: block;
+    }
+  }
+  .content {
+    margin: 10px;
+  }
+  .unpublished {
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    color: $brick;
+  }
+  .image {
+    height: 200px;
+    background: #8484ba;
+  }
+  .action {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+    font-size: 1.2em;
+    a {
+      color: white;
+      &:hover {
+        color: $brick;
+      }
+    }
+  }
+}

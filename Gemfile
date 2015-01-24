@@ -30,6 +30,11 @@ gem "mandrill-api"
 gem "instagram"
 gem "font-awesome-rails"
 gem "nokogiri"
+gem "mini_magick"
+gem "refile", require: ["refile/rails", "refile/image_processing"]
+gem "aws-sdk"
+gem 'kaminari'
+
 
 group :development do
   gem "bundler-audit"
@@ -40,6 +45,7 @@ group :development do
   gem "guard"
   gem 'guard-livereload', require: false
   gem 'guard-rspec', require: false
+  gem 'quiet_assets'
 end
 
 group :development, :test do

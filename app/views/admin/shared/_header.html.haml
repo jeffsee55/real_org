@@ -1,0 +1,11 @@
+.header
+  %h2.page= yield :title
+  .actions
+    =yield :actions
+    =link_to "Search", "", class: "item"
+    =link_to "View", "", class: "item"
+    =link_to "Category", "", class: "item"
+    =link_to "Sort", "", class: "item"
+    =content_tag :button, new_admin_post_path, class: "item", method: :get do
+      New
+%hr.thick

@@ -55,26 +55,8 @@
 }
 
 .related-blogs-block {
-  background: $card-color;
   a {
     color: white;
-  }
-  ul {
-    li {
-      padding: 1em;
-      position: relative;
-      min-height: 200px;
-      background-size: cover !important; // This is necessary because the image is added via inline styling.
-      .content {
-        padding: 1em;
-        position: relative;
-        z-index: 30;
-        h3 {
-          color: #FFF;
-          margin-top: 0.5em;
-        }
-      }
-    }
   }
 }
 

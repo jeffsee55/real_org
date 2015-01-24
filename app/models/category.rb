@@ -5,4 +5,8 @@ class Category < ActiveRecord::Base
   def nice_name
     name.gsub(/%20/, " ")
   end
+
+  def image
+    posts.last.image
+  end
 end

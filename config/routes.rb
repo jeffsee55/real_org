@@ -11,5 +11,8 @@ Rails.application.routes.draw do
     resources :posts
     resources :authors
     resources :categories
+    resources :images
+    post "create_image", to: "images#create"
+    post "destroy_image", to: "images#destroy"
   end
 end

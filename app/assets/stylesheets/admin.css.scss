@@ -11,7 +11,9 @@
 @import "froala_style.min.css";
 @import "font-awesome";
 
+@import 'admin/components';
 @import 'admin/layout';
 @import 'admin/table';
 @import 'admin/post';
 @import 'admin/index';
+@import 'admin/author';

@@ -1,3 +1,22 @@
-%h2= @author.name
-%h5= @author.email
-%p= @author.bio
+=render "nav"
+.card
+  =link_to edit_admin_author_path(@author) do
+    -if @author.avatar_id?
+      .image{style: "background: url('#{attachment_url(@author, :avatar, :fill, 200, 200)}') no-repeat center; background-size: cover"}
+    -else
+      .image
+    .content
+      .title
+        %strong=@author.name
+        = "#{Post.all.where(author_id: @author.id).count} posts"
+        %br
+      = @author.short_bio(100)
+  %ul.action
+    %li
+      =link_to edit_admin_author_path(@author) do
+        %i.fa.fa-pencil
+    %li
+      =link_to admin_author_path(@author), method: :delete do
+        %i.fa.fa-trash
+.author_form
+  =render "form"
