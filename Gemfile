@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.1.5"
+ruby "2.1.3"
 
 gem "airbrake"
 gem "bourbon", "~> 3.2.1"
@@ -34,6 +34,11 @@ gem "mini_magick"
 gem "refile", require: ["refile/rails", "refile/image_processing"]
 gem "aws-sdk"
 gem 'kaminari'
+
+gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-rails', '~> 1.1.1'
+gem 'capistrano-rbenv', github: "capistrano/rbenv"
 
 
 group :development do
