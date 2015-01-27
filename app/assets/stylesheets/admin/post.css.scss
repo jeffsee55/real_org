@@ -1,6 +1,18 @@
 .post {
   .body {
     @include span-columns(9);
+    .post_title {
+      font-size: 2.5em;
+      margin-left: 20px;
+      input {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+      }
+    }
+    .f-basic {
+      border: none;
+    }
   }
   .toolbar {
     @include span-columns(3);

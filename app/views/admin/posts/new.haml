@@ -2,8 +2,7 @@
 = simple_form_for [:admin, @post] do |p|
   .post
     .body
-      %h2 New Post
-      = p.input :title, placeholder: "Title", label: false
+      = p.input :title, placeholder: "Title", class: "post-title", label: false
       = p.input :body, label: false
       = p.input :author_id, as: :hidden, value: Author.last.id
     .toolbar

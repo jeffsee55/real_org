@@ -1,47 +1,40 @@
 .sidebar
-  .menu
+  %i.toggle_menu.fa.fa-2x.fa-bars
+  =link_to "", class: "settings" do
+    %i.fa.fa-cog.fa-2x
+  =link_to admin_author_path(Author.last), class: "item" do
+    =image_tag attachment_url(Author.last, :avatar, :fill, 100, 100), class: "avatar circle"
+  %h3.author= Author.last.first_name.upcase
+  %hr.thick
   %ul
     %li.side-item
-      .icon
-        %i.fa.fa-area-chart
-      %ul.dropdown.dash
-        %li
-          =link_to admin_path do
-            %h3 DASHBOARD
+      =link_to admin_path do
+        %h5
+          DASHBOARD
     %li.side-item
-      .icon
-        %i.fa.fa-pencil
-      %ul.dropdown.post
-        %li
-          %h3 POST
-        =link_to new_admin_post_path do
-          %li NEW POST
-        =link_to admin_posts_path do
-          %li ALL POSTS
+      =link_to admin_posts_path do
+        %h5
+          POSTS
+        %ul
+          =link_to new_admin_post_path do
+            %li NEW POST
+          =link_to admin_posts_path do
+            %li ALL POSTS
     %li.side-item
-      .icon
-        %i.fa.fa-list
-      %ul.dropdown.category
-        %li
-          %h3 CATEGORIES
-        =link_to new_admin_category_path do
-          %li NEW CATEGORY
-        =link_to admin_categories_path do
-          %li ALL CATEGORIES
+      =link_to admin_categories_path do
+        %h5
+          CATEGORIES
+        %ul
+          =link_to new_admin_post_path do
+            %li NEW CATEGORY
+          =link_to admin_categories_path do
+            %li ALL CATEGORIES
     %li.side-item
-      .icon
-        %i.fa.fa-cogs
-      %ul.dropdown.settings
-        %li
+      =link_to admin_posts_path do
+        %h5
+          SETTINGS
+        %ul
+          =link_to new_admin_post_path do
+            %li EDIT PROFILE
           =link_to "" do
-            %h3 SETTINGS
-    %li.side-item
-      .icon
-        %i.fa.fa-user
-      %ul.dropdown.profile
-        %li
-          %h3 PROFILE
-        =link_to admin_author_path(Author.last.id) do
-          %li MANAGE PROFILE
-        =link_to "" do
-          %li ADD AUTHOR
+            %li COLORS

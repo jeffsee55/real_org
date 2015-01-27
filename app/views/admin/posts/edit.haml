@@ -2,7 +2,6 @@
 = simple_form_for [:admin, @post] do |p|
   .post
     .body
-      %h2 Edit Post
       = p.input :title, placeholder: "Title", label: false
       = p.input :body, label: false
       = p.input :author_id, as: :hidden, value: Author.last.id

@@ -12,13 +12,12 @@
 }
 .header {
   @include row();
-  padding-top: 1em;
   .page {
     float: left;
-    padding-top: 0.25em;
   }
   .actions {
     float: right;
+    padding-top: 0.5em;
     i {
       vertical-align: middle;
     }
