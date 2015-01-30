@@ -31,8 +31,8 @@ gem "instagram"
 gem "font-awesome-rails"
 gem "nokogiri"
 gem "mini_magick"
-gem "refile", require: ["refile/rails", "refile/image_processing"]
 gem "aws-sdk"
+gem "refile", require: ["refile/rails", "refile/image_processing"]
 gem 'kaminari'
 
 gem 'capistrano', '~> 3.1.0'
