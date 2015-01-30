@@ -11,5 +11,9 @@
       #disqus_thread
         :javascript
           var disqus_shortname = 'therealisticorganizer';
-  = render partial: "sidebar", locals: { p: @post }
+  .sidebar
+    =render partial: "sidebar", locals: { p: @post }
+    =render partial: "related_block", locals: { p: @post }
+    =render partial: "archives", locals: { p: @post }
+= render "social_card"
 = render "footer"

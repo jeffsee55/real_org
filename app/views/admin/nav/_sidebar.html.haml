@@ -1,40 +1,44 @@
 .sidebar
-  %i.toggle_menu.fa.fa-2x.fa-bars
+  %span.toggle_menu
+    %span.toggle_menu_inner +
   =link_to "", class: "settings" do
     %i.fa.fa-cog.fa-2x
-  =link_to admin_author_path(Author.last), class: "item" do
-    =image_tag attachment_url(Author.last, :avatar, :fill, 100, 100), class: "avatar circle"
-  %h3.author= Author.last.first_name.upcase
-  %hr.thick
+  =link_to admin_author_path(Author.last), class: "item sidebar-welcome" do
+    =image_tag "stefanie.png", class: "avatar circle", style: "width:50px; height: 50px"
+    .author= Author.last.first_name.upcase
+  %hr{style: "border-color: #dddddd"}
   %ul
     %li.side-item
+      =link_to root_path do
+        VIEW SITE
+    %li.side-item
       =link_to admin_path do
-        %h5
-          DASHBOARD
+        DASHBOARD
     %li.side-item
-      =link_to admin_posts_path do
-        %h5
-          POSTS
-        %ul
-          =link_to new_admin_post_path do
-            %li NEW POST
-          =link_to admin_posts_path do
-            %li ALL POSTS
+      POSTS
+      %ul
+        =link_to new_admin_post_path do
+          %li NEW POST
+        =link_to admin_posts_path do
+          %li ALL POSTS
     %li.side-item
-      =link_to admin_categories_path do
-        %h5
-          CATEGORIES
-        %ul
-          =link_to new_admin_post_path do
-            %li NEW CATEGORY
-          =link_to admin_categories_path do
-            %li ALL CATEGORIES
+      CATEGORIES
+      %ul
+        =link_to new_admin_post_path do
+          %li NEW CATEGORY
+        =link_to admin_categories_path do
+          %li ALL CATEGORIES
     %li.side-item
-      =link_to admin_posts_path do
-        %h5
-          SETTINGS
-        %ul
-          =link_to new_admin_post_path do
-            %li EDIT PROFILE
-          =link_to "" do
-            %li COLORS
+      MESSAGES
+      %ul
+        =link_to "" do
+          %li ALL MESSAGES
+    %li.side-item
+      SETTINGS
+      %ul
+        =link_to new_admin_post_path do
+          %li EDIT PROFILE
+        =link_to "" do
+          %li COLORS
+        =link_to "" do
+          %li CUSTOMIZE MENU

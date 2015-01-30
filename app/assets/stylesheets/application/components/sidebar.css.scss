@@ -28,9 +28,9 @@
     h3 {
       font-weight: 300;
     }
-    input {
+    .email_field {
       @include span-columns(6);
-      padding: 1em;
+      padding: 0.55em;
       &:nth-child(2) {
       }
     }

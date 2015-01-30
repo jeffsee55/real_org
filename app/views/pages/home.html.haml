@@ -1,14 +1,15 @@
 .container
   = render "nav"
   .welcome-post
-    .main
-      = link_to @post do
+    =link_to @post do
+      .main
         =render partial: "posts/poster", locals: { post: @post }
-    = render partial: "sidebar"
+      .sidebar
+        = render partial: "posts/sidebar"
   .index
     - @categories.each do |cat|
       =link_to category_path(cat.id) do
-        %h5.tag{style: "background: #{cat.tag_color}", class:"category-tag"}= cat.nice_name.upcase
+        %h5.tag{style: "background: ##{cat.tag_color}", class:"category-tag"}= cat.nice_name.upcase
       %ul.index_row
         - cat.posts.limit(3).each do |p|
           = render partial: "shared/tile", locals: { p: p, cat: cat }

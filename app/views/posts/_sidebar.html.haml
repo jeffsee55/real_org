@@ -1,45 +1,24 @@
-.sidebar
-  .welcome.card
-    = image_tag attachment_url(Author.last, :avatar, :fill, 300, 300), class: 'welcome-picture'
-    .greeting
-      %span.meet MEET
-      %span.name= Author.last.first_name.upcase
-      %p= Author.last.short_bio(30)
-    .call-to-action
-      %h3 NEVER MISS A POST
-      %input
-      = button_tag "SUBSCRIBE"
+.welcome.card
+  = image_tag attachment_url(Author.last, :avatar, :fill, 300, 300), class: 'welcome-picture'
+  .greeting
+    %span.meet MEET
+    %span.name= Author.last.first_name.upcase
+    %p= Author.last.short_bio(200)
+  .call-to-action
+    =render "shared/message_modal"
+    .icon-list
+      %hr
+      =link_to "" do
+        .fa.fa-pinterest-square.fa-3x
+      =link_to "" do
+        .fa.fa-facebook-square.fa-3x
+      =link_to "" do
+        .fa.fa-instagram.fa-3x
+      =link_to "" do
+        .fa.fa-google-plus-square.fa-3x
+      =link_to "" do
+        .fa.fa-rss-square.fa-3x
     %hr
-    .category-block
-      %ul
-        - i = 0
-        - @categories.each do |cat|
-          - i += 1
-          = link_to cat do
-            %li{style: "background: url('#{attachment_url(cat.posts.last, :image, :fill, 200, 200)}') no-repeat center"}
-              %span.overlay
-              %h3= cat.nice_name.upcase
-  .related-blogs-block
-    %ul
-      - i = 0
-      - p.categories.each do |cat|
-        - if i < 3
-          - cat.posts.last(3).each do |post|
-            = render partial: "shared/tile", locals: { p: post, cat: cat }
-            - i += 1
-  .blog-archive-block.card
-    %h3 BLOG ARCHIVE
-    %hr
-    %ul
-      %li JANUARY
-      %li FEBRUARY
-      %li MARCH
-      %li APRIL
-      %li MAY
-      %li JUNE
-      %li JULY
-      %li AUGUST
-      %li SEPTEMBER
-      %li OCTOBER
-      %li NOVEMBER
-      %li DECEMBER
+    %h3 NEVER MISS A POST
+    %input.email_field
+    = button_tag "SUBSCRIBE"

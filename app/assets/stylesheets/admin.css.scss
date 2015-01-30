@@ -10,10 +10,12 @@
 @import "froala_editor.min.css";
 @import "froala_style.min.css";
 @import "font-awesome";
+@import "admin/colpick";
 
 @import 'admin/components';
-@import 'admin/nav';
+@import 'admin/sidebar';
 @import 'admin/layout';
+@import 'admin/header';
 @import 'admin/table';
 @import 'admin/post';
 @import 'admin/index';

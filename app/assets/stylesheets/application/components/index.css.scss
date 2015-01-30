@@ -62,7 +62,7 @@ ul.index_row {
   .rotate {
     transition: all 350ms ease-in-out;
     transform: rotate(405deg);
-    background: #54938f !important;
+    background: $brick !important;
   }
   .popout {
     z-index: 40;

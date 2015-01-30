@@ -1,10 +1,4 @@
-.header
-  %h2.page= "Welcome Back, #{Author.last.first_name}"
-  .actions
-    =link_to "View Site", root_url
-    =link_to admin_author_path(Author.last), class: "item" do
-      =image_tag attachment_url(Author.last, :avatar, :fill, 50, 50), class: "avatar circle"
-%hr
+=render "nav"
 %h3 Latest Posts
 %br
 =render partial: "admin/posts/index", locals: { posts: @posts }

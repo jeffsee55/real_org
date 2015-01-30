@@ -3,7 +3,7 @@
   .index
     - @categories.each do |cat|
       =link_to category_path(cat.id) do
-        %h5.tag{style: "background: #{cat.tag_color}"}= cat.nice_name.upcase
+        %h5.tag{style: "background: ##{cat.tag_color}"}= cat.nice_name.upcase
       %hr.dark-hr
       = render partial: 'shared/index', locals: { cat: cat }
 = render "footer"

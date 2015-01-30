@@ -1,8 +1,13 @@
 .poster{style: "background-image: url('#{attachment_url(post, :image, :fill, 800, 500)}')"}
   .overlay
+    .poster-icons.icon-list
+      =link_to ("http://pinterest.com/pin/create/button/?url=#{request.original_url}&media=#{root_url}/attachments/store/fill/400/400/#{@post.image.id}/image?fit=crop&fm=jpg&h=700&q=75&w=1050&description=#{@post.title}"), target: "_blank" do
+        %i.fa.fa-pinterest-square.fa-3x.pinterest
+      =link_to "" do
+        %i.fa.fa-facebook-square.fa-3x.facebook
     .content
       - post.categories.each do |category|
         =link_to category do
-          %span.tag{style: "background: #{category.tag_color}"}= category.nice_name.upcase
+          %span.tag{style: "background: ##{category.tag_color}"}= category.nice_name.upcase
       .text
         %h2= @post.title

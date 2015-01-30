@@ -1,0 +1,20 @@
+.header {
+  @include row();
+  margin-top: 1em;
+  .page {
+    float: left;
+    margin-top: 10px;
+  }
+  .actions {
+    float: right;
+    padding-top: 0.5em;
+    i {
+      vertical-align: middle;
+    }
+    .item {
+      display: inline-block;
+      margin-left: 10px;
+      padding-top: 12px;
+    }
+  }
+}

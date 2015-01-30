@@ -1,0 +1,8 @@
+.related-blogs-block
+  %ul
+    - i = 0
+    - p.categories.each do |cat|
+      - if i < 3
+        - cat.posts.last(3).each do |post|
+          = render partial: "shared/tile", locals: { p: post, cat: cat }
+          - i += 1

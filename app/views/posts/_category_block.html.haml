@@ -1,0 +1,10 @@
+%hr
+.category-block
+  %ul
+    - i = 0
+    - @categories.each do |cat|
+      - i += 1
+      = link_to cat do
+        %li{style: "background: url('#{attachment_url(cat.posts.last, :image, :fill, 200, 200)}') no-repeat center"}
+          %span.overlay
+          %h3= cat.nice_name.upcase

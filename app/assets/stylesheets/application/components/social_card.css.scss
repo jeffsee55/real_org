@@ -1,0 +1,10 @@
+.social_card {
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: 40%;
+  z-index: 20;
+  a {
+    display: block !important;
+  }
+}

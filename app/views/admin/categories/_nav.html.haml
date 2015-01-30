@@ -1,9 +1,8 @@
 .header
-  %h2.page Categories
+  %h2.page CATEGORIES
   .actions
-    =link_to "New Category", new_admin_category_path, class: "item"
     =link_to "All Categories", admin_categories_path, class: "item"
     =link_to "View Site", root_url, class: "item"
-    =link_to admin_author_path(Author.last), class: "item" do
-      =image_tag attachment_url(Author.last, :avatar, :fill, 50, 50), class: "avatar circle"
+    =content_tag :button, new_admin_category_path, class: "item", method: :get do
+      New Category
 %hr.thick

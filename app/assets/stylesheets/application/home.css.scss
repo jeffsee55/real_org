@@ -1,3 +1,22 @@
+.header-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 12em;
+  background: #a5eed4;
+  z-index: -10;
+}
+
 .welcome-post {
   @include clearfix();
+  .main {
+  }
+  .sidebar {
+    display: none;
+    @include media($large-screen) {
+      display: block;
+    }
+  }
+  .poster {
+    margin-bottom: 5%;
+  }
 }

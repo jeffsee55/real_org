@@ -1,12 +1,19 @@
 .nav {
+  color: $dark-gray;
+  a {
+    color: $dark-gray;
+    &:hover {
+      color: lighten($dark-gray, 15);
+    }
+  }
   @include clearfix();
   .banner {
-    @include span-columns(12);
-    @include clearfix();
+    @include row();
+    float: left;
   }
   .title {
     float: left;
-    font-size: 1.2em;
+    font-size: 1em;
   }
   .tagline {
     display: none;
@@ -15,33 +22,53 @@
     float: right;
   }
   @include media($large-screen) {
+    margin-top: 1em;
     text-align: center;
-    float: none;
+    .banner {
+      float: none;
+    }
+    .title {
+      font-size: 3em;
+      float: none;
+      letter-spacing: 0.4em;
+      line-height: 0.8em;
+      margin-left: 0.4em;
+    }
     br {
       display: none;
     }
-    .title {
-      font-size: 2.4em;
-      float: none;
-      letter-spacing: 4px;
-    }
     .tagline {
-      display: inline;
+      display: block;
       font-size: 1.3em;
+      letter-spacing: 4px;
       font-weight: 300;
       float: none;
+      line-height: 2em;
     }
     i {
       display: none;
     }
   }
-  ul {
-    padding: 1em 0;
-    display: none;
-    @include media($large-screen) {
+  .nav_menu {
+    position: fixed;
+    top: 0; right: 0; left: 0; bottom: 0;
+    padding: 0.5em 0;
+    display: block;
+    background: white;
+    z-index: 20;
+    a li {
       display: block;
     }
-    li {
+    @include media($large-screen) {
+      @include row();
+      display: block;
+      border-top: 1px solid;
+      position: static;
+      padding: 0.5em 0;
+      display: block;
+      background: none;
+    }
+    a li {
       display: inline-block;
       width: percentage(1/6);
       font-size: 1.3em;

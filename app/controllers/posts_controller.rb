@@ -20,6 +20,10 @@ class PostsController < ApplicationController
 
   def index
     @categories = Category.all
+    @posts = Post.all
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit

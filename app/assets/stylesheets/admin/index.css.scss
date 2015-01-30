@@ -10,23 +10,6 @@
     color: white;
   }
 }
-.header {
-  @include row();
-  .page {
-    float: left;
-  }
-  .actions {
-    float: right;
-    padding-top: 0.5em;
-    i {
-      vertical-align: middle;
-    }
-    .item {
-      display: inline-block;
-      margin-left: 10px;
-    }
-  }
-}
 
 .index {
   @include row();

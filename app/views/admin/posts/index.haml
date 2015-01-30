@@ -1,13 +1,4 @@
-.header
-  %h2.page= title
-  .actions
-    =link_to "Search", "", class: "item"
-    =link_to "View", "", class: "item"
-    =link_to "Category", "", class: "item"
-    =link_to "Sort", "", class: "item"
-    =content_tag :button, new_admin_post_path, class: "item", method: :get do
-      New
-%hr.thick
+=render "nav"
 =render partial: "index", locals: { posts: @posts }
 %hr.thick
 .pagination

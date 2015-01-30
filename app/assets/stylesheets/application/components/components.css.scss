@@ -4,9 +4,11 @@
 @import "navigation";
 @import "poster";
 @import "sidebar";
+@import "social_card";
+@import "modal";
 
 body {
-  @include background(url("notebook.png"))
+  @include background(url("gplaypattern.png"))
 }
 
 hr {
@@ -41,6 +43,19 @@ input[type="button"] {
   }
 }
 
+.btn-full {
+  width: 100% !important;
+}
+
+.btn-outline {
+  background: none !important;
+  color: $base-accent-color !important;
+  border: 1px solid !important;
+  &:hover {
+    background: lighten($base-accent-color, 30) !important;
+  }
+}
+
 .blog {
   @include row;
   background: $card-color;
@@ -52,6 +67,26 @@ input[type="button"] {
   img {
     max-width: 100%;
     height: auto !important;
+  }
+}
+
+.icon-list {
+  @include clearfix();
+  text-align: center;
+  a {
+    margin-left: 10px;
+  }
+  .facebook {
+    color: $facebook;
+    &:hover {
+      color: darken($facebook, 15);
+    }
+  }
+  .pinterest {
+    color: $pinterest;
+    &:hover {
+      color: darken($pinterest, 15);
+    }
   }
 }
 
@@ -81,6 +116,9 @@ input[type="button"] {
 
 .dark-hr {
   border-bottom: 1px solid $dark-gray;
+}
+.thick-hr {
+  border-bottom: 4px solid #ddd;
 }
 
 .thin {

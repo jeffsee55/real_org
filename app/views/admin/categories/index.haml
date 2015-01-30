@@ -3,7 +3,7 @@
   .index
     - @categories.each do |c|
       .card
-        =link_to admin_category_path(c) do
+        =link_to edit_admin_category_path(c) do
           -if c.image
             .image{style: "background: url('#{attachment_url(c.posts.last, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
           -else
@@ -11,7 +11,7 @@
           .content
             .title
               %strong=c.nice_name
-            = c.posts.count
+            = "#{c.posts.count} posts"
         %ul.action
           %li
             =link_to category_path(c) do
