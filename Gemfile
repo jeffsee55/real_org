@@ -42,7 +42,6 @@ gem 'capistrano-rbenv', github: "capistrano/rbenv"
 
 
 group :development do
-  gem "bundler-audit"
   gem "spring"
   gem "spring-commands-rspec"
   gem "better_errors"
