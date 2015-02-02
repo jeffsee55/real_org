@@ -1,12 +1,10 @@
 .sidebar
   %span.toggle_menu
     %span.toggle_menu_inner +
-  =link_to "", class: "settings" do
-    %i.fa.fa-cog.fa-2x
   =link_to admin_author_path(Author.last), class: "item sidebar-welcome" do
     =image_tag "stefanie.png", class: "avatar circle", style: "width:50px; height: 50px"
     .author= Author.last.first_name.upcase
-  %hr{style: "border-color: #dddddd"}
+  %hr{style: "border-color: #dddddd; border: 2px solid"}
   %ul
     %li.side-item
       =link_to root_path do

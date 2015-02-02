@@ -1,12 +1,9 @@
-.modal
-  %label{:for => "modal-1"}
-    .button.btn-outline.btn-full.modal-trigger{style: "text-align: center"} GET IN TOUCH
-  %input#modal-1.modal-state{:type => "checkbox"}/
-  .modal-window
-    .modal-inner
-      %label.modal-close{:for => "modal-1"}
-      =simple_form_for :message, url: messages_path , method: :post do |f|
-        =f.input :name
-        =f.input :email
-        =f.input :body, as: :text
-        =f.submit
+%input#modal-message.modal-state{:type => "checkbox"}/
+.modal-window
+  .modal-inner
+    %label.modal-close{:for => "modal-message"}
+    =simple_form_for :message, url: messages_path , method: :post do |f|
+      =f.input :name, label: false, placeholder: "Name"
+      =f.input :email, label: false, placeholder: "Email"
+      =f.input :body, as: :text, label: false, placeholder: "Enter your message here..."
+      =f.submit

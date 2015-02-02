@@ -7,10 +7,33 @@
     .comment.card
       .comment-header
         %h2 COMMENTS
+        #fb-root
+        :javascript
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=744459768945734&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+      .fb-share-button{"data-href" => "http://104.131.124.197/posts/29", "data-layout" => "button"}
       %hr
       #disqus_thread
-        :javascript
-          var disqus_shortname = 'therealisticorganizer';
+        :coffee
+          ### * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * ###
+          # Required - Replace example with your forum shortname
+          disqus_shortname = "therealisticorganizer"
+          disqus_identifier = '/organized-weekly-dinners/';
+
+          ### * * DON'T EDIT BELOW THIS LINE * * ###
+          do ->
+            dsq = document.createElement('script')
+            dsq.type = 'text/javascript'
+            dsq.async = true
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'
+            (document.getElementsByTagName('head')[0] or document.getElementsByTagName('body')[0]).appendChild dsq
+            return
+
   .sidebar
     =render partial: "sidebar", locals: { p: @post }
     =render partial: "related_block", locals: { p: @post }

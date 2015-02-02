@@ -1,14 +1,26 @@
-@import "contact";
 @import "footer";
 @import "index";
 @import "navigation";
 @import "poster";
 @import "sidebar";
 @import "social_card";
+@import "tile";
 @import "modal";
+@import "page_header";
+@import "contact";
+
 
 body {
   @include background(url("gplaypattern.png"))
+}
+
+#flash {
+  background: $brick;
+  & > div {
+    padding: 10px 0;
+    color: white;
+    @include outer-container;
+  }
 }
 
 hr {
@@ -43,6 +55,11 @@ input[type="button"] {
   }
 }
 
+.btn {
+  color: white;
+  padding: 1em 1.5em;
+}
+
 .btn-full {
   width: 100% !important;
 }
@@ -73,9 +90,6 @@ input[type="button"] {
 .icon-list {
   @include clearfix();
   text-align: center;
-  a {
-    margin-left: 10px;
-  }
   .facebook {
     color: $facebook;
     &:hover {
@@ -111,7 +125,7 @@ input[type="button"] {
 .overlay {
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
-  background: transparentize($dark-gray, 0.5);
+  background: transparentize($dark-gray, 0.2);
 }
 
 .dark-hr {
@@ -130,10 +144,28 @@ input[type="button"] {
 }
 
 .tag {
-  padding: 0.5em 1em;
   color: white;
+  padding: 0.75em 2em;
   display: inline;
+  position: relative;
+  white-space: nowrap;
+  z-index: 50;
+  left: -20px;
+  top: 20px;
+  &:hover {
+    color: darken(white, 15);
+  }
 }
+
+.poster-tag {
+  left: 0;
+  top: 0;
+  font-size: 0.8em;
+  @include media($large-screen) {
+    font-size: 1em;
+  }
+}
+
 .tag-diy {
   background: $yellow;
 }

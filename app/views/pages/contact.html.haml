@@ -1,0 +1,34 @@
+.container
+  = render "nav"
+  .welcome-post
+    =render partial: "contact_poster"
+  .card.blog
+    .contact-item
+      =image_tag attachment_url(@recent_projects, :image, :fill, 200, 200), class: "welcome-picture"
+      %h3.thin RECENT
+      %h3.fat PROJECTS
+      = @recent_projects.body
+      .modal
+        %label{:for => "modal-projects"}
+          .btn-outline.modal-trigger{style: "text-align: center;"} VIEW PROJECTS
+    .contact-item
+      =image_tag attachment_url(@about_me, :image, :fill, 200, 200), class: "welcome-picture"
+      %h3.thin ABOUT
+      %h3.fat ME
+      = @about_me.body
+      .modal
+        %label{:for => "modal-about"}
+          .btn-outline.modal-trigger{style: "text-align: center;"} VIEW
+    .contact-item
+      =image_tag attachment_url(@work_with_me, :image, :fill, 200, 200), class: "welcome-picture"
+      %h3.thin WORK
+      %h3.fat WITH ME
+      = @work_with_me.body
+      .modal
+        %label{:for => "modal-message"}
+          .btn-outline.modal-trigger{style: "text-align: center;"} WORK WITH ME
+  .index
+    %ul.index_row
+      - @posts.limit(3).each do |p|
+        = render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
+= render "footer"

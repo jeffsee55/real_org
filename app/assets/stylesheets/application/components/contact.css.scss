@@ -1,30 +1,16 @@
-.content-poster {
-  .content {
-    position: relative;
-    bottom: 0;
+.contact-item {
+  @include media($large-screen) {
+    @include span-columns(4);
   }
-}
-.contact-form {
-  h2 {
-    font-size: 3em;
+  text-align: center;
+  .welcome-picture {
+    height: 150px;
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
   }
-
-  input {
-    padding: 0.3em;
-    font-size: 1.2em;
-  }
-
-  textarea {
-    @include span-columns(12);
-    border-radius: 0;
-    font-size: 1.2em;
-    margin-top: 1em;
-  }
-
-  .name, .email {
-    @include media($large-screen) {
-      @include span-columns(4);
-    }
-    margin-bottom: 1em;
+  p {
+    text-align: justify;
   }
 }

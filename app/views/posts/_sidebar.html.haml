@@ -5,7 +5,10 @@
     %span.name= Author.last.first_name.upcase
     %p= Author.last.short_bio(200)
   .call-to-action
-    =render "shared/message_modal"
+  .modal
+    %label{:for => "modal-message"}
+      .button.btn.btn-outline.btn-full.modal-trigger{style: "text-align: center"} GET IN TOUCH
+      =render "shared/message_modal"
     .icon-list
       %hr
       =link_to "" do
@@ -20,5 +23,5 @@
         .fa.fa-rss-square.fa-3x
     %hr
     %h3 NEVER MISS A POST
-    %input.email_field
-    = button_tag "SUBSCRIBE"
+    %input.email_field{placeholder: "Email"}
+    %button{class: "btn btn-full"} SUBSCRIBE

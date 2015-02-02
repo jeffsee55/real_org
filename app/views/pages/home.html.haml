@@ -9,7 +9,7 @@
   .index
     - @categories.each do |cat|
       =link_to category_path(cat.id) do
-        %h5.tag{style: "background: ##{cat.tag_color}", class:"category-tag"}= cat.nice_name.upcase
+        .tag{style: "background: ##{cat.tag_color}", class:"category-tag"}= cat.nice_name.upcase
       %ul.index_row
         - cat.posts.limit(3).each do |p|
           = render partial: "shared/tile", locals: { p: p, cat: cat }

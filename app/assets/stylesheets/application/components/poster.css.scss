@@ -1,10 +1,13 @@
 .poster {
   position: relative;
-  height: 420px;
+  height: $poster-height-small;
   width: 100%;
   box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.26);
   margin-bottom: 2em;
   background-size: cover !important; // This is necessary because the image is added via inline styling.
+  @include media($large-screen) {
+    height: $poster-height-large;
+  }
   &:hover .poster-icons {
     visibility: visible;
   }
@@ -29,7 +32,7 @@
     bottom: 0;
     color: white;
     padding: 2em;
-    .text {
+    & > .text {
       position: relative;
       margin-top: 0.5em;
       font-size: 1em;

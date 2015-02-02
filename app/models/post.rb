@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
   attachment :image
   attachment :featured_image
 
+  scope :site_post, -> { where(site_post: true) }
+  scope :blog_post, -> { where(site_post: false).order('created_at DESC') }
   accepts_nested_attributes_for :post_categories
 
   def short_title

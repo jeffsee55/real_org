@@ -7,11 +7,13 @@ class Admin::PostsController < AdminController
 
   def create
     @post = Post.create(post_params)
-    params[:category_ids].each do |category_id|
-      PostCategory.create(
-        post_id: @post.id,
-        category_id: category_id
-      )
+    if params[:category_ids]
+      params[:category_ids].each do |category_id|
+        PostCategory.create(
+          post_id: @post.id,
+          category_id: category_id
+        )
+      end
     end
     redirect_to @post
   end
@@ -21,7 +23,7 @@ class Admin::PostsController < AdminController
   end
 
   def index
-    @posts = Post.order(:updated_at).page params[:page]
+    @posts = Post.all.page params[:page]
   end
 
   def edit
@@ -32,12 +34,14 @@ class Admin::PostsController < AdminController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    params[:category_ids].each do |category_id|
-    PostCategory.where(post_id: @post.id).delete_all
-    PostCategory.create(
-      post_id: @post.id,
-      category_id: category_id
-      )
+    if params[:category_ids]
+      params[:category_ids].each do |category_id|
+      PostCategory.where(post_id: @post.id).delete_all
+      PostCategory.create(
+        post_id: @post.id,
+        category_id: category_id
+        )
+      end
     end
     if @post.published == true
       redirect_to @post, notice: "#{@post.title} was susccessfully updated"

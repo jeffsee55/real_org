@@ -34,6 +34,7 @@ gem "mini_magick"
 gem "aws-sdk"
 gem "refile", require: ["refile/rails", "refile/image_processing"]
 gem 'kaminari'
+gem 'ransack', '~> 1.6.3'
 
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-bundler', '~> 1.1.2'

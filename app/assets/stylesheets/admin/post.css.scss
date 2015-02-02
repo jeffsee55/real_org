@@ -49,6 +49,7 @@
   $pagination-color: $base-font-color;
 
   text-align: center;
+  margin: 1em;
   span {
     @include transition (all 0.2s ease-in-out);
     background: $pagination-background;

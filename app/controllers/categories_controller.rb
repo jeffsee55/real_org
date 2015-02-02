@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
 
   def show
+    @q = Post.ransack(params[:q])
     @category = Category.find(params[:id])
   end
 

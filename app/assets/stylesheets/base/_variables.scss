@@ -18,9 +18,12 @@ $base-line-height: 1.5;
 $header-line-height: 1.25;
 
 // Other Sizes
-$base-border-radius: 3px;
+$base-border-radius: 1px;
 $base-spacing: $base-line-height * 1em;
 $base-z-index: 0;
+$poster-height-large: 420px;
+$poster-height-small: 300px;
+
 
 // Colors
 $blue: #477DCA;
@@ -39,9 +42,10 @@ $yellow: #f3f64c;
 $aqua: #09cdad;
 $blue: #0d538d;
 $purple: #ef30b6;
-$primary: $aqua;
+$primary: $blue;
 $secondary: $purple;
 $brick: #d97056;
+$mint: #a5eed4;
 
 // Background Color
 $base-background-color: white;

@@ -1,5 +1,5 @@
 .modal {
-
+  color: $dark-gray;
   $modal-padding: 3em;
   $modal-background: $base-background-color;
   $modal-close-color: $light-gray;
@@ -25,6 +25,7 @@
   .modal-trigger {
     @include button(flat, $base-accent-color);
     padding: 0.8em 1em;
+    margin-bottom: 20px;
   }
 
   .modal-window { // overlay

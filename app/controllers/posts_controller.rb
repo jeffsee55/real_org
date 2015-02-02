@@ -20,7 +20,14 @@ class PostsController < ApplicationController
 
   def index
     @categories = Category.all
-    @posts = Post.all
+  end
+
+  def search
+    if params[:q]
+      @posts = @q.result(distinct: true)
+    else
+      @posts = Post.first(3)
+    end
   end
 
   def edit
@@ -29,7 +36,7 @@ class PostsController < ApplicationController
   def updated
   end
 
-  def delete
+  def destroy
   end
 
   private

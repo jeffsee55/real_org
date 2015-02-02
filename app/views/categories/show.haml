@@ -1,7 +1,7 @@
 .container
   = render "nav"
+  = render partial: "shared/page_header", locals: { title: @category.nice_name, q: @q }
   .index
-    %h5.tag{style: "background: ##{@category.tag_color}", class:"category-tag"}= @category.nice_name.upcase
-    = render partial: 'shared/index', locals: { cat: @category }
+    = render partial: 'shared/index', locals: { cat: @category, limit: nil }
 
 = render "footer"

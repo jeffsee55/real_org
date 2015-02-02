@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129201054) do
+ActiveRecord::Schema.define(version: 20150202211136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150129201054) do
     t.string   "unique_number"
     t.string   "image_id"
     t.boolean  "published"
+    t.boolean  "site_post",     default: false
   end
 
   create_table "stylesheets", force: true do |t|

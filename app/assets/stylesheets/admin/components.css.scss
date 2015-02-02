@@ -1,3 +1,12 @@
+#flash {
+  background: $brick;
+  & > div {
+    padding: 10px 0;
+    color: white;
+    @include outer-container;
+  }
+}
+
 hr {
   margin: 1em 0;
 }
@@ -21,6 +30,11 @@ hr.thick {
 
 .button {
   background: $base-accent-color;
+}
+
+.btn-inline {
+  display: inline-block;
+  float: left;
 }
 
 .primary {

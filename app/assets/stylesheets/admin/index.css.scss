@@ -12,19 +12,19 @@
 }
 
 .index {
-  @include row();
-  & > div {
+  @include clearfix();
+}
+
+.card {
+  @include media($large-screen) {
+    @include span-columns(3);
     &:nth-child(4n) {
       @include omega();
     }
     &:nth-child(4n+1) {
-      clear:left;
+      clear: left;
     }
   }
-}
-
-.card {
-  @include span-columns(3);
   position: relative;
   margin-bottom: 20px;
   border-radius: 4px;

@@ -11,7 +11,7 @@
         .content
           .title
             %strong=p.title
-          = "#{time_ago_in_words(p.updated_at)} ago"
+          = "#{time_ago_in_words(p.created_at)} ago"
       %ul.action
         %li
           =link_to post_path(p) do

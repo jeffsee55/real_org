@@ -1,10 +1,18 @@
 .social_card {
-  display: none;
+  padding: 10px;  
   position: fixed;
-  left: 0px;
-  top: 40%;
+  bottom: 0;
+  left: 0;
+  top: initial;
+  background: #E7F1EC;
   z-index: 20;
-  a {
-    display: block !important;
+  display: none;
+  @include media($large-screen) {
+    left: 0px;
+    top: 40%;
+    bottom: initial;
+    a {
+      display: block !important;
+    }
   }
 }

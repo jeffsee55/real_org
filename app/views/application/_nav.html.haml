@@ -7,15 +7,51 @@
       %span.thin ORGANIZER
     .tagline
       ADVENTURES IN ORGANIZING AND ATTEMPS AT CREATIVITY
-  %i.fa.fa-2x.fa-bars
-  %ul.nav_menu
-    = link_to root_url do
-      %li HOME
-    = link_to about_path do
-      %li ABOUT
-    = link_to category_path(4) do
-      %li ORGANZING
-    = link_to category_path(4) do
-      %li WEDDINGS
-    = link_to category_path(4) do
-      %li DIY
+  %i.mobile_menu.fa.fa-2x.fa-bars
+%header.centered-navigation{:role => "banner"}
+  .centered-navigation-wrapper
+    .title.mobile-logo
+      %span.thin THE
+      %span.fat REALISTIC
+      %br
+      %span.thin ORGANIZER
+    %a#js-centered-navigation-mobile-menu.centered-navigation-mobile-menu.fa.fa-bars.fa-2x{:href => "javascript:void(0)"}
+    %nav{:role => "navigation"}
+      %ul#js-centered-navigation-menu.centered-navigation-menu.show
+        %li.nav-link
+          =link_to "HOME", root_url
+        %li.nav-link
+          =link_to "WORK WITH ME", contact_path
+        %li.nav-link
+          =link_to "WEDDINGS", category_path(Category.find_by_name("Wedding").id)
+        %li.nav-link.more
+          =link_to "ORGANIZING", category_path(Category.find_by_name("Organizing%20for%20Others").id)
+          %ul.submenu
+            %li
+              =link_to "KITCHEN", category_path(Category.find_by_name("Kitchen").id)
+            %li
+              =link_to "HOME OFFICE", category_path(Category.find_by_name("Home%20Office").id)
+            %li.more
+              =link_to "MORE", ""
+              %ul.submenu
+                %li
+                  =link_to "ORGANZING FOR OTHERS", ""
+                %li
+                  =link_to "BUDGET FRIENDLY", ""
+        %li.nav-link.more
+          =link_to "DIY", ""
+          %ul.submenu
+            %li
+              =link_to "HOLIDAYS", category_path(Category.find_by_name("Holidays").id)
+        %li.nav-link.more
+          =link_to "MORE", ""
+          %ul.submenu
+            %li
+              =link_to "ALL CATEGORIES", root_url
+            %li
+              =link_to "ALL POSTS", root_url
+        %li.nav-link
+          = search_form_for @q, class: "search-bar", url: search_posts_path, html: { method: :post } do |f|
+            = f.search_field :title_or_body_cont
+            = f.button do
+              %i.fa.fa-search
