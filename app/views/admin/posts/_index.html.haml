@@ -4,21 +4,18 @@
       -unless p.published?
         .unpublished.fa-2x.fa.fa-bookmark
       =link_to edit_admin_post_path(p) do
-        -if p.image_id?
-          .image{style: "background: url('#{attachment_url(p, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
-        -else
-          .image
+        .image{style: "background: url('#{attachment_url(p, :image, :fill, 200, 200) if p.image_id?}') no-repeat center; background-size: cover"}
         .content
           .title
             %strong=p.title
-          = "#{time_ago_in_words(p.created_at)} ago"
+            %br
+            -if p.published?
+              = "Published #{time_ago_in_words(p.published_at)} ago"
+              %br
+              %em= "#{pluralize(p.impressions_count, "view")}"
+            -else
+              = "Draft: #{time_ago_in_words(p.updated_at)} ago"
       %ul.action
         %li
           =link_to post_path(p) do
-            %i.fa.fa-link
-        %li
-          =link_to edit_admin_post_path(p) do
-            %i.fa.fa-pencil
-        %li
-          =link_to admin_post_path(p), method: :delete do
-            %i.fa.fa-trash
+            .fa.fa-location-arrow

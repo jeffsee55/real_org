@@ -1,7 +1,7 @@
-class SplitNameOfAuthor < ActiveRecord::Migration
+class SplitNameOfuser < ActiveRecord::Migration
   def change
-    remove_column :authors, :name
-    add_column :authors, :first_name, :string
-    add_column :authors, :last_name, :string
+    remove_column :users, :name
+    add_column :users, :first_name, :string
+    add_column :users, :last_name, :string
   end
 end

@@ -11,20 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202211136) do
+ActiveRecord::Schema.define(version: 20150205222917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "authors", force: true do |t|
-    t.string   "email"
-    t.text     "bio"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "avatar_id"
-  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -56,6 +46,31 @@ ActiveRecord::Schema.define(version: 20150202211136) do
     t.datetime "updated_at"
   end
 
+  create_table "impressions", force: true do |t|
+    t.string   "impressionable_type"
+    t.integer  "impressionable_id"
+    t.integer  "user_id"
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.string   "view_name"
+    t.string   "request_hash"
+    t.string   "ip_address"
+    t.string   "session_hash"
+    t.text     "message"
+    t.text     "referrer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
+  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
+
   create_table "messages", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -74,13 +89,14 @@ ActiveRecord::Schema.define(version: 20150202211136) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "unique_number"
     t.string   "image_id"
-    t.boolean  "published"
-    t.boolean  "site_post",     default: false
+    t.boolean  "site_post",         default: false
+    t.datetime "published_at"
+    t.integer  "impressions_count", default: 0
+    t.integer  "user_id"
   end
 
   create_table "stylesheets", force: true do |t|
@@ -88,5 +104,40 @@ ActiveRecord::Schema.define(version: 20150202211136) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "subscribers", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "themes", force: true do |t|
+    t.string   "header_bg",           default: "#6097b6"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "button_bg",           default: "#6097b6"
+    t.string   "icon_color",          default: "#6097b6"
+    t.string   "footer_bg",           default: "#6097b6"
+    t.string   "background_image_id", default: "#6097b6"
+    t.string   "primary_gradient",    default: "#e66f66"
+    t.string   "secondary_gradient",  default: "#68e9ca"
+    t.string   "header_color",        default: "#575454"
+  end
+
+  create_table "users", force: true do |t|
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "email",                          null: false
+    t.string   "encrypted_password", limit: 128, null: false
+    t.string   "confirmation_token", limit: 128
+    t.string   "remember_token",     limit: 128, null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "image_id"
+    t.text     "bio"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end

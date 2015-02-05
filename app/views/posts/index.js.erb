@@ -1,1 +1,1 @@
-$("<%= j(render @posts) %>").appendTo(".archive-list")
+$("<%= j(render partial: "archives_list", locals: { posts: @posts }) %>").appendTo(".archive_list")

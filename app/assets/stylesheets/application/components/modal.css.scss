@@ -22,12 +22,6 @@
     display: none;
   }
 
-  .modal-trigger {
-    @include button(flat, $base-accent-color);
-    padding: 0.8em 1em;
-    margin-bottom: 20px;
-  }
-
   .modal-window { // overlay
     @include transition(opacity 0.25s ease);
     @include position(fixed, 0px 0px 0px 0px);
@@ -36,7 +30,7 @@
     padding-top: 0.6em;
     text-align: left;
     visibility: hidden;
-    z-index: 99999999999;
+    z-index: 900;
 
     @include media($large-screen) {
       padding-top: 10em;

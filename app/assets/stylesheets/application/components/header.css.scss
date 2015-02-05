@@ -2,7 +2,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 15em;
-  background: $mint;
+  background: $theme-header-bg;
   z-index: -10;
 }
 
@@ -18,5 +18,18 @@
   }
   .poster {
     margin-bottom: 5%;
+  }
+}
+
+.load {
+  position: fixed;
+  z-index: 1000;
+  top: 0; right: 0; left: 0; bottom: 0;
+  background: #dddddd;
+  .fa {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    color: white;
   }
 }

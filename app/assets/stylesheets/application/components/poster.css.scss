@@ -14,9 +14,7 @@
   .overlay {
     position: absolute;
     z-index: 10;
-    $overlay-primary: tomato;
-    $overlay-secondary: #215478;
-    @include background(linear-gradient(transparentize($overlay-primary, 0.3), transparentize($overlay-secondary, 0.3)));
+    @include background(linear-gradient(transparentize($theme-overlay-primary, 0.3), transparentize($theme-overlay-secondary, 0.3)));
     height: 100%;
     width: 100%;
   }

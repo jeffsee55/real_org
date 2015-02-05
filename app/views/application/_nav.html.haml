@@ -23,14 +23,14 @@
         %li.nav-link
           =link_to "WORK WITH ME", contact_path
         %li.nav-link
-          =link_to "WEDDINGS", category_path(Category.find_by_name("Wedding").id)
+          =link_to "WEDDINGS", category_path(Category.find_by_name("Weddings").id)
         %li.nav-link.more
-          =link_to "ORGANIZING", category_path(Category.find_by_name("Organizing%20for%20Others").id)
+          =link_to "ORGANIZING", category_path(Category.find_by_name("Organizing for Others").id)
           %ul.submenu
             %li
               =link_to "KITCHEN", category_path(Category.find_by_name("Kitchen").id)
             %li
-              =link_to "HOME OFFICE", category_path(Category.find_by_name("Home%20Office").id)
+              =link_to "HOME OFFICE", category_path(Category.find_by_name("Home Office").id)
             %li.more
               =link_to "MORE", ""
               %ul.submenu

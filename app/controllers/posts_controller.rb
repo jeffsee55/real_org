@@ -3,6 +3,10 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @categories = Category.all
+    @subscriber = Subscriber.new
+
+    impressionist(@post)
+    @post.impressionist_count(filter: :session_hash)
   end
 
   def new
@@ -19,7 +23,14 @@ class PostsController < ApplicationController
   end
 
   def index
-    @categories = Category.all
+    if params[:posts]
+      @posts = params[:posts]
+      respond_to do |format|
+        format.js
+      end
+    else
+      @categories = Category.all
+    end
   end
 
   def search
@@ -42,7 +53,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :author_id, :image)
+    params.require(:post).permit(:title, :body, :user_id, :image)
   end
 
 end

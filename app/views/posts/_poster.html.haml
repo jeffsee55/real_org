@@ -8,6 +8,6 @@
     .content
       - post.categories.each do |category|
         =link_to category do
-          %span.tag.poster-tag{style: "background: ##{category.tag_color}"}= category.nice_name.upcase
+          %span.tag.poster-tag{style: "background: #{category.tag_color}"}= category.nice_name.upcase
       .text
         %h2= @post.title

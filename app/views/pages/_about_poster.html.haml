@@ -1,0 +1,9 @@
+.poster{style: "background-image: url('#{attachment_url(post, :image, :fill, 800, 500)}')"}
+  .overlay
+    .content
+      .text
+        %h2= @post.title
+      .modal
+        %label{:for => "modal-message"}
+          .btn.btn-warning.modal-trigger{style: "text-align: center;"} WORK WITH ME
+        =render "shared/message_modal"

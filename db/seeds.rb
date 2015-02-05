@@ -19,9 +19,9 @@ cat.root.css('category').each do |c|
     published = post.css('published')
     updated = post.css('updated')
     body = post.css('content')
-    author = post.css('author')
+    user = post.css('user')
     doc = Nokogiri::HTML(body.text)
-    first_image = doc.xpath("//img")[0]['src'].split(" ")[0]
+    second_image = doc.xpath("//img")[0]['src'].split(" ")[0]
     post = Post.find_or_create_by(unique_number: post_id) do |p|
       p.title = title.text
       p.body = body.text
@@ -29,10 +29,10 @@ cat.root.css('category').each do |c|
       p.updated_at = updated.text
       p.unique_number = post_id
       backend = Refile.backends["store"]
-      file = backend.upload(open(first_image))
+      file = backend.upload(open(second_image))
       p.image = file
     end
-    category_record = Category.find_or_create_by(name: category)
+    category_record = Category.find_or_create_by(name: category.gsub("%20", " "))
     PostCategory.create(
       post_id: post.id,
       category_id: category_record.id

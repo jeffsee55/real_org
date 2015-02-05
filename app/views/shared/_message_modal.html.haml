@@ -1,6 +1,7 @@
 %input#modal-message.modal-state{:type => "checkbox"}/
 .modal-window
   .modal-inner
+    %h2 Get in Touch
     %label.modal-close{:for => "modal-message"}
     =simple_form_for :message, url: messages_path , method: :post do |f|
       =f.input :name, label: false, placeholder: "Name"

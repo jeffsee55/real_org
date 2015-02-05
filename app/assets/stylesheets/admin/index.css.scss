@@ -1,6 +1,6 @@
 .load {
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   top: 0; right: 0; left: 0; bottom: 0;
   background: #dddddd;
   .fa {
@@ -13,51 +13,4 @@
 
 .index {
   @include clearfix();
-}
-
-.card {
-  @include media($large-screen) {
-    @include span-columns(3);
-    &:nth-child(4n) {
-      @include omega();
-    }
-    &:nth-child(4n+1) {
-      clear: left;
-    }
-  }
-  position: relative;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  &:hover {
-    background: $light-gray;
-    .action {
-      display: block;
-    }
-  }
-  .content {
-    margin: 10px;
-  }
-  .unpublished {
-    position: absolute;
-    top: -5px;
-    right: 20px;
-    color: $brick;
-  }
-  .image {
-    height: 200px;
-    background: #8484ba;
-  }
-  .action {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: none;
-    font-size: 1.2em;
-    a {
-      color: white;
-      &:hover {
-        color: $brick;
-      }
-    }
-  }
 }

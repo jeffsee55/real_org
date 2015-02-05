@@ -1,0 +1,11 @@
+.footer
+  .footer-container
+    %ul
+      %li
+        =link_to "Dashboard", admin_path
+      %li
+        =link_to "View Site", root_path
+      %li
+        =link_to "Profile", admin_user_path(@user)
+      %li
+        =link_to "Theme", admin_theme_path(Theme.last)

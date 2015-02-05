@@ -1,42 +1,48 @@
 .sidebar
   %span.toggle_menu
     %span.toggle_menu_inner +
-  =link_to admin_author_path(Author.last), class: "item sidebar-welcome" do
-    =image_tag "stefanie.png", class: "avatar circle", style: "width:50px; height: 50px"
-    .author= Author.last.first_name.upcase
+  =link_to admin_user_path(@user), class: "item sidebar-welcome" do
+    =image_tag attachment_url(@user, :image, :fill, 50, 50), class: "avatar circle", style: "width:50px; height: 50px"
+    .user= @user.first_name.upcase
   %hr{style: "border-color: #dddddd; border: 2px solid"}
-  %ul
-    %li.side-item
-      =link_to root_path do
-        VIEW SITE
-    %li.side-item
-      =link_to admin_path do
-        DASHBOARD
-    %li.side-item
-      POSTS
-      %ul
-        =link_to new_admin_post_path do
-          %li NEW POST
-        =link_to admin_posts_path do
-          %li ALL POSTS
-    %li.side-item
-      CATEGORIES
-      %ul
-        =link_to new_admin_post_path do
-          %li NEW CATEGORY
-        =link_to admin_categories_path do
-          %li ALL CATEGORIES
-    %li.side-item
-      MESSAGES
-      %ul
-        =link_to "" do
-          %li ALL MESSAGES
-    %li.side-item
-      SETTINGS
-      %ul
-        =link_to new_admin_post_path do
-          %li EDIT PROFILE
-        =link_to "" do
-          %li COLORS
-        =link_to "" do
-          %li CUSTOMIZE MENU
+  %ul.accordion
+    %li
+      =link_to "VIEW SITE", "", class: "js-accordion-trigger"
+      .fa.fa-angle-down
+      %ul.submenu
+        %li
+          =link_to "Home", root_path
+        %li
+          =link_to "About", about_path
+        %li
+          =link_to "Contact", contact_path
+    %li
+      =link_to "DASHBOARD", admin_path
+    %li
+      =link_to "SETTINGS", "", class: "js-accordion-trigger"
+      .fa.fa-angle-down
+      %ul.submenu
+        %li
+          =link_to "Profile", edit_admin_user_path(@user)
+        %li
+          =link_to "Theme", admin_theme_path(Theme.last)
+        %li
+          =link_to "Menu", admin_theme_path(Theme.last)
+    %li
+      =link_to "POSTS", "", class: "js-accordion-trigger"
+      .fa.fa-angle-down
+      %ul.submenu
+        %li
+          =link_to "New", new_admin_post_path
+        %li
+          =link_to "All", admin_posts_path
+    %li
+      =link_to "CATEGORIES", "", class: "js-accordion-trigger"
+      .fa.fa-angle-down
+      %ul.submenu
+        %li
+          =link_to "New", new_admin_category_path
+        %li
+          =link_to "All", admin_categories_path
+    %li
+      =link_to "MESSAGES", admin_messages_path

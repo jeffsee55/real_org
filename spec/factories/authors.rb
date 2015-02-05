@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :author do
+  factory :user do
     name "MyString"
 email "MyString"
 bio "MyText"

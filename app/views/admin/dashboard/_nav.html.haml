@@ -4,6 +4,5 @@
     =link_to "Categories", admin_categories_path, class: "item"
     =link_to "Posts", admin_posts_path, class: "item"
     =link_to "View Site", root_url, class: "item"
-    =content_tag :button, new_admin_post_path, class: "item", method: :get do
-      New Post
+    =button_to "New Post", new_admin_post_path, class: "item button", method: :get
 %hr.thick

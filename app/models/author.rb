@@ -1,4 +1,4 @@
-class Author < ActiveRecord::Base
+class user < ActiveRecord::Base
   has_many :posts
   attachment :avatar
 

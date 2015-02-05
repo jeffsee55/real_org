@@ -1,9 +1,9 @@
 .welcome.card
-  = image_tag attachment_url(Author.last, :avatar, :fill, 300, 300), class: 'welcome-picture'
+  = image_tag attachment_url(@user, :image, :fill, 300, 300), class: 'welcome-picture'
   .greeting
     %span.meet MEET
-    %span.name= Author.last.first_name.upcase
-    %p= Author.last.short_bio(200)
+    %span.name= @user.first_name.upcase
+    %p= @user.bio
   .call-to-action
   .modal
     %label{:for => "modal-message"}
@@ -23,5 +23,7 @@
         .fa.fa-rss-square.fa-3x
     %hr
     %h3 NEVER MISS A POST
-    %input.email_field{placeholder: "Email"}
-    %button{class: "btn btn-full"} SUBSCRIBE
+    = simple_form_for @subscriber do |f|
+      = f.input :email, label: false, placeholder: "Email"
+      = f.submit "SUBSCRIBE", class: "btn btn-full", style: "border: none;"
+  = render partial: "posts/category_block"

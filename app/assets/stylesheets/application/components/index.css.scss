@@ -21,3 +21,15 @@ ul.index_row {
     }
   }
 }
+
+ul.index_row_wide {
+  @include clearfix();
+  li {
+    @include media($large-screen) {
+      @include span-columns(6);
+      &:nth-child(2n) {
+        @include omega();
+      }
+    }
+  }
+}

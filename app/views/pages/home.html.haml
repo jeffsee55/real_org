@@ -1,16 +1,20 @@
 .container
   = render "nav"
   .welcome-post
-    =link_to @post do
-      .main
+    .main
+      .card.blog
+        =@welcome_post.body.html_safe
+      =link_to @post do
         =render partial: "posts/poster", locals: { post: @post }
-      .sidebar
-        = render partial: "posts/sidebar"
-  .index
-    - @categories.each do |cat|
-      =link_to category_path(cat.id) do
-        .tag{style: "background: ##{cat.tag_color}", class:"category-tag"}= cat.nice_name.upcase
-      %ul.index_row
-        - cat.posts.limit(3).each do |p|
-          = render partial: "shared/tile", locals: { p: p, cat: cat }
+      .card.blog
+        =@post.body.truncate(1000).html_safe
+        =button_to "Read More", @post, class: "button", method: :get
+      .index
+        = render partial: "shared/page_header", locals: { title: "Recent Posts" }
+        %ul.index_row_wide
+          - @posts.each do |p|
+            = render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
+    .sidebar
+      = render partial: "posts/sidebar"
+= render "posts/social_card"
 = render "footer"

@@ -1,7 +1,10 @@
+@import "theme";
+
 // Typography
 $sans-serif: 'Lato', $helvetica;
 $serif: $georgia;
-$base-font-family: $sans-serif;
+$theme-font: $sans-serif !default;
+$base-font-family: $theme-font;
 $header-font-family: $base-font-family;
 
 // Font Sizes
@@ -47,18 +50,28 @@ $secondary: $purple;
 $brick: #d97056;
 $mint: #a5eed4;
 
+// Site Variables
+$theme-overlay-primary: tomato !default;
+$theme-overlay-secondary: $mint !default;
+$theme-header-bg: $mint !default;
+$theme-footer-bg: $blue !default;
+$theme-background: $light-gray !default;
+$theme-background-image: "gplaypattern.png" !default;
+$theme-accent-color: $medium-gray !default;
+$theme-hover-accent-color: darken($theme-accent-color, 15) !default;
+
 // Background Color
 $base-background-color: white;
 
 // Font Colors
 $base-font-color: $dark-gray;
-$base-accent-color: $medium-gray;
+$base-accent-color: $theme-accent-color;
 
 // Link Colors
-$base-link-color: $base-accent-color;
-$hover-link-color: darken($base-accent-color, 15);
-$base-button-color: $base-link-color;
-$hover-button-color: $hover-link-color;
+$base-link-color: lighten($base-font-color, 15);
+$hover-link-color: darken($base-font-color, 15);
+$base-button-color: $theme-accent-color;
+$hover-button-color: $theme-hover-accent-color;
 
 // Flash Colors
 $alert-color: $light-yellow;

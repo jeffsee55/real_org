@@ -26,7 +26,7 @@ gem "unicorn"
 gem 'haml', '~> 4.0.6'
 gem 'haml-rails', '~> 0.6.0'
 gem "wysiwyg-rails"
-gem "mandrill-api"
+gem "mandrill-api", require: "mandrill"
 gem "instagram"
 gem "font-awesome-rails"
 gem "nokogiri"
@@ -35,6 +35,8 @@ gem "aws-sdk"
 gem "refile", require: ["refile/rails", "refile/image_processing"]
 gem 'kaminari'
 gem 'ransack', '~> 1.6.3'
+gem 'impressionist'
+gem 'clearance', '~> 1.8.0'
 
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-bundler', '~> 1.1.2'

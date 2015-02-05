@@ -1,4 +1,8 @@
-=render "nav"
-%h3 Latest Posts
+=render "admin/nav"
+%h3 Drafts
 %br
-=render partial: "admin/posts/index", locals: { posts: @posts }
+-if @unpublished_posts.empty?
+  You have no drafts.
+  =button_to "New Draft", new_admin_post_path, method: :get, class: "button"
+-else
+  =render partial: "admin/posts/index", locals: { posts: @unpublished_posts }

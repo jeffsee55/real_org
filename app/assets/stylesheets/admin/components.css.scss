@@ -1,9 +1,30 @@
+.clearfix {
+  @include clearfix();
+}
+
 #flash {
   background: $brick;
   & > div {
     padding: 10px 0;
     color: white;
     @include outer-container;
+  }
+}
+
+#image {
+  height: 200px;
+  width: 100%;
+  background: $light-gray;
+  overflow: hidden;
+  position: relative;
+  img {
+    width: 100%;
+  }
+  i {
+    position: absolute;
+    top: 45%;
+    left: 43%;
+    color: $aqua;
   }
 }
 
@@ -28,8 +49,20 @@ hr.thick {
   border-radius: 50%;
 }
 
-.button {
+.button, button {
   background: $base-accent-color;
+  border: none;
+  color: white;
+  border-radius: 2px;
+}
+
+.btn {
+  color: white;
+  background: $theme-accent-color;
+  padding: 1em 1.5em;
+  line-height: 1.5 !important;
+  display: inline-block;
+  border-radius: 2px;
 }
 
 .btn-inline {

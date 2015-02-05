@@ -7,28 +7,27 @@
       =image_tag attachment_url(@recent_projects, :image, :fill, 200, 200), class: "welcome-picture"
       %h3.thin RECENT
       %h3.fat PROJECTS
-      %p=@recent_projects.body.html_safe
-      .modal
-        %label{:for => "modal-projects"}
-          .btn-outline.btn-full.modal-trigger{style: "text-align: center;"} VIEW PROJECTS
+      .body
+        =@recent_projects.body.html_safe
+        =button_to "RECENT PROJECTS", category_path(Category.find_by_name("Recent Projects")), class: "btn-outline btn-full", style: "text-align: center;", method: :get
     .contact-item
       =image_tag attachment_url(@about_me, :image, :fill, 200, 200), class: "welcome-picture"
       %h3.thin ABOUT
       %h3.fat ME
-      %p= @about_me.body.html_safe
-      .modal
-        %label{:for => "modal-about"}
-          .btn-outline.btn-full.modal-trigger{style: "text-align: center;"} VIEW
+      .body
+        =@about_me.bio.html_safe
+        =button_to "VIEW", about_path, class: "btn btn-outline btn-full", style: "text-align: center;", method: :get
     .contact-item
       =image_tag attachment_url(@work_with_me, :image, :fill, 200, 200), class: "welcome-picture"
       %h3.thin WORK
       %h3.fat WITH ME
-      %p=@work_with_me.body.html_safe
-      .modal
-        %label{:for => "modal-message"}
-          .btn-outline.btn-full.modal-trigger{style: "text-align: center;"} WORK WITH ME
+      .body
+        =@work_with_me.body.html_safe
+        .modal
+          %label{:for => "modal-message"}
+            .btn.btn-outline.btn-full.modal-trigger{style: "text-align: center;"} WORK WITH ME
   .index
     %ul.index_row
-      - @posts.limit(3).each do |p|
+      - @posts.each do |p|
         = render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
 = render "footer"

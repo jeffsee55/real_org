@@ -14,7 +14,6 @@
     cursor: pointer;
     top: 10px;
     right: -60px;
-    z-index: 10;
     cursor: pointer;
     border-radius: 50%;
     background: $base-accent-color;
@@ -40,22 +39,27 @@
       width: 50px;
       float: left
     }
-    .author {
+    .user {
       float: left;
       vertical-align: middle;
       padding: 12px 5px;
     }
   }
-  li a {
+  a, a:visited {
     color: $light-gray;
-  }
-  .side-item {
-    margin: 1.5em 0;
-    ul { display: none }
-    li {
-      padding-left: 15px;
-      margin: 1em 0;
+    &:hover {
+      color: lighten($light-gray, 10);
     }
+  }
+  .accordion {
+    li {
+      margin: 15px 0;
+    }
+  }
+
+  .submenu {
+    display: none;
+    margin-left: 20px;
   }
 }
 .show-sidebar {

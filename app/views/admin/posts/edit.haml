@@ -1,32 +1,3 @@
-=render "nav_single"
+=render "admin/nav"
 = simple_form_for [:admin, @post] do |p|
-  .post
-    .body
-      = p.input :title, placeholder: "Title", label: false
-      = p.input :body, label: false
-      = p.input :author_id, as: :hidden, value: Author.last.id
-    .toolbar
-      %h5 Featured Image
-      %hr
-      - if @post.image_id?
-        #image= image_tag attachment_url(@post, :image, :fill, 200, 200)
-        = p.input :remove_image, as: :boolean
-      - else
-        #image
-      = p.attachment_field :image, direct: true, class: "button"
-      %hr
-      %h5 Categories
-      %ul
-        - @categories.each do |cat|
-          %li
-            -if @post.categories.include?(cat)
-              = check_box_tag 'category_ids[]', cat.id, input_html: { checked: true }
-            -else
-              = check_box_tag 'category_ids[]', cat.id
-            = cat.nice_name
-        %hr
-        %li
-          = p.input :published, as: :boolean
-        %hr
-        %li
-          = p.submit "Save"
+  =render partial: "form", locals: { p:p }

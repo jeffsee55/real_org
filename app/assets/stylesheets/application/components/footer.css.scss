@@ -1,6 +1,6 @@
 .footer {
-  color: darken($blue, 10);
-  background: $blue;
+  color: darken($theme-footer-bg, 10);
+  background: $theme-footer-bg;
   padding: 5em 0;
   text-align: center;
   .title {

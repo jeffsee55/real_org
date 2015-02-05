@@ -6,16 +6,23 @@ class Admin::PostsController < AdminController
   end
 
   def create
-    @post = Post.create(post_params)
-    if params[:category_ids]
-      params[:category_ids].each do |category_id|
-        PostCategory.create(
-          post_id: @post.id,
-          category_id: category_id
-        )
+    @post = Post.new(post_params)
+
+    if @post.save
+      @post.publish! if publishing?
+      @post.save_as_draft! if drafting?
+      if params[:category_ids]
+        params[:category_ids].each do |category_id|
+          PostCategory.create(
+            post_id: @post.id,
+            category_id: category_id
+          )
+        end
       end
+      redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully created"
+    else
+      redirect_to :back, notice: "There was a problem saving your post."
     end
-    redirect_to @post
   end
 
   def show
@@ -23,7 +30,7 @@ class Admin::PostsController < AdminController
   end
 
   def index
-    @posts = Post.all.page params[:page]
+    @posts = Post.admin_posts.page params[:page]
   end
 
   def edit
@@ -33,7 +40,8 @@ class Admin::PostsController < AdminController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
+    @post.publish! if publishing?
+    @post.save_as_draft! if drafting?
     if params[:category_ids]
       params[:category_ids].each do |category_id|
       PostCategory.where(post_id: @post.id).delete_all
@@ -43,8 +51,8 @@ class Admin::PostsController < AdminController
         )
       end
     end
-    if @post.published == true
-      redirect_to @post, notice: "#{@post.title} was susccessfully updated"
+    if @post.published? == true
+      redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully updated"
     else
       redirect_to admin_post_path(@post)
     end
@@ -64,7 +72,15 @@ class Admin::PostsController < AdminController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :author_id, :published, :image, :remove_image, post_categories_attributes: [:post_id])
+    params.require(:post).permit(:title, :body, :user_id, :image, :remove_image, :site_post, post_categories_attributes: [:post_id])
+  end
+
+  def publishing?
+    params["commit"] == "Publish"
+  end
+
+  def drafting?
+    params["commit"] == "Save as Draft"
   end
 
 end

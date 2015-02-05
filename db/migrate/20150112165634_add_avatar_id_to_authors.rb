@@ -1,5 +1,5 @@
-class AddAvatarIdToAuthors < ActiveRecord::Migration
+class AddAvatarIdTousers < ActiveRecord::Migration
   def change
-    add_column :authors, :avatar_id, :string
+    add_column :users, :avatar_id, :string
   end
 end

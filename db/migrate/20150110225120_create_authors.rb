@@ -1,6 +1,6 @@
-class CreateAuthors < ActiveRecord::Migration
+class Createusers < ActiveRecord::Migration
   def change
-    create_table :authors do |t|
+    create_table :users do |t|
       t.string :name
       t.string :email
       t.text :bio

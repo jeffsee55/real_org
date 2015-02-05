@@ -1,0 +1,6 @@
+.header
+  %h2.page ADMIN
+  .actions
+    ="#{current_user.email}"
+    =button_to "Sign Out", sign_out_path, class: "button btn-warning", method: :delete
+%hr.thick

@@ -1,6 +1,8 @@
 @import "footer";
+@import "header";
 @import "index";
 @import "navigation";
+@import "posts";
 @import "poster";
 @import "sidebar";
 @import "social_card";
@@ -11,7 +13,7 @@
 
 
 body {
-  @include background(url("gplaypattern.png"))
+  @include background(url($theme-background-image))
 }
 
 #flash {
@@ -55,9 +57,22 @@ input[type="button"] {
   }
 }
 
+button,
+input[type="submit"] {
+  color: white;
+  background: $theme-accent-color;
+  border: none;
+  padding: 1em 1.5em;
+  line-height: 1.5 !important;
+  display: inline-block;
+}
+
 .btn {
   color: white;
+  background: $theme-accent-color;
   padding: 1em 1.5em;
+  line-height: 1.5 !important;
+  display: inline-block;
 }
 
 .btn-full {
@@ -66,30 +81,22 @@ input[type="button"] {
 
 .btn-outline {
   background: none !important;
-  color: $base-accent-color !important;
   border: 1px solid !important;
+  line-height: 1.5;
   &:hover {
-    background: lighten($base-accent-color, 30) !important;
-  }
-}
-
-.blog {
-  @include row;
-  background: $card-color;
-  position: relative;
-  overflow: hidden;
-  .first-lines {
-    font-size: 1.5em;
-  }
-  img {
-    max-width: 100%;
-    height: auto !important;
+    background: lighten($base-accent-color, 30);
   }
 }
 
 .icon-list {
   @include clearfix();
   text-align: center;
+  a {
+    color: $theme-accent-color;
+    &:hover {
+      color: $theme-hover-accent-color;
+    }
+  }
   .facebook {
     color: $facebook;
     &:hover {
