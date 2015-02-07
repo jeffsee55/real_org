@@ -16,7 +16,14 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboard#home'
     get 'site_posts', to: 'dashboard#site_posts'
-    resources :posts
+    resources :posts do
+      collection do
+        match 'search' => 'posts#search', via: [:get, :post], as: :search
+      end
+      member do
+        patch 'publish' => 'posts#update'
+      end
+    end
     resources :users
     resources :categories
     resources :images

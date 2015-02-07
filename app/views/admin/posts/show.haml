@@ -20,13 +20,13 @@
     -if @post.published?
       %h5= "Published #{time_ago_in_words(@post.published_at)} ago"
       %h5= "#{pluralize(@post.impressions_count, "view")}"
-      =button_to "Edit", edit_admin_post_path(@post), class: "button btn-inline", method: :get
-      =button_to "View", post_path(@post), class: "button btn-inline", method: :get
     -else
       %h5= "Draft: #{time_ago_in_words(@post.updated_at)} ago"
-      =button_to "Edit", edit_admin_post_path(@post), class: "button btn-inline", method: :get
-      =button_to "Publish", edit_admin_post_path(@post), class: "button btn-inline btn-primary", method: :get
+    =button_to "Edit", edit_admin_post_path(@post), class: "button btn-inline", method: :get
+    =button_to "Delete", admin_post_path(@post), class: "button btn-inline btn-warning", method: :delete, confirm: "Are you sure?"
 %hr
-= @post.body.html_safe
+.post
+  .body.show
+    = @post.body.html_safe
 :javascript
   disqus_shortname = "therealisticorganizer"

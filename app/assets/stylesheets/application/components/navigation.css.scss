@@ -81,10 +81,14 @@
   min-height: $centered-navigation-height;
   width: 100%;
   z-index: 500;
-
+  padding: 10px;
+  @include media($large-screen) {
+    padding: 0px;
+  }
   // Mobile view
 
   .mobile-logo {
+    margin-top: 5px;
     display: inline;
     float: left;
     max-height: $centered-navigation-height;

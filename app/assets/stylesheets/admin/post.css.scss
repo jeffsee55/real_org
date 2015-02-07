@@ -1,6 +1,11 @@
 .post {
+  .show {
+    @include shift(2);
+    box-shadow: 0px 0px 6px 0 rgba(0, 0, 0, 0.4);
+    padding: 2em;
+  }
   .body {
-    @include span-columns(9);
+    @include span-columns(8);
     .post_title {
       font-size: 2.5em;
       margin-left: 0px;
@@ -11,16 +16,34 @@
         margin-bottom: 10px;
       }
     }
+    .froala-wrapper {
+      box-shadow: 0px 0px 6px 0 rgba(0, 0, 0, 0.4);
+      margin-top: 1em;
+      padding: 2em;
+    }
+    .fr-placeholder {
+      top: 0 !important;
+      margin: 2em !important;
+    }
+    .froala-element.f-basic {
+      padding: 0;
+    }
     .f-basic {
       border: none;
     }
   }
   .toolbar {
-    @include span-columns(3);
+    @include span-columns(4);
     @include omega();
     height: 100%;
     #post_image {
       padding: 10px;
+    }
+    li {
+      @include span-columns(6);
+      &:nth-child(2n) {
+        @include omega();
+      }
     }
   }
 }

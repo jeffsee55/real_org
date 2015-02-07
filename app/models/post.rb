@@ -6,13 +6,12 @@ class Post < ActiveRecord::Base
   attachment :featured_image
   is_impressionable :counter_cache => true
 
+  default_scope -> { order('created_at DESC') }
   scope :site_post, -> { where(site_post: true) }
-  scope :popular, -> { where(site_post: false).order('impressions_count DESC').order('published_at DESC') }
-  scope :blog_posts, -> { where(site_post: false).order('published_at DESC') }
-  scope :admin_posts, -> { where(site_post: false).order('published_at DESC') }
+  scope :regular_post, -> { where(site_post: false) }
+  scope :published, -> { where.not(published_at: nil).where(site_post: false).order('published_at DESC') }
 
   accepts_nested_attributes_for :post_categories
-
 
   def short_title
     title.truncate(45, seperator: " ")
@@ -36,6 +35,13 @@ class Post < ActiveRecord::Base
 
   def published?
     published_at != nil
+  end
+
+  def body_without_images
+    require 'nokogiri'
+    doc = Nokogiri::HTML(self.body)
+    doc.search("img").remove
+    doc.to_html
   end
 
   # def send_to_subscribers

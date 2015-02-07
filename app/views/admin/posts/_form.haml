@@ -2,16 +2,15 @@
   .body
     = p.input :title, placeholder: "Title", label: false
     = p.input :body, label: false
-    = p.input :image_id, as: :hidden, value: @user.id
+    = p.input :user_id, as: :hidden, value: @user.id
   .toolbar
+    = p.submit "Save as Draft", class: "button"
+    = p.submit "Publish", class: "button btn-primary"
     %h5 Featured Image
     %hr
-    - if @post.image_id?
-      #image= image_tag attachment_url(@post, :image, :fill, 200, 200)
-      = p.input :remove_image, as: :boolean
-    - else
-      #image
-    = p.attachment_field :image, direct: true, class: "button"
+    #image.post_image= image_tag attachment_url(@post, :image, :fill, 200, 200) if @post.image_id?
+    = p.input :remove_image, as: :boolean
+    = p.attachment_field :image, direct: true
     %hr
     %h5 Categories
     %ul
@@ -25,7 +24,3 @@
       %hr
       %li
         = p.input :site_post, as: :boolean
-      %hr
-      %li
-        = p.submit "Save as Draft", class: "button"
-        = p.submit "Publish", class: "button btn-primary"

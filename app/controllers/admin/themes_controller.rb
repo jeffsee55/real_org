@@ -35,6 +35,6 @@ class Admin::ThemesController < AdminController
     end
 
     def theme_params
-      params.require(:theme).permit(:header_bg, :footer_bg, :button_bg, :icon_color, :background_image, :primary_gradient, :secondary_gradient)
+      params.require(:theme).permit(:header_bg, :footer_bg, :button_bg, :logo, :icon_color, :background_image, :primary_gradient, :secondary_gradient)
     end
 end

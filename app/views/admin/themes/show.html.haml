@@ -1,6 +1,7 @@
 =render "admin/nav"
 =simple_form_for [:admin, @theme] do |f|
   .body
+    =f.input :logo
     .index
       .card
         -if @theme.background_image

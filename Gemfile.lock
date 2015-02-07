@@ -47,12 +47,6 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.10)
-    better_errors (2.1.1)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
-      rack (>= 0.9.0)
-    binding_of_caller (0.7.2)
-      debug_inspector (>= 0.0.1)
     bourbon (3.2.3)
       sass (~> 3.2)
       thor
@@ -102,7 +96,6 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     database_cleaner (1.4.0)
-    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
@@ -361,6 +354,7 @@ GEM
     title (0.0.5)
       i18n
       rails (>= 3.1)
+    truncate_html (0.9.3)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.0)
@@ -386,8 +380,6 @@ DEPENDENCIES
   airbrake
   awesome_print
   aws-sdk
-  better_errors
-  binding_of_caller
   bourbon (~> 3.2.1)
   bundler-audit
   byebug
@@ -440,6 +432,7 @@ DEPENDENCIES
   spring-commands-rspec
   timecop
   title
+  truncate_html (~> 0.9.3)
   uglifier
   unicorn
   webmock

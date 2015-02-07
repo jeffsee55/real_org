@@ -1,20 +1,21 @@
+-require "nokogiri"
+
 .container
   = render "nav"
-  .welcome-post
-    .main
-      .card.blog
-        =@welcome_post.body.html_safe
-      =link_to @post do
-        =render partial: "posts/poster", locals: { post: @post }
-      .card.blog
-        =@post.body.truncate(1000).html_safe
-        =button_to "Read More", @post, class: "button", method: :get
-      .index
-        = render partial: "shared/page_header", locals: { title: "Recent Posts" }
-        %ul.index_row_wide
-          - @posts.each do |p|
-            = render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
-    .sidebar
-      = render partial: "posts/sidebar"
+  .main
+    .card.blog
+      =@welcome_post.body.html_safe
+    =link_to @post do
+      =render partial: "posts/poster", locals: { post: @post }
+    .card.blog
+      =truncate_html(@post.body_without_images, omission: '...(continued)').html_safe
+      =button_to "Read More", @post, class: "button", method: :get
+    .index
+      = render partial: "shared/page_header", locals: { title: "Recent Posts" }
+      %ul.index_row_wide
+        - @posts.each do |p|
+          = render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
+  .sidebar
+    = render partial: "posts/sidebar"
 = render "posts/social_card"
 = render "footer"

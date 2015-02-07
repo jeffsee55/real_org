@@ -1,0 +1,9 @@
+.container
+  = render "nav"
+  .search
+    = render partial: "shared/page_header", locals: { title: "Categories", q: @q }
+  .index
+    - @categories.each do |cat|
+      =link_to cat.nice_name.upcase, cat, class: "tag", style: "background: #{cat.tag_color}"
+      = render partial: 'shared/index', locals: { cat: cat, limit: 3 }
+= render "footer"

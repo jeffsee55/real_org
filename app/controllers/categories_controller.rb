@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    redirect_to posts_path
+    @categories = Category.alphabetical.regular.page params[:page]
   end
 
 end

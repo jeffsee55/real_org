@@ -24,12 +24,10 @@ class PostsController < ApplicationController
 
   def index
     if params[:posts]
-      @posts = params[:posts]
-      respond_to do |format|
-        format.js
-      end
+      posts = params[:posts]
+      @posts = posts.published.page params[:page]
     else
-      @categories = Category.all
+      @posts = Post.published.page params[:page]
     end
   end
 

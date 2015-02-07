@@ -37,6 +37,7 @@ gem 'kaminari'
 gem 'ransack', '~> 1.6.3'
 gem 'impressionist'
 gem 'clearance', '~> 1.8.0'
+gem 'truncate_html', '~> 0.9.3'
 
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-bundler', '~> 1.1.2'
@@ -48,8 +49,6 @@ gem "bundler-audit"
 group :development do
   gem "spring"
   gem "spring-commands-rspec"
-  gem "better_errors"
-  gem "binding_of_caller"
   gem "guard"
   gem 'guard-livereload', require: false
   gem 'guard-rspec', require: false

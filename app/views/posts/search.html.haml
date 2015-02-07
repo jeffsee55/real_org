@@ -3,6 +3,6 @@
   = render partial: "shared/page_header", locals: { title: "Search", q: @q }
   .index
     %ul.index_row
-      - @posts.blog_post.each do |p|
+      - @posts.each do |p|
         =render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
 = render "footer"

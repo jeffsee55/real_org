@@ -1,9 +1,9 @@
 .index
-  - posts.sort { |a,b| b.updated_at <=> a.updated_at }.each do |p|
+  -posts.each do |p|
     .card
       -unless p.published?
         .unpublished.fa-2x.fa.fa-bookmark
-      =link_to edit_admin_post_path(p) do
+      =link_to admin_post_path(p) do
         .image{style: "background: url('#{attachment_url(p, :image, :fill, 200, 200) if p.image_id?}') no-repeat center; background-size: cover"}
         .content
           .title
@@ -15,7 +15,8 @@
               %em= "#{pluralize(p.impressions_count, "view")}"
             -else
               = "Draft: #{time_ago_in_words(p.updated_at)} ago"
-      %ul.action
-        %li
-          =link_to post_path(p) do
-            .fa.fa-location-arrow
+        %ul.action
+          -if p.published?
+            %li
+              =link_to post_path(p) do
+                .fa.fa-location-arrow

@@ -1,12 +1,15 @@
 .nav
-  .banner
-    .title
-      %span.thin THE
-      %span.fat REALISTIC
-      %br
-      %span.thin ORGANIZER
-    .tagline
-      ADVENTURES IN ORGANIZING AND ATTEMPS AT CREATIVITY
+  .banner{style: "line-height: 0.5"}
+    -if @theme.logo.empty?
+      .title
+        %span.thin THE
+        %span.fat REALISTIC
+        %br
+        %span.thin ORGANIZER
+      .tagline
+        ADVENTURES IN ORGANIZING AND ATTEMPS AT CREATIVITY
+    -else
+      =@theme.logo.html_safe
   %i.mobile_menu.fa.fa-2x.fa-bars
 %header.centered-navigation{:role => "banner"}
   .centered-navigation-wrapper

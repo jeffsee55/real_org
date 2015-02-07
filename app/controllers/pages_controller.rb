@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
   def home
     @welcome_post = Post.find_by_title("Welcome Message")
-    @post = Post.blog_posts.first
-    @posts = Post.blog_posts.first(4)
+    @post = Post.published.first
+    @posts = Post.published.first(5)[1..-1]
     @categories = Category.all
     @subscriber = Subscriber.new
   end
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @recent_projects = Post.find_by_title("Recent Projects")
     @about_me = User.last
     @work_with_me = Post.find_by_title("Work With Me")
-    @posts = Post.blog_posts.first(3)
+    @posts = Post.first(3)
     @categories = Category.all
   end
 end
