@@ -4,8 +4,6 @@
     = p.input :body, label: false
     = p.input :user_id, as: :hidden, value: @user.id
   .toolbar
-    = p.submit "Save as Draft", class: "button"
-    = p.submit "Publish", class: "button btn-primary"
     %h5 Featured Image
     %hr
     #image.post_image= image_tag attachment_url(@post, :image, :fill, 200, 200) if @post.image_id?
@@ -21,6 +19,7 @@
           -else
             = check_box_tag 'category_ids[]', cat.id
           = cat.nice_name
-      %hr
-      %li
-        = p.input :site_post, as: :boolean
+    %div{style: "float: left"}
+      = p.input :site_post, as: :boolean
+      = p.submit "Save as Draft", class: "button"
+      = p.submit "Publish", class: "button btn-primary"

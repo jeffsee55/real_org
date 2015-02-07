@@ -31,19 +31,22 @@ class SiteMailer < ActionMailer::Base
   def post_notification(post)
     template_name = "post-notification"
     template_content = []
-    messaage = {
-      to: [],
-      subject: "Realistic Organizer: #{post.title}",
+    message = {
+      to: [
+        {email: "jeffsee.55@gmail.com"},
+        {email: "jeff@jeffseedesigns.com"},
+      ],
+      subject: "Post: #{post.title}",
       merge_vars: [
-        {
-          rcpt: "",
+        {rcpt: "jeffsee.55@gmail.com",
           vars: [
             {name: "TITLE", content: post.title},
-            {name: "EXCERPT", content: post.short_body(100)}
-            {name: "LINK", content: "#{base_url}/posts/#{post.id}"}
+            {name: "EXCERPT", content: post.body.html_safe}
           ]
         }
       ]
     }
+
+    mandrill_client.messages.send_template template_name, template_content, message
   end
 end

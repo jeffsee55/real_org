@@ -25,6 +25,7 @@ class Post < ActiveRecord::Base
     # mark :published_at with current time
     update(published_at: Time.now)
     # send mail notification at the next 1:00pm
+    SiteMailer.post_notification(self)
   end
 
   def save_as_draft!

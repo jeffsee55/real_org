@@ -1,4 +1,6 @@
 .post {
+  @include clearfix();
+  margin-top:1em;
   .show {
     @include shift(2);
     box-shadow: 0px 0px 6px 0 rgba(0, 0, 0, 0.4);
