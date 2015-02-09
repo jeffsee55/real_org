@@ -20,41 +20,70 @@
       %span.thin ORGANIZER
     %a#js-centered-navigation-mobile-menu.centered-navigation-mobile-menu.fa.fa-bars.fa-2x{:href => "javascript:void(0)"}
     %nav{:role => "navigation"}
-      %ul#js-centered-navigation-menu.centered-navigation-menu.show
-        %li.nav-link
-          =link_to "HOME", root_url
-        %li.nav-link
-          =link_to "WORK WITH ME", contact_path
-        %li.nav-link
-          =link_to "WEDDINGS", category_path(Category.find_by_name("Weddings").id)
-        %li.nav-link.more
-          =link_to "ORGANIZING", category_path(Category.find_by_name("Organizing for Others").id)
-          %ul.submenu
-            %li
-              =link_to "KITCHEN", category_path(Category.find_by_name("Kitchen").id)
-            %li
-              =link_to "HOME OFFICE", category_path(Category.find_by_name("Home Office").id)
-            %li.more
-              =link_to "MORE", ""
-              %ul.submenu
-                %li
-                  =link_to "ORGANZING FOR OTHERS", ""
-                %li
-                  =link_to "BUDGET FRIENDLY", ""
-        %li.nav-link.more
-          =link_to "DIY", ""
-          %ul.submenu
-            %li
-              =link_to "HOLIDAYS", category_path(Category.find_by_name("Holidays").id)
-        %li.nav-link.more
-          =link_to "MORE", ""
-          %ul.submenu
-            %li
-              =link_to "ALL CATEGORIES", root_url
-            %li
-              =link_to "ALL POSTS", root_url
-        %li.nav-link
-          = search_form_for @q, class: "search-bar", url: search_posts_path, html: { method: :post } do |f|
-            = f.search_field :title_or_body_cont
-            = f.button do
-              %i.fa.fa-search
+      -if @menu
+        %ul#js-centered-navigation-menu.centered-navigation-menu.show
+          -@menu.menu_items.each do |item|
+            -if item.sub_items.empty?
+              %li.nav-link
+                =link_to item.name, item.link
+            -else
+              %li.nav-link.more
+                =link_to item.name, item.link
+                -if item.sub_items
+                  %ul.submenu
+                    -item.sub_items.each do |sub_item|
+                      -if sub_item.sub_items.empty?
+                        %li
+                          =link_to sub_item.name, ""
+                      -else
+                        %li.more
+                          =link_to sub_item.name, ""
+                          -if sub_item.sub_items
+                            %ul.submenu
+                              -sub_item.sub_items.each do |sub_item|
+                                %li
+                                  =link_to sub_item.name, ""
+          %li.nav-link
+            = search_form_for @q, class: "search-bar", url: search_posts_path, html: { method: :post } do |f|
+              = f.search_field :title_or_body_cont
+              = f.button do
+                %i.fa.fa-search
+      -else
+        %ul#js-centered-navigation-menu.centered-navigation-menu.show
+          %li.nav-link
+            =link_to "HOME", root_url
+          %li.nav-link
+            =link_to "WORK WITH ME", contact_path
+          %li.nav-link
+            =link_to "WEDDINGS", category_path(Category.find_by_name("Weddings").id)
+          %li.nav-link.more
+            =link_to "ORGANIZING", category_path(Category.find_by_name("Organizing for Others").id)
+            %ul.submenu
+              %li
+                =link_to "KITCHEN", category_path(Category.find_by_name("Kitchen").id)
+              %li
+                =link_to "HOME OFFICE", category_path(Category.find_by_name("Home Office").id)
+              %li.more
+                =link_to "MORE", ""
+                %ul.submenu
+                  %li
+                    =link_to "ORGANZING FOR OTHERS", ""
+                  %li
+                    =link_to "BUDGET FRIENDLY", ""
+          %li.nav-link.more
+            =link_to "DIY", ""
+            %ul.submenu
+              %li
+                =link_to "HOLIDAYS", category_path(Category.find_by_name("Holidays").id)
+          %li.nav-link.more
+            =link_to "MORE", ""
+            %ul.submenu
+              %li
+                =link_to "ALL CATEGORIES", root_url
+              %li
+                =link_to "ALL POSTS", root_url
+          %li.nav-link
+            = search_form_for @q, class: "search-bar", url: search_posts_path, html: { method: :post } do |f|
+              = f.search_field :title_or_body_cont
+              = f.button do
+                %i.fa.fa-search

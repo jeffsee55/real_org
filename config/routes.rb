@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     resources :subscribers, only: [:index, :show, :destroy]
     resources :stylesheets
     resources :themes, except: [:index]
+    resources :menus
+    resources :menu_items, only: [:create, :new, :show]
     get "contact", to: "pages#contact"
     post "create_image", to: "images#create"
     post "destroy_image", to: "images#destroy"
