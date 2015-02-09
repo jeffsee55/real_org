@@ -9,9 +9,6 @@ set :deploy_to, '/home/deploy/real_org'
 set :linked_files, %w{config/database.yml .env.production config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-Rake::Task["deploy:assets:precompile"].clear_actions
-Rake::Task["deploy:assets:backup_manifest"].clear_actions
-
 namespace :deploy do
 
   desc 'Restart application'
