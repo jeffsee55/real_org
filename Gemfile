@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.1.5"
 
+gem "dotenv-rails"
 gem "airbrake"
 gem "bourbon", "~> 3.2.1"
 gem "coffee-rails"
@@ -58,7 +59,6 @@ end
 group :development, :test do
   gem "awesome_print"
   gem "byebug"
-  gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.0.0"
