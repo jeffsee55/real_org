@@ -44,6 +44,10 @@ class Admin::PostsController < AdminController
     end
   end
 
+  def site_posts
+    @posts = Post.site_post.page params[:page]
+  end
+
   def edit
     @post = Post.find(params[:id])
     @categories = Category.all

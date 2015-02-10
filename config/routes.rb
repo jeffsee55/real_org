@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :posts do
       collection do
         match 'search' => 'posts#search', via: [:get, :post], as: :search
+        get 'site_posts'
       end
       member do
         patch 'publish' => 'posts#update'
