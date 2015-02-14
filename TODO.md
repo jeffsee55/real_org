@@ -36,6 +36,7 @@ Import comments DONE
   Need to remap CSV when site is live.
 Populate archives DONE
 Render XML for RSS
+Fix site post show request
 
 ADMIN
 =====

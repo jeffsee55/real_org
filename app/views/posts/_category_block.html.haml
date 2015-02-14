@@ -4,6 +4,7 @@
     - @categories.each do |cat|
       - i += 1
       = link_to cat do
-        %li{style: "background-image: url('#{attachment_url(cat.posts.last, :image, :fill, 200, 200)}')"}
-          %span.overlay-light
-          %h3.overlay-light-font= cat.nice_name.upcase
+        -if cat.posts.last
+          %li{style: "background-image: url('#{attachment_url(cat.posts.last, :image, :fill, 200, 200)}')"}
+            %span.overlay-light
+            %h3.overlay-light-font= cat.nice_name.upcase
