@@ -87,11 +87,14 @@ class Post < ActiveRecord::Base
   end
 
   def send_email
-    recent_projects = Category.find_by_name("Recent Projects")
-    unless self.categories.include? recent_projects or self.site_post? or self.email_sent?
-      SiteMailer.post_notification(self)
-      self.email_sent_at = Time.now
-      self.save
+    # check again to see if post is still marked published
+    if published_at != nil
+      recent_projects = Category.find_by_name("Recent Projects")
+      unless self.categories.include? recent_projects or self.site_post? or self.email_sent?
+        SiteMailer.post_notification(self)
+        self.email_sent_at = Time.now
+        self.save
+      end
     end
   end
 end

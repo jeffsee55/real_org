@@ -4,6 +4,7 @@ require 'capistrano/setup'
 # Includes default deployment tasks
 require 'capistrano/deploy'
 
+
 # Includes tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
@@ -24,6 +25,7 @@ require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rbenv'
+require "whenever/capistrano"
 
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup

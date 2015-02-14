@@ -1,6 +1,8 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
+require "whenever/capistrano"
+
 set :application, 'real_org'
 set :repo_url, 'git@github.com:jeffsee55/real_org.git'
 
@@ -8,6 +10,8 @@ set :deploy_to, '/home/deploy/real_org'
 
 set :linked_files, %w{config/database.yml .env}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+
 
 namespace :deploy do
 
