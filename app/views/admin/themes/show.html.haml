@@ -11,34 +11,19 @@
         %td URL
       %tr
         %td Facebook
-        -if @theme.facebook.empty?
-          %td= f.input :facebook, label: false, placeholder: "Facebook"
-        -else
-          %td= @theme.facebook
+        %td= f.input :facebook, label: false, placeholder: "Facebook"
       %tr
         %td Instagram
-        -if @theme.instagram.empty?
-          %td= f.input :instagram, label: false, placeholder: "Instagram"
-        -else
-          %td= @theme.instagram
+        %td= f.input :instagram, label: false, placeholder: "Instagram"
       %tr
         %td Pinterest
-        -if @theme.pinterest.empty?
-          %td= f.input :pinterest, label: false, placeholder: "Pinterest"
-        -else
-          %td= @theme.pinterest
+        %td= f.input :pinterest, label: false, placeholder: "Pinterest"
       %tr
         %td Google Plus
-        -if @theme.google_plus.empty?
-          %td= f.input :google_plus, label: false, placeholder: "Google_plus"
-        -else
-          %td= @theme.google_plus
+        %td= f.input :google_plus, label: false, placeholder: "Google_plus"
       %tr
         %td RSS Feed
-        -if @theme.rss.empty?
-          %td= f.input :rss, label: false, placeholder: "RSS"
-        -else
-          %td= @theme.rss
+        %td= f.input :rss, label: false, placeholder: "RSS"
     .index
       .card
         -if @theme.background_image
@@ -85,4 +70,4 @@
             %strong Poster Gradient
             =f.input :primary_gradient, label: false
             =f.input :secondary_gradient, label: false
-    =f.submit "Save", class: "button"
+    =f.submit "Save", class: "button "
