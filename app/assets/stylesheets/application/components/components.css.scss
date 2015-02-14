@@ -16,6 +16,15 @@ body {
   @include background(url($theme-background-image))
 }
 
+.spacer {
+  height: 2em;
+  width: 100%;
+}
+
+input {
+  line-height: 2em;
+}
+
 #flash {
   background: $brick;
   & > div {

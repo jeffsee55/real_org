@@ -10,7 +10,6 @@
       .button.btn.btn-outline.btn-full.modal-trigger{style: "text-align: center"} GET IN TOUCH
       =render "shared/message_modal"
     .icon-list
-      %hr
       -unless @theme.pinterest
         =link_to @theme.pinterest do
           .fa.fa-pinterest-square.fa-3x
@@ -26,9 +25,10 @@
       -unless @theme.rss
         =link_to @theme.rss do
           .fa.fa-rss-square.fa-3x
-    %hr
+    .spacer
     %h3 NEVER MISS A POST
     = simple_form_for @subscriber do |f|
       = f.input :email, label: false, placeholder: "Email"
       = f.submit "SUBSCRIBE", class: "btn btn-full", style: "border: none;"
+    .spacer
   = render partial: "posts/category_block"
