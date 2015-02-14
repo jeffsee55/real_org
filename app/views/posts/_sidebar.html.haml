@@ -11,19 +11,19 @@
       =render "shared/message_modal"
     .icon-list
       %hr
-      -unless @theme.pinterest.empty?
+      -unless @theme.pinterest
         =link_to @theme.pinterest do
           .fa.fa-pinterest-square.fa-3x
-      -unless @theme.facebook.empty?
+      -unless @theme.facebook
         =link_to @theme.facebook do
           .fa.fa-facebook-square.fa-3x
-      -unless @theme.instagram.empty?
+      -unless @theme.instagram
         =link_to @theme.instagram do
           .fa.fa-instagram.fa-3x
-      -unless @theme.google_plus.empty?
+      -unless @theme.google_plus
         =link_to @theme.google_plus do
           .fa.fa-google-plus-square.fa-3x
-      -unless @theme.rss.empty?
+      -unless @theme.rss
         =link_to @theme.rss do
           .fa.fa-rss-square.fa-3x
     %hr
