@@ -2,18 +2,10 @@
   %h3 BLOG ARCHIVE
   %hr
   %ul
-    =link_to posts_path(posts: Post.where('extract(month from created_at) = ?', 1)), remote: true do
-      %li
-        JANUARY
-      %ul.archive_list
-    %li FEBRUARY
-    %li MARCH
-    %li APRIL
-    %li MAY
-    %li JUNE
-    %li JULY
-    %li AUGUST
-    %li SEPTEMBER
-    %li OCTOBER
-    %li NOVEMBER
-    %li DECEMBER
+    -@posts.each do |month, post|
+      %li.archive-month
+        %strong= month.strftime("%B %Y")
+        %ul.archive-list
+          -post.each do |p|
+            %li
+              =link_to p.title, p

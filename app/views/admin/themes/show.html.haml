@@ -1,7 +1,44 @@
 =render "admin/nav"
 =simple_form_for [:admin, @theme] do |f|
   .body
-    =f.input :logo
+    =f.input :logo, label: false
+    %table
+      %tr
+        %td Site Tagline
+        %td= f.input :tagline, label: false, placeholder: "Tagline (ex. Save. Play. Organize)"
+      %tr
+        %td Link
+        %td URL
+      %tr
+        %td Facebook
+        -if @theme.facebook.empty?
+          %td= f.input :facebook, label: false, placeholder: "Facebook"
+        -else
+          %td= @theme.facebook
+      %tr
+        %td Instagram
+        -if @theme.instagram.empty?
+          %td= f.input :instagram, label: false, placeholder: "Instagram"
+        -else
+          %td= @theme.instagram
+      %tr
+        %td Pinterest
+        -if @theme.pinterest.empty?
+          %td= f.input :pinterest, label: false, placeholder: "Pinterest"
+        -else
+          %td= @theme.pinterest
+      %tr
+        %td Google Plus
+        -if @theme.google_plus.empty?
+          %td= f.input :google_plus, label: false, placeholder: "Google_plus"
+        -else
+          %td= @theme.google_plus
+      %tr
+        %td RSS Feed
+        -if @theme.rss.empty?
+          %td= f.input :rss, label: false, placeholder: "RSS"
+        -else
+          %td= @theme.rss
     .index
       .card
         -if @theme.background_image

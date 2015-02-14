@@ -11,7 +11,6 @@ class SiteMailer < ActionMailer::Base
     message = {
       to: [
         {email: "jeffsee.55@gmail.com"},
-        {email: "jeff@jeffseedesigns.com"},
       ],
       subject: "New Message from #{message.name}",
       merge_vars: [
@@ -32,16 +31,19 @@ class SiteMailer < ActionMailer::Base
     template_name = "post-notification"
     template_content = []
     message = {
-      to: [
-        {email: "jeffsee.55@gmail.com"},
-        {email: "jeff@jeffseedesigns.com"},
-      ],
-      subject: "Post: #{post.title}",
+      to:
+        Subscriber.all.map do |s|
+          {email: "#{s.email}"}
+        end,
+      subject: "RO:#{post.title}",
       merge_vars: [
         {rcpt: "jeffsee.55@gmail.com",
           vars: [
             {name: "TITLE", content: post.title},
-            {name: "EXCERPT", content: post.body.html_safe}
+            {name: "IMAGE_URL", content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{post.image.id}"},
+            {name: "POST_URL", content: ""},
+            {name: "UNSUBSCRIBE_URL", content: "http://localhost:5000"},
+            {name: "EXCERPT", content: post.strip_and_truncate(200) }
           ]
         }
       ]

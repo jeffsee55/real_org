@@ -1,9 +1,9 @@
-#= require froala_editor.min.js
-#= require froala/font_family.min.js
-#= require froala/font_size.min.js
-#= require froala/inline_styles.min.js
-#= require froala/colors.min.js
 $ ->
+  #= require froala_editor.min.js
+  #= require froala/font_family.min.js
+  #= require froala/font_size.min.js
+  #= require froala/inline_styles.min.js
+  #= require froala/colors.min.js
   $("#theme_logo").editable(
     height: 300
     inlineMode: false
@@ -14,9 +14,30 @@ $ ->
       '#575454', '#D5D5D5'
       ],
       colorsStep: 6
+    imageButtons: ["display", "align", "linkImage", "info", "replaceImage", "removeImage"],
+    customImageButtons:
+      info:
+        title: 'Image source'
+        icon:
+          type: 'font'
+          value: 'fa fa-info'
+        callback: ($img) ->
+          alert $img.attr('src')
+          return
+        refresh: ($img) ->
+          console.log 'Refresh image button'
+          console.log $img
+          return
+    )
+
+  $(window).resize ->
+    $('#post_body').editable(
+      windowHeight = $(window).height()
+      boxHeight = windowHeight - 120
+      $(".froala-wrapper .f-basic").height boxHeight
     )
   windowHeight = $(window).height()
-  boxHeight = windowHeight - 200
+  boxHeight = windowHeight - 120
   $("#post_body").editable(
     height: boxHeight
     inlineMode: false
@@ -26,6 +47,20 @@ $ ->
     defaultImageWidth: 600
     spellcheck: true
     colorsStep: 6
+    imageButtons: ["display", "align", "linkImage", "info", "replaceImage", "removeImage"],
+    customImageButtons:
+      info:
+        title: 'Image source'
+        icon:
+          type: 'font'
+          value: 'fa fa-info'
+        callback: ($img) ->
+          alert $img.attr('src')
+          return
+        refresh: ($img) ->
+          console.log 'Refresh image button'
+          console.log $img
+          return
     )
     .on "editable.imageError", (e, editor, error) ->
       # Custom error message returned from the server.
@@ -56,3 +91,11 @@ $ ->
       console.log data
     .on 'editable.imageDeleteError', (e, editor, error) ->
       console.log error
+
+  $("input#post_site_post").click ->
+    if $("input#post_site_post").is(":checked")
+      $(".categories li input").attr("disabled", "disabled").removeAttr("checked")
+      console.log "Check"
+    else
+      $(".categories li input").removeAttr("disabled")
+      console.log "Uncheck"

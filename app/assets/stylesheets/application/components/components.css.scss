@@ -71,6 +71,7 @@ input[type="submit"] {
   padding: 1em 1.5em;
   line-height: 1.5 !important;
   display: inline-block;
+  font-weight: bold;
 }
 
 .btn-full {
@@ -78,11 +79,11 @@ input[type="submit"] {
 }
 
 .btn-outline {
-  background: none !important;
-  border: 1px solid !important;
+  background: none;
+  border: 1px solid;
   line-height: 1.5;
   &:hover {
-    background: lighten($base-accent-color, 30);
+    color: darken($base-accent-color, 20);
   }
 }
 
@@ -131,6 +132,16 @@ input[type="submit"] {
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
   background: transparentize($dark-gray, 0.2);
+}
+
+.overlay-light {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: transparentize(white, 0.2);
+}
+
+.overlay-light-font {
+  color: $dark-gray;
 }
 
 .dark-hr {

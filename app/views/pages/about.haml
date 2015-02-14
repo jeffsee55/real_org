@@ -1,6 +1,10 @@
 .container
   = render "nav"
-  .welcome-post
-    =render partial: "about_poster", locals: { post: @post }
-    .blog.card
-      = @post.body.html_safe
+  .main
+    =render partial: "posts/poster", locals: { post: @post }
+    .card.blog
+      =@post.body.html_safe
+  .sidebar
+    = render partial: "posts/sidebar"
+= render "posts/social_card"
+= render "footer"

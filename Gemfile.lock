@@ -79,6 +79,7 @@ GEM
       json
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    chronic (0.10.2)
     clearance (1.8.0)
       bcrypt
       email_validator (~> 1.4)
@@ -137,6 +138,8 @@ GEM
       activesupport
       capybara
       i18n
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     guard (2.11.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -367,6 +370,8 @@ GEM
     webmock (1.20.4)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
     wysiwyg-rails (1.2.4)
       font-awesome-rails (= 4.2.0.0)
       railties (>= 3.2, < 5.0)
@@ -398,6 +403,7 @@ DEPENDENCIES
   flutie
   font-awesome-rails
   formulaic
+  friendly_id (~> 5.1.0)
   guard
   guard-livereload
   guard-rspec
@@ -436,4 +442,5 @@ DEPENDENCIES
   uglifier
   unicorn
   webmock
+  whenever (~> 0.9.4)
   wysiwyg-rails

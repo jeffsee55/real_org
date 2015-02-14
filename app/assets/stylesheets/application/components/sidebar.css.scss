@@ -50,7 +50,6 @@
         }
         h3 {
           position: relative;
-          color: #FFF;
           z-index: 20
         }
       }
@@ -67,6 +66,10 @@
     background: $card-color;
     h3 {
       font-weight: 300;
+    }
+    text-align: left;
+    .archive-list {
+      display:none;
     }
   }
 }

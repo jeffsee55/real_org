@@ -10,23 +10,36 @@
           %strong=@post.title
           %br
           -if @post.published?
-            = "Published #{time_ago_in_words(@post.published_at)} ago"
-            %br
             %em= "#{pluralize(@post.impressions_count, "view")}"
           -else
             = "Draft: #{time_ago_in_words(@post.updated_at)} ago"
+          %br
+          -@post.categories.each do |c|
+            =link_to c.name, admin_category_path(c)
+            %br
   .post_info
     %h3= @post.title
     -if @post.published?
       %h5= "Published #{time_ago_in_words(@post.published_at)} ago"
       %h5= "#{pluralize(@post.impressions_count, "view")}"
+      -if @post.email_sent?
+        Notification email sent at:
+        = time_tag @post.email_sent_at
+      -else
+        Notification email not yet sent.
     -else
       %h5= "Draft: #{time_ago_in_words(@post.updated_at)} ago"
+    %hr
+    =button_to "View", post_path(@post), class: "button btn-inline", method: :get
     =button_to "Edit", edit_admin_post_path(@post), class: "button btn-inline", method: :get
-    =button_to "Delete", admin_post_path(@post), class: "button btn-inline btn-warning", method: :delete, confirm: "Are you sure?"
+    -unless @post.published?
+      =button_to "Publish", publish_admin_post_path("post"=>{"title" => @post.title}, "commit" => "Publish"), class: "button btn-primary btn-inline", method: :patch
+    -else
+      =button_to "Revert To Draft", publish_admin_post_path("post"=>{"title" => @post.title}, "commit" => "Save as Draft"), class: "button btn-primary btn-inline", method: :patch
+    =button_to "Delete", admin_post_path(@post), class: "button btn-inline btn-warning", method: :delete, data: {confirm: "Are you sure you want to delete?"}
 %hr
 .post
-  .body.show
+  .show
     = @post.body.html_safe
 :javascript
   disqus_shortname = "therealisticorganizer"

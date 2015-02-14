@@ -1,4 +1,6 @@
 class Admin::PostsController < AdminController
+  layout 'post', only: [:new, :edit]
+  before_action :set_post, only: [:edit, :update, :updatish, :show, :destroy]
 
   def new
     @post = Post.new
@@ -19,12 +21,11 @@ class Admin::PostsController < AdminController
           )
         end
       end
-      redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully updated"
+      redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully created"
     end
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def index
@@ -49,13 +50,10 @@ class Admin::PostsController < AdminController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @categories = Category.all
   end
 
   def update
-    @post = Post.find(params[:id])
-
     @post.update(post_params)
     if @post.save
       @post.publish! if publishing?
@@ -74,7 +72,6 @@ class Admin::PostsController < AdminController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
 
     respond_to do |format|
@@ -86,8 +83,12 @@ class Admin::PostsController < AdminController
 
   private
 
+  def set_post
+    @post = Post.friendly.find(params[:id])
+  end
+
   def post_params
-    params.require(:post).permit(:title, :body, :user_id, :image, :remove_image, :site_post, post_categories_attributes: [:post_id])
+    params.require(:post).permit(:title, :body, :user_id, :image, :remove_image, :pinterest_image, :remove_pinterest_image, :site_post, post_categories_attributes: [:post_id])
   end
 
   def publishing?

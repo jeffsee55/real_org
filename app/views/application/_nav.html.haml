@@ -3,13 +3,21 @@
     -if @theme.logo.empty?
       .title
         %span.thin THE
-        %span.fat REALISTIC
+        %span.fat realistic
         %br
         %span.thin ORGANIZER
       .tagline
-        ADVENTURES IN ORGANIZING AND ATTEMPS AT CREATIVITY
+        -unless @theme.tagline.empty?
+          =@theme.tagline
+        -else
+          ADVENTURES IN ORGANIZING AND ATTEMPTS AT CREATIVITY
     -else
       =@theme.logo.html_safe
+      .tagline
+        -unless @theme.tagline.empty?
+          =@theme.tagline
+        -else
+          ADVENTURES IN ORGANIZING AND ATTEMPTS AT CREATIVITY
   %i.mobile_menu.fa.fa-2x.fa-bars
 %header.centered-navigation{:role => "banner"}
   .centered-navigation-wrapper
@@ -53,6 +61,8 @@
           %li.nav-link
             =link_to "HOME", root_url
           %li.nav-link
+            =link_to "ABOUT ME", about_path
+          %li.nav-link
             =link_to "WORK WITH ME", contact_path
           %li.nav-link
             =link_to "WEDDINGS", category_path(Category.find_by_name("Weddings").id)
@@ -63,25 +73,30 @@
                 =link_to "KITCHEN", category_path(Category.find_by_name("Kitchen").id)
               %li
                 =link_to "HOME OFFICE", category_path(Category.find_by_name("Home Office").id)
+              %li
+                =link_to "QUICK FIXES", category_path(Category.find_by_name("Quick Fixes").id)
+              %li
+                =link_to "CLOSETS", category_path(Category.find_by_name("Closets").id)
+              %li
+                =link_to "BUDGET FRIENDLY", category_path(Category.find_by_name("Budget Friendly").id)
+              %li
+                =link_to "HOLIDAYS", category_path(Category.find_by_name("Holidays").id)
               %li.more
                 =link_to "MORE", ""
                 %ul.submenu
                   %li
-                    =link_to "ORGANZING FOR OTHERS", ""
+                    =link_to "ORGANZING FOR OTHERS", category_path(Category.find_by_name("Organizing for Others").id)
                   %li
-                    =link_to "BUDGET FRIENDLY", ""
-          %li.nav-link.more
-            =link_to "DIY", ""
-            %ul.submenu
-              %li
-                =link_to "HOLIDAYS", category_path(Category.find_by_name("Holidays").id)
+                    =link_to "TRAVEL", category_path(Category.find_by_name("Travel").id)
           %li.nav-link.more
             =link_to "MORE", ""
             %ul.submenu
               %li
-                =link_to "ALL CATEGORIES", root_url
+                =link_to "RECENT PROJECTS", category_path(Category.find_by_name("Recent Projects").id)
               %li
-                =link_to "ALL POSTS", root_url
+                =link_to "ALL CATEGORIES", categories_path
+              %li
+                =link_to "ALL POSTS", posts_path
           %li.nav-link
             = search_form_for @q, class: "search-bar", url: search_posts_path, html: { method: :post } do |f|
               = f.search_field :title_or_body_cont

@@ -39,11 +39,12 @@ gem 'ransack', '~> 1.6.3'
 gem 'impressionist'
 gem 'clearance', '~> 1.8.0'
 gem 'truncate_html', '~> 0.9.3'
-
+gem 'whenever', '~> 0.9.4'
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
+gem 'friendly_id', '~> 5.1.0'
 
 gem "bundler-audit"
 

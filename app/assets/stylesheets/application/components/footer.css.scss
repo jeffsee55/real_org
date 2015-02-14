@@ -12,5 +12,11 @@
     &:last-child {
       @include omega();
     }
+    li a {
+      color: white;
+      &:hover {
+        color: darken(white, 15);
+      }
+    }
   }
 }

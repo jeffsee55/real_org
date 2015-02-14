@@ -23,13 +23,17 @@
     &:hover
       background: darken(#{@theme.button_bg}, 15)
   .btn-outline
-    color: #{@theme.button_bg} !important
+    color: #{@theme.button_bg}
+    background: none
+    &:hover
+      background: lighten(#{@theme.button_bg}, 20)
   .icon-list a
     color: #{@theme.icon_color}
     &:hover
       color: darken(#{@theme.icon_color}, 15)
   .poster .overlay
     background: linear-gradient(transparentize(#{@theme.primary_gradient}, 0.60), transparentize(#{@theme.secondary_gradient}, 0.60))
+
 = csrf_meta_tags
 %body{ class: body_class}
 .load

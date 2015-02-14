@@ -1,5 +1,5 @@
 class Admin::CategoriesController < AdminController
-
+  before_filter :set_category, only: [:show, :edit, :update, :destroy]
   def new
     @category = Category.new
   end
@@ -14,11 +14,10 @@ class Admin::CategoriesController < AdminController
   end
 
   def show
-    @category = Category.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
 
     if @category.update(category_params)
       redirect_to admin_categories_path, notice: "#{@category.name} was successfully updated"
@@ -33,17 +32,22 @@ class Admin::CategoriesController < AdminController
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def destroy
-    @category = Category.find(params[:id])
     @category.destroy
+    @category.posts.collect do |p|
+      p.move_to_uncategorized
+    end
 
     redirect_to admin_categories_path, notice: "#{@category.name} was successfully deleted"
   end
 
   private
+
+  def set_category
+    @category = Category.friendly.find(params[:id])
+  end
 
   def category_params
     params.require(:category).permit(:name, :description, :tag_color)

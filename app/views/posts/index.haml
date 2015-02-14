@@ -5,4 +5,6 @@
     %ul.index_row
       - @posts.each do |p|
         =render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
+.pagination
+  = paginate @posts
 = render "footer"

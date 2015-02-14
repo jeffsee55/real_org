@@ -7,16 +7,6 @@
     .comment.card
       .comment-header
         %h2 COMMENTS
-        #fb-root
-        :javascript
-          (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=744459768945734&version=v2.0";
-            fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-      .fb-share-button{"data-href" => "http://104.131.124.197/posts/29", "data-layout" => "button"}
       %hr
       #disqus_thread
         :coffee
