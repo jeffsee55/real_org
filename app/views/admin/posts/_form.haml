@@ -2,24 +2,40 @@
   .body
     = p.input :body, label: false
     = p.input :user_id, as: :hidden, value: @user.id
+  .options
+    #options_close
+      Close
+      %i.fa.fa-close
+    .manage-images
+      %div
+        %h4 Poster Image
+        #image.post_image= image_tag attachment_url(@post, :image, :fit, 408, 250) if @post.image_id?
+        = p.input :remove_image, as: :boolean
+        = p.attachment_field :image, direct: true, class: "image_upload"
+      %div
+        %h4 Pinterest Image
+        #image.pinterest_image= image_tag attachment_url(@post, :pinterest_image) if @post.pinterest_image_id?
+        = p.input :remove_pinterest_image, as: :boolean if @post.pinterest_image_id?
+        = p.attachment_field :pinterest_image, direct: true, class: "image_upload"
+    .manage-categories
+      %h4 Categories
+      .categories
+        - @categories.each do |cat|
+          %span
+            -if @post.categories.include?(cat)
+              = check_box_tag 'category_ids[]', cat.id, input_html: { checked: true }
+            -else
+              = check_box_tag 'category_ids[]', cat.id
+            = cat.nice_name
   .toolbar
     = p.input :title, placeholder: "Title", label: false
-    %hr
-    #image.post_image= image_tag attachment_url(@post, :image, :fill, 400, 200) if @post.image_id?
-    = p.input :remove_image, as: :boolean
-    = p.attachment_field :image, direct: true
+    #image.post_image= image_tag attachment_url(@post, :image, :limit, 400, 600) if @post.image_id?
     %hr
     %h5 Categories
-    %ul.categories
-      - @categories.each do |cat|
-        %li
-          -if @post.categories.include?(cat)
-            = check_box_tag 'category_ids[]', cat.id, input_html: { checked: true }
-          -else
-            = check_box_tag 'category_ids[]', cat.id
-          = cat.nice_name
+    = @post.categories.map(&:name).join(", ")
+    %hr
+    =link_to "Manage Categories and Images", "javascript:void(0)", id: "options"
     %hr
     .submit-actions
-      = p.input :site_post, as: :boolean
       = p.submit "Save as Draft", class: "button"
       = p.submit "Publish", class: "button btn-primary"

@@ -7,3 +7,7 @@ $ ->
     e.preventDefault()
   $(window).load ->
     $('.load').fadeOut('slow')
+  $('#options').click ->
+    $('.options').css("right", "0")
+  $('#options_close').click ->
+    $('.options').css("right", "-900px")

@@ -1,9 +1,9 @@
 .nav
   .banner{style: "line-height: 0.5"}
-    -if @theme.logo.empty?
+    -if @theme.logo_image_id.empty?
       .title
         %span.thin THE
-        %span.fat realistic
+        %span.fat REALISTIC
         %br
         %span.thin ORGANIZER
       .tagline
@@ -12,7 +12,8 @@
         -else
           ADVENTURES IN ORGANIZING AND ATTEMPTS AT CREATIVITY
     -else
-      =@theme.logo.html_safe
+      .title
+        = attachment_image_tag @theme, :logo_image
       .tagline
         -unless @theme.tagline.empty?
           =@theme.tagline

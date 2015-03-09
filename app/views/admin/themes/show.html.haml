@@ -1,7 +1,6 @@
 =render "admin/nav"
 =simple_form_for [:admin, @theme] do |f|
   .body
-    =f.input :logo, label: false
     %table
       %tr
         %td Site Tagline
@@ -26,6 +25,24 @@
         %td= f.input :rss, label: false, placeholder: "RSS"
     .index
       .card
+        -if @theme.logo_image
+          .image{style: "background: url('#{attachment_url(@theme, :logo_image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
+        -else
+          .image{style: "background: #{@theme.logo_image}"}
+        .content
+          .title
+            %strong Logo
+            = f.attachment_field :logo_image, direct: true, class: "image_upload"
+      .card
+        -if @theme.signature_image
+          .image{style: "background: url('#{attachment_url(@theme, :signature_image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
+        -else
+          .image{style: "background: #{@theme.signature_image}"}
+        .content
+          .title
+            %strong Post Signature
+            = f.attachment_field :signature_image, direct: true
+      .card
         -if @theme.background_image
           .image{style: "background: url('#{attachment_url(@theme, :background_image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
         -else
@@ -35,31 +52,33 @@
             %strong Background Image
             = f.attachment_field :background_image, direct: true
       .card
-        .image.item{style: "background: #{@theme.header_bg}"}
-        .content
-          .title
-            %strong Header Background
-            =f.input :header_bg, label: false
-      .card
-        .image.item{style: "background: #{@theme.footer_bg}"}
-        .content
-          .title
-            %strong Footer Background
-            =f.input :footer_bg, label: false
-      .card
-        .image
-          .btn.item{style: "background: #{@theme.button_bg}"} TEST BUTTON
-        .content
-          .title
-            %strong Button Background
-            =f.input :button_bg, label: false
-      .card
         .image
           .icon.item.fa.fa-facebook-square.fa-4x{style: "color: #{@theme.icon_color}"}
         .content
           .title
             %strong Icon Background
             =f.input :icon_color, label: false
+      .card
+        .image.item{style: "background: #{@theme.header_bg}; color: #{@theme.header_color}"}
+          .text Header Font
+        .content
+          .title
+            =f.input :header_bg
+            =f.input :header_color
+      .card
+        .image.item{style: "background: #{@theme.footer_bg}; color: #{@theme.footer_color}"}
+          .text Footer Font
+        .content
+          .title
+            =f.input :footer_bg
+            =f.input :footer_color
+      .card
+        .image
+          .btn.item{style: "background: #{@theme.button_bg}; color: #{ @theme.button_color}"} TEST BUTTON
+        .content
+          .title
+            =f.input :button_bg
+            =f.input :button_color
       .card#gradient
         :sass
           #gradient .item

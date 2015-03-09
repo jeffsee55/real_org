@@ -16,8 +16,8 @@ class Admin::UsersController < AdminController
 
   private
 
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :bio, :image, :remove_image, :image_cache_id)
-  end
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :email, :bio, :image, :remove_image, :image_cache_id)
+    end
 
 end

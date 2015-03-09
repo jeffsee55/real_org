@@ -1,0 +1,45 @@
+:sass
+  .header-bg
+    background: #{ @theme.header_bg }
+  .nav
+    color: #{ @theme.header_color }
+    .banner
+      .tagline
+        color: #{ @theme.header_color }
+  .centered-navigation form.search-bar input[type=search],
+  .centered-navigation form.search-bar button[type=submit]
+    color: #{ @theme.header_color }
+  .centered-navigation ul li.nav-link a
+    color: #{ @theme.header_color }
+    &:hover
+      color: darken(#{ @theme.header_color }, 10)
+    &:after
+      color: #{ @theme.header_color }
+  .centered-navigation li.more.nav-link > ul > li a
+    background: darken( #{ @theme.header_bg }, 10)
+  .pages-home
+    .page_header
+      background: #{ @theme.header_bg }
+      color: #{ @theme.header_color }
+  .footer
+    background: #{ @theme.footer_bg }
+    .title, ul li a
+      color: #{ @theme.footer_color }
+    ul li a
+      &:hover
+        color: darken(#{ @theme.footer_color }, 10)
+  .btn-outline
+    color: #{ @theme.button_bg }
+    &:hover
+      color: darken(#{ @theme.button_bg }, 10)
+  .btn, input[type="submit"]
+    background: #{ @theme.button_bg }
+    color: #{ @theme.button_color }
+    &:hover
+      background: darken( #{ @theme.button_bg }, 10)
+  .poster .overlay
+    background: linear-gradient( transparentize(#{ @theme.primary_gradient}, .30), transparentize(#{ @theme.secondary_gradient}, .30) )
+  .icon-list a
+    color: #{ @theme.icon_color }
+    &:hover
+      color: darken( #{@theme.icon_color }, 10)

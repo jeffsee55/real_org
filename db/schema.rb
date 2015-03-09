@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213024616) do
+ActiveRecord::Schema.define(version: 20150308070433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,12 +101,24 @@ ActiveRecord::Schema.define(version: 20150213024616) do
     t.datetime "updated_at"
   end
 
+  create_table "message_options", force: true do |t|
+    t.text     "spaces"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "times"
+  end
+
   create_table "messages", force: true do |t|
     t.string   "name"
     t.string   "email"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "days"
+    t.text     "times"
+    t.text     "spaces"
+    t.text     "concerns"
+    t.string   "phone"
   end
 
   create_table "post_categories", force: true do |t|
@@ -164,6 +176,10 @@ ActiveRecord::Schema.define(version: 20150213024616) do
     t.string   "rss"
     t.string   "google_plus"
     t.string   "tagline"
+    t.string   "footer_color",        default: "#575454"
+    t.string   "button_color"
+    t.string   "signature_image_id"
+    t.string   "logo_image_id"
   end
 
   create_table "users", force: true do |t|

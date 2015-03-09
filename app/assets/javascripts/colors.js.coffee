@@ -1,8 +1,11 @@
 $ ->
   $("#category_tag_color,
       #theme_header_bg,
+      #theme_header_color,
       #theme_footer_bg,
+      #theme_footer_color,
       #theme_button_bg,
+      #theme_button_color,
       #theme_primary_gradient,
       #theme_secondary_gradient,
       #theme_icon_color").colpick(
@@ -10,7 +13,7 @@ $ ->
     submit: 0
     onChange: (hsb, hex, rgb, el, bySetColor) ->
       console.log(el.id)
-      if el.id == "theme_icon_color"
+      if el.id.indexOf("_color") > 0
         $(el).parents(".card").find(".item").css("color", "##{hex}")
       else if el.id == "theme_primary_gradient"
         other_gradient = $("#theme_secondary_gradient").val()

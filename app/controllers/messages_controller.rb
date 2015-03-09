@@ -1,17 +1,21 @@
-class MessagesController < AdminController
+class MessagesController < ApplicationController
+  def new
+    @message = Message.new
+  end
 
   def create
     @message = Message.new(message_params)
+    @message.clean_arrays
     if @message.save
-      redirect_to :back, notice: "Message was successfully submitted, we'll be in touch!"
+      redirect_to root_url, notice: "Thank you for reaching out, we'll be in touch!"
     else
-      redirect_to :back, notice: "We're sorry, there was a problem submitting your message. Please contact us at stefanie@example.com"
+      redirect_to root_url, notice: "We're sorry, there was a problem submitting your message. Please contact us at stefanie@example.com"
     end
   end
 
   private
 
-  def message_params
-    params.require(:message).permit(:name, :email, :body)
-  end
+    def message_params
+      params.require(:message).permit(:name, :email, :body, :phone, :concerns, days: [], times: [], spaces: [])
+    end
 end

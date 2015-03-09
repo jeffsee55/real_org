@@ -3,8 +3,8 @@
   .welcome {
     background: $card-color;
     .welcome-picture {
-      height: 150px;
-      width: 150px;
+      height: 200px;
+      width: 200px;
       display: block;
       margin: 0 auto;
       border-radius: 50%;
@@ -37,16 +37,29 @@
         &:nth-child(2) {
         }
       }
+      .icon-list {
+      }
     }
     .category-block {
+      @include clearfix();
       text-align: center;
-      background: $dark-gray;
+      @include hyphens(auto);
+      a {
+        @include span-columns(6);
+        &:nth-child(2n) {
+          @include omega();
+        }
+      }
       li {
+        border-radius: 50%;
         position: relative;
-        padding: 1em;
         background-size: cover !important; // This is necessary because the image is added via inline styling.
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        @include transition(all 0.2s ease-in-out);
         &:hover {
-          background: transparentize($dark-gray, 0.3);
+          border: 4px solid;
         }
         h3 {
           position: relative;

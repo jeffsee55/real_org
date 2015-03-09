@@ -91,9 +91,7 @@ input[type="submit"] {
   background: none;
   border: 1px solid;
   line-height: 1.5;
-  &:hover {
-    color: darken($base-accent-color, 20);
-  }
+  padding: 1em 1.5em;
 }
 
 .icon-list {

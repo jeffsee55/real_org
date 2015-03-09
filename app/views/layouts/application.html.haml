@@ -6,39 +6,18 @@
 %meta{:content => "initial-scale=1", :name => "viewport"}/
 %title= title
 = stylesheet_link_tag :application, media: "all"
-:sass
-  body
-    background-image: url('#{attachment_url(@theme, :background_image, :fill, 200, 200)}')
-  .header-bg
-    background: #{@theme.header_bg}
-  .page_header
-    background: darken(#{@theme.header_bg}, 15)
-  .footer
-    background: #{@theme.footer_bg}
-    color: darken(#{@theme.footer_bg}, 20)
-  button,
-  .btn,
-  input[type="submit"]
-    background: #{@theme.button_bg}
-    &:hover
-      background: darken(#{@theme.button_bg}, 15)
-  .btn-outline
-    color: #{@theme.button_bg}
-    background: none
-    &:hover
-      background: lighten(#{@theme.button_bg}, 20)
-  .icon-list a
-    color: #{@theme.icon_color}
-    &:hover
-      color: darken(#{@theme.icon_color}, 15)
-  .poster .overlay
-    background: linear-gradient(transparentize(#{@theme.primary_gradient}, 0.60), transparentize(#{@theme.secondary_gradient}, 0.60))
-
+= render partial: "application/theme"
 = csrf_meta_tags
 %body{ class: body_class}
-.load
-  .fa.fa-circle-o-notch.fa-spin.fa-4x
+-#.load
+  -#.fa.fa-circle-o-notch.fa-spin.fa-4x
 = render "flashes"
 .header-bg
 = yield
-= render "javascript"
+-#.card
+-#%script{:async => "", :src => "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
+-#/ RealisticOranizerFooterAd
+-#%ins.adsbygoogle{"data-ad-client" => "ca-pub-7600043945930923", "data-ad-format" => "auto", "data-ad-slot" => "8976265896", :style => "display:block"}
+-#:javascript
+  -#(adsbygoogle = window.adsbygoogle || []).push({});
+-#= render "javascript"

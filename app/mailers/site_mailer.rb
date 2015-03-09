@@ -18,7 +18,7 @@ class SiteMailer < ActionMailer::Base
           vars: [
             {name: "NAME", content: message.name},
             {name: "EMAIL", content: message.email},
-            {name: "BODY", content: message.body}
+            {name: "BODY", content: message.body},
           ]
         }
       ]

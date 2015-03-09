@@ -139,6 +139,10 @@
     overflow: auto;
   }
 
+  .message_name, .message_email {
+    @include span-columns(5);
+  }
+
 }
 
 // Based on code by Kasper Mikiewicz

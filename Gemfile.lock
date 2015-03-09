@@ -384,7 +384,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   awesome_print
-  aws-sdk
+  aws-sdk (< 2.0)
   bourbon (~> 3.2.1)
   bundler-audit
   byebug

@@ -3,7 +3,4 @@
     .content
       .text
         %h2= @contact_poster.body.html_safe
-      .modal
-        %label{:for => "modal-message"}
-          .btn.btn-warning.modal-trigger{style: "text-align: center;"} WORK WITH ME
-        =render "shared/message_modal"
+      =button_to "WORK WITH ME", new_message_path, method: :get

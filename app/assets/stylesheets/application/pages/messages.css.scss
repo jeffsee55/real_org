@@ -1,0 +1,16 @@
+.new-message {
+  .message_email, .message_phone {
+    @include span-columns(6);
+  }
+  .message_phone {
+    @include omega();
+  }
+  .check_boxes {
+    @include clearfix();
+  }
+  .days, .times, .areas {
+    @include media($medium-screen) {
+      @include span-columns(4);
+    }
+  }
+}

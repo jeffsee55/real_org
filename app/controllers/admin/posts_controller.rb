@@ -22,6 +22,8 @@ class Admin::PostsController < AdminController
         end
       end
       redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully created"
+    else
+      redirect_to :back, notice: "Post could not be saved"
     end
   end
 
@@ -59,8 +61,8 @@ class Admin::PostsController < AdminController
       @post.publish! if publishing?
       @post.save_as_draft! if drafting?
       if params[:category_ids]
-        params[:category_ids].each do |category_id|
         PostCategory.where(post_id: @post.id).delete_all
+        params[:category_ids].each do |category_id|
         PostCategory.create(
           post_id: @post.id,
           category_id: category_id

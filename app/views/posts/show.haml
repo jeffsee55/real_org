@@ -4,6 +4,7 @@
     =render partial: "poster", locals: { post: @post }
     .blog.card
       = @post.body.html_safe
+      = attachment_image_tag @theme, :signature_image
     .comment.card
       .comment-header
         %h2 COMMENTS

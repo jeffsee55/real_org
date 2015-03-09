@@ -1,0 +1,1661 @@
+FUNCTION  1()
+Called 2103 times
+Total time:   0.105823
+ Self time:   0.078545
+
+count  total (s)   self (s)
+ 2103              0.005818     let prependCWD = 0
+ 2103   0.036812   0.009534     if nerdtree#runningWindows()
+                                    let prependCWD = a:str !~# '^.:\(\\\|\/\)' && a:str !~# '^\(\\\\\|\/\/\)'
+                                else
+ 2103              0.020269         let prependCWD = a:str !~# '^/'
+ 2103              0.002194     endif
+                            
+ 2103              0.006260     let toReturn = a:str
+ 2103              0.003079     if prependCWD
+                                    let toReturn = getcwd() . s:Path.Slash() . a:str
+                                endif
+                            
+ 2103              0.003755     return toReturn
+
+FUNCTION  3()
+Called 2103 times
+Total time:   0.217064
+ Self time:   0.124837
+
+count  total (s)   self (s)
+ 2103   0.051715   0.015462     let self.cachedDisplayString = self.flagSet.renderToString()
+                            
+ 2103   0.050372   0.014360     let self.cachedDisplayString .= self.getLastPathComponent(1)
+                            
+ 2103              0.003226     if self.isExecutable
+  180              0.000905         let self.cachedDisplayString = self.cachedDisplayString . '*'
+  180              0.000145     endif
+                            
+ 2103              0.007350     let self._bookmarkNames = []
+ 2103   0.034719   0.014757     for i in g:NERDTreeBookmark.Bookmarks()
+                                    if i.path.equals(self)
+                                        call add(self._bookmarkNames, i.name)
+                                    endif
+                                endfor
+ 2103              0.005541     if !empty(self._bookmarkNames)
+                                    let self.cachedDisplayString .= ' {' . join(self._bookmarkNames) . '}'
+                                endif
+                            
+ 2103              0.002739     if self.isSymLink
+                                    let self.cachedDisplayString .=  ' -> ' . self.symLinkDest
+                                endif
+                            
+ 2103              0.002601     if self.isReadOnly
+                                    let self.cachedDisplayString .=  ' [RO]'
+                                endif
+
+FUNCTION  5()
+Called 11769 times
+Total time:   3.519055
+ Self time:   0.617692
+
+count  total (s)   self (s)
+11769   0.285583   0.065161     let thisPath = self.getLastPathComponent(1)
+11769   0.270280   0.075109     let thatPath = a:path.getLastPathComponent(1)
+                            
+                                "if the paths are the same then clearly we return 0
+11769              0.028058     if thisPath ==# thatPath
+ 2100              0.002233         return 0
+                                endif
+                            
+ 9669   1.300520   0.051988     let thisSS = self.getSortOrderIndex()
+ 9669   1.301123   0.063885     let thatSS = a:path.getSortOrderIndex()
+                            
+                                "compare the sort sequences, if they are different then the return
+                                "value is easy
+ 9669              0.017268     if thisSS < thatSS
+  660              0.000747         return -1
+                                elseif thisSS > thatSS
+  423              0.004545         return 1
+                                else
+ 8586              0.018305         if !g:NERDTreeSortHiddenFirst
+                                        let thisPath = substitute(thisPath, '^[._]', '', '')
+                                        let thatPath = substitute(thatPath, '^[._]', '', '')
+                                    endif
+                                    "if the sort sequences are the same then compare the paths
+                                    "alphabetically
+ 8586              0.049554         let pathCompare = g:NERDTreeCaseSensitiveSort ? thisPath <# thatPath : thisPath <? thatPath
+ 8586              0.012925         if pathCompare
+ 4989              0.005839             return -1
+                                    else
+ 3597              0.003940             return 1
+                                    endif
+                                endif
+
+FUNCTION  <SNR>171_clear_matches()
+Called 3 times
+Total time:   0.000036
+ Self time:   0.000036
+
+count  total (s)   self (s)
+    3              0.000016 	if exists('w:color_match_id')
+                            		call filter(w:color_match_id, 'matchdelete(v:val)')
+                            		unlet w:color_match_id
+                            	endif
+
+FUNCTION  12()
+Called 273 times
+Total time:   0.001959
+ Self time:   0.001959
+
+count  total (s)   self (s)
+  273              0.000544     if self.cachedDisplayString ==# ""
+                                    call self.cacheDisplayString()
+                                endif
+                            
+  273              0.000339     return self.cachedDisplayString
+
+FUNCTION  14()
+Called 4206 times
+Total time:   0.163747
+ Self time:   0.113706
+
+count  total (s)   self (s)
+ 4206   0.067879   0.017838     if nerdtree#runningWindows()
+                                    if a:fullpath =~ '^\(\\\\\|\/\/\)'
+                                        "For network shares, the 'drive' consists of the first two parts of the path, i.e. \\boxname\share
+                                        let self.drive = substitute(a:fullpath, '^\(\(\\\\\|\/\/\)[^\\\/]*\(\\\|\/\)[^\\\/]*\).*', '\1', '')
+                                        let self.drive = substitute(self.drive, '/', '\', "g")
+                                    else
+                                        let self.drive = substitute(a:fullpath, '\(^[a-zA-Z]:\).*', '\1', '')
+                                    endif
+                                else
+ 4206              0.016878         let self.drive = ''
+ 4206              0.003746     endif
+                            
+
+FUNCTION  16()
+Called 270 times
+Total time:   0.005672
+ Self time:   0.002778
+
+count  total (s)   self (s)
+  270   0.003947   0.001053     if nerdtree#runningWindows()
+                                    return " `\|\"#%&,?()\*^<>"
+                                endif
+                            
+  270              0.000508     return " \\`\|\"#%&,?()\*^<>[]"
+
+FUNCTION  19()
+Called 107892 times
+Total time:   1.562601
+ Self time:   1.562601
+
+count  total (s)   self (s)
+107892              0.286147     if empty(self.pathSegments)
+                                    return ''
+                                endif
+107892              0.315671     let toReturn = self.pathSegments[-1]
+107892              0.197650     if a:dirSlash && self.isDirectory
+12081              0.036517         let toReturn = toReturn . '/'
+12081              0.010581     endif
+107892              0.147434     return toReturn
+
+FUNCTION  105()
+Called 273 times
+Total time:   0.003026
+ Self time:   0.001067
+
+count  total (s)   self (s)
+  273   0.002917   0.000958     return self.path.displayString()
+
+FUNCTION  107()
+Called 9 times
+Total time:   0.005108
+ Self time:   0.000154
+
+count  total (s)   self (s)
+    9   0.005032   0.000078     if a:path.equals(self.path)
+    3              0.000008         return self
+                                endif
+    6              0.000011     return {}
+
+FUNCTION  20()
+Called 19338 times
+Total time:   2.485770
+ Self time:   1.466484
+
+count  total (s)   self (s)
+19338              0.030760     let i = 0
+90333              0.224694     while i < len(g:NERDTreeSortOrder)
+76134   1.681418   0.662132         if  self.getLastPathComponent(1) =~# g:NERDTreeSortOrder[i]
+ 5139              0.007270             return i
+                                    endif
+70995              0.141656         let i = i + 1
+70995              0.061756     endwhile
+14199              0.029299     return s:NERDTreeSortStarIndex
+
+FUNCTION  24()
+Called 1911 times
+Total time:   0.073195
+ Self time:   0.052554
+
+count  total (s)   self (s)
+ 1911              0.003304     let pat = a:pattern
+ 1911              0.007770     if strpart(pat,len(pat)-7) == '[[dir]]'
+                                    if !self.isDirectory
+                                        return 0
+                                    endif
+                                    let pat = strpart(pat,0, len(pat)-7)
+                                elseif strpart(pat,len(pat)-8) == '[[file]]'
+                                    if self.isDirectory
+                                        return 0
+                                    endif
+                                    let pat = strpart(pat,0, len(pat)-8)
+                                endif
+                            
+ 1911   0.032139   0.011498     return self.getLastPathComponent(0) =~# pat
+
+FUNCTION  27()
+Called 87 times
+Total time:   0.054761
+ Self time:   0.002016
+
+count  total (s)   self (s)
+   87   0.054658   0.001913     return self.str() ==# a:path.str()
+
+FUNCTION  28()
+Called 2103 times
+Total time:   0.976892
+ Self time:   0.141567
+
+count  total (s)   self (s)
+ 2103              0.062928     let newPath = copy(self)
+                            
+ 2103   0.837683   0.031585     call newPath.readInfoFromDisk(s:Path.AbsolutePathFor(a:path))
+                            
+ 2103              0.009328     let newPath.cachedDisplayString = ""
+ 2103   0.050089   0.020862     let newPath.flagSet = g:NERDTreeFlagSet.New()
+                            
+ 2103              0.002841     return newPath
+
+FUNCTION  29()
+Called 22294 times
+Total time:   0.389977
+ Self time:   0.118243
+
+count  total (s)   self (s)
+22294   0.376273   0.104539     return nerdtree#runningWindows() ? '\' : '/'
+
+FUNCTION  111()
+Called 3 times
+Total time:   0.170205
+ Self time:   0.002056
+
+count  total (s)   self (s)
+    3              0.000011     try
+    3   0.079773   0.001917         let path = b:NERDTree.ui.getPath(line("."))
+    3              0.000008         if path ==# {}
+                                        return {}
+                                    endif
+    3   0.090353   0.000060         return b:NERDTreeRoot.findNode(path)
+                                catch /^NERDTree/
+                                    return {}
+                                endtry
+
+FUNCTION  nerdtree#compareNodes()
+Called 5019 times
+Total time:   1.764828
+ Self time:   0.040966
+
+count  total (s)   self (s)
+ 5019   1.762223   0.038361     return a:n1.path.compareTo(a:n2.path)
+
+FUNCTION  30()
+Called 8412 times
+Total time:   0.309288
+ Self time:   0.309288
+
+count  total (s)   self (s)
+ 8412              0.155902     let tmp = resolve(a:path)
+ 8412              0.145065     return tmp =~# '.\+/$' ? substitute(tmp, '/$', '', '') : tmp
+
+FUNCTION  31()
+Called 4206 times
+Total time:   1.396213
+ Self time:   0.701713
+
+count  total (s)   self (s)
+ 4206   0.189276   0.025529     call self.extractDriveLetter(a:fullpath)
+                            
+ 4206   0.116597   0.028390     let fullpath = s:Path.WinToUnixPath(a:fullpath)
+                            
+ 4206              0.059290     if getftype(fullpath) ==# "fifo"
+                                    throw "NERDTree.InvalidFiletypeError: Cant handle FIFO files: " . a:fullpath
+                                endif
+                            
+ 4206              0.065273     let self.pathSegments = split(fullpath, '/')
+                            
+ 4206              0.014613     let self.isReadOnly = 0
+ 4206              0.029555     if isdirectory(a:fullpath)
+ 1203              0.003504         let self.isDirectory = 1
+ 1203              0.002911     elseif filereadable(a:fullpath)
+ 3003              0.009653         let self.isDirectory = 0
+ 3003              0.045245         let self.isReadOnly = filewritable(a:fullpath) ==# 0
+ 3003              0.003255     else
+                                    throw "NERDTree.InvalidArgumentsError: Invalid path = " . a:fullpath
+                                endif
+                            
+ 4206              0.012275     let self.isExecutable = 0
+ 4206              0.007676     if !self.isDirectory
+ 3003              0.030759         let self.isExecutable = getfperm(a:fullpath) =~# 'x'
+ 3003              0.002920     endif
+                            
+                                "grab the last part of the path (minus the trailing slash)
+ 4206   0.106392   0.035323     let lastPathComponent = self.getLastPathComponent(0)
+                            
+                                "get the path to the new node with the parent dir fully resolved
+ 4206   0.273613   0.052147     let hardPath = s:Path.Resolve(self.strTrunk()) . '/' . lastPathComponent
+                            
+                                "if  the last part of the path is a symlink then flag it as such
+ 4206   0.194278   0.044267     let self.isSymLink = (s:Path.Resolve(hardPath) != hardPath)
+ 4206              0.007281     if self.isSymLink
+                                    let self.symLinkDest = s:Path.Resolve(fullpath)
+                            
+                                    "if the link is a dir then slap a / on the end of its dest
+                                    if isdirectory(self.symLinkDest)
+                            
+                                        "we always wanna treat MS windows shortcuts as files for
+                                        "simplicity
+                                        if hardPath !~# '\.lnk$'
+                            
+                                            let self.symLinkDest = self.symLinkDest . '/'
+                                        endif
+                                    endif
+                                endif
+
+FUNCTION  32()
+Called 2103 times
+Total time:   1.434633
+ Self time:   0.060195
+
+count  total (s)   self (s)
+ 2103   1.042913   0.025270     call self.readInfoFromDisk(self.str())
+ 2103   0.160980   0.021249     call g:NERDTreePathNotifier.NotifyListeners('refresh', self, {})
+ 2103   0.228092   0.011028     call self.cacheDisplayString()
+
+FUNCTION  35()
+Called 11153 times
+Total time:   1.645600
+ Self time:   0.749247
+
+count  total (s)   self (s)
+11153              0.035763     let options = a:0 ? a:1 : {}
+11153              0.024312     let toReturn = ""
+                            
+11153              0.040215     if has_key(options, 'format')
+  276              0.000870         let format = options['format']
+  276              0.001136         if has_key(self, '_strFor' . format)
+  276   0.045478   0.003774             exec 'let toReturn = self._strFor' . format . '()'
+  276              0.000263         else
+                                        raise 'NERDTree.UnknownFormatError: unknown format "'. format .'"'
+                                    endif
+  276              0.000173     else
+10877   0.862466   0.069368         let toReturn = self._str()
+10877              0.011271     endif
+                            
+11153   0.119372   0.057821     if nerdtree#has_opt(options, 'escape')
+                                    let toReturn = shellescape(toReturn)
+                                endif
+                            
+11153              0.033936     if has_key(options, 'truncateTo')
+    3              0.000008         let limit = options['truncateTo']
+    3              0.000011         if len(toReturn) > limit-1
+                                        let toReturn = toReturn[(len(toReturn)-limit+1):]
+                                        if len(split(toReturn, '/')) > 1
+                                            let toReturn = '</' . join(split(toReturn, '/')[1:], '/') . '/'
+                                        else
+                                            let toReturn = '<' . toReturn
+                                        endif
+                                    endif
+    3              0.000002     endif
+                            
+11153              0.017938     return toReturn
+
+FUNCTION  36()
+Called 6 times
+Total time:   0.000159
+ Self time:   0.000159
+
+count  total (s)   self (s)
+    6              0.000090     let toReturn = '/' . join(self.pathSegments, '/')
+    6              0.000025     if self.isDirectory && toReturn != '/'
+    6              0.000017         let toReturn  = toReturn . '/'
+    6              0.000006     endif
+    6              0.000009     return toReturn
+
+FUNCTION  39()
+Called 270 times
+Total time:   0.041545
+ Self time:   0.015458
+
+count  total (s)   self (s)
+  270   0.011140   0.001536     let lead = s:Path.Slash()
+                            
+                                "if we are running windows then slap a drive letter on the front
+  270   0.004509   0.001508     if nerdtree#runningWindows()
+                                    let lead = self.drive . '\'
+                                endif
+                            
+  270   0.007254   0.002975     let toReturn = lead . join(self.pathSegments, s:Path.Slash())
+                            
+  270   0.004550   0.001019     if !nerdtree#runningWindows()
+  270   0.011382   0.005710         let toReturn = escape(toReturn, self._escChars())
+  270              0.000241     endif
+  270              0.000417     return toReturn
+
+FUNCTION  121()
+Called 1500 times
+Total time:   1.028049
+ Self time:   0.011714
+
+count  total (s)   self (s)
+ 1500   1.026999   0.010664     call self.path.refresh()
+
+FUNCTION  124()
+Called 3 times
+Total time:   0.136693
+ Self time:   0.000055
+
+count  total (s)   self (s)
+    3   0.136690   0.000052     return self._renderToString(0, 0, [], self.getChildCount() ==# 1)
+
+FUNCTION  40()
+Called 10877 times
+Total time:   0.793098
+ Self time:   0.289727
+
+count  total (s)   self (s)
+10877   0.254854   0.058152     let lead = s:Path.Slash()
+                            
+                                "if we are running windows then slap a drive letter on the front
+10877   0.175090   0.047813     if nerdtree#runningWindows()
+                                    let lead = self.drive . '\'
+                                endif
+                            
+10877   0.298428   0.119036     return lead . join(self.pathSegments, s:Path.Slash())
+
+FUNCTION  41()
+Called 4206 times
+Total time:   0.062189
+ Self time:   0.062189
+
+count  total (s)   self (s)
+ 4206              0.058520     return self.drive . '/' . join(self.pathSegments[0:-2], '/')
+
+FUNCTION  43()
+Called 4206 times
+Total time:   0.088207
+ Self time:   0.040974
+
+count  total (s)   self (s)
+ 4206   0.064374   0.017141     if !nerdtree#runningWindows()
+ 4206              0.016758         return a:pathstr
+                                endif
+                            
+                                let toReturn = a:pathstr
+                            
+                                "remove the x:\ of the front
+                                let toReturn = substitute(toReturn, '^.*:\(\\\|/\)\?', '/', "")
+                            
+                                "remove the \\ network share from the front
+                                let toReturn = substitute(toReturn, '^\(\\\\\|\/\/\)[^\\\/]*\(\\\|\/\)[^\\\/]*\(\\\|\/\)\?', '/', "")
+                            
+                                "convert all \ chars to /
+                                let toReturn = substitute(toReturn, '\', '/', "g")
+                            
+                                return toReturn
+
+FUNCTION  133()
+Called 2103 times
+Total time:   0.008752
+ Self time:   0.008752
+
+count  total (s)   self (s)
+ 2103              0.006241     return len(self.children)
+
+FUNCTION  134()
+Called 2100 times
+Total time:   3.285396
+ Self time:   0.070854
+
+count  total (s)   self (s)
+ 2100   0.617140   0.029641     if stridx(a:path.str(), self.path.str(), 0) ==# -1
+                                    return {}
+                                endif
+                            
+ 2100   2.643800   0.016757     let index = self.getChildIndex(a:path)
+ 2100              0.003261     if index ==# -1
+                                    return {}
+                                else
+ 2100              0.005930         return self.children[index]
+                                endif
+                            
+
+FUNCTION  136()
+Called 2100 times
+Total time:   2.627043
+ Self time:   0.246513
+
+count  total (s)   self (s)
+ 2100   0.602510   0.025913     if stridx(a:path.str(), self.path.str(), 0) ==# -1
+                                    return -1
+                                endif
+                            
+                                "do a binary search for the child
+ 2100              0.004142     let a = 0
+ 2100   0.019756   0.011016     let z = self.getChildCount()
+ 6750              0.011369     while a < z
+ 6750              0.020641         let mid = (a+z)/2
+ 6750   1.878932   0.083739         let diff = a:path.compareTo(self.children[mid].path)
+                            
+ 6750              0.009940         if diff ==# -1
+ 2625              0.004087             let z = mid
+ 2625              0.003381         elseif diff ==# 1
+ 2025              0.004489             let a = mid+1
+ 2025              0.001767         else
+ 2100              0.003010             return mid
+                                    endif
+ 4650              0.004076     endwhile
+                                return -1
+
+FUNCTION  139()
+Called 24 times
+Total time:   0.098243
+ Self time:   0.003367
+
+count  total (s)   self (s)
+   24              0.000039     let toReturn = []
+  297              0.000375     for i in self.children
+  273   0.096217   0.001341         if i.path.ignore() ==# 0
+  273              0.000737             call add(toReturn, i)
+  273              0.000364         endif
+  273              0.000205     endfor
+   24              0.000027     return toReturn
+
+FUNCTION  <SNR>86_refreshRoot()
+Called 3 times
+Total time:   8.515392
+ Self time:   0.052723
+
+count  total (s)   self (s)
+    3   0.010769   0.000044     call nerdtree#echo("Refreshing the root node. This could take a while...")
+    3   8.313561   0.000248     call b:NERDTreeRoot.refresh()
+    3   0.138567   0.000028     call b:NERDTree.render()
+    3              0.052352     redraw
+    3   0.000127   0.000035     call nerdtree#echo("Refreshing the root node. This could take a while... DONE")
+
+FUNCTION  65()
+Called 9 times
+Total time:   0.000089
+ Self time:   0.000089
+
+count  total (s)   self (s)
+    9              0.000040     if !exists("s:keyMaps")
+                                    let s:keyMaps = []
+                                endif
+    9              0.000014     return s:keyMaps
+
+FUNCTION  66()
+Called 9 times
+Total time:   0.003831
+ Self time:   0.003742
+
+count  total (s)   self (s)
+  390   0.000706   0.000617     for i in s:KeyMap.All()
+  384              0.001080          if i.key ==# a:key && i.scope ==# a:scope
+    3              0.000006             return i
+                                    endif
+  381              0.000278     endfor
+    6              0.000013     return {}
+
+FUNCTION  150()
+Called 603 times
+Total time:  31.486244
+ Self time:  22.134160
+
+count  total (s)   self (s)
+  603   0.421390   0.003092     call self.path.refresh()
+                            
+                                "if this node was ever opened, refresh its children
+  603              0.002574     if self.isOpen || !empty(self.children)
+                                    "go thru all the files/dirs under this node
+  270              0.000664         let newChildNodes = []
+  270              0.000608         let invalidFilesFound = 0
+  270              0.000569         let dir = self.path
+  270   0.066865   0.002899         let globDir = dir.str({'format': 'Glob'})
+  270              0.418704         let filesStr = globpath(globDir, '*') . "\n" . globpath(globDir, '.*')
+  270              0.005198         let files = split(filesStr, "\n")
+ 2910              0.009040         for i in files
+                                        "filter out the .. and . directories
+                                        "Note: we must match .. AND ../ cos sometimes the globpath returns
+                                        "../ for path with strange chars (eg $)
+ 2640              0.043583             if i !~# '\/\.\.\/\?$' && i !~# '\/\.\/\?$'
+                            
+ 2100              0.003076                 try
+                                                "create a new path and see if it exists in this nodes children
+ 2100   1.053186   0.082780                     let path = g:NERDTreePath.New(i)
+ 2100   3.303527   0.018131                     let newNode = self.getChild(path)
+ 2100              0.005399                     if newNode != {}
+ 2100   1.042077   0.014028                         call newNode.refresh()
+ 2100              0.010419                         call add(newChildNodes, newNode)
+                            
+                                                "the node doesnt exist so create it
+ 2100              0.002097                     else
+                                                    let newNode = g:NERDTreeFileNode.New(path)
+                                                    let newNode.parent = self
+                                                    call add(newChildNodes, newNode)
+                                                endif
+                            
+                            
+ 2100              0.004732                 catch /^NERDTree.\(InvalidArguments\|InvalidFiletype\)Error/
+                                                let invalidFilesFound = 1
+                                            endtry
+ 2100              0.001670             endif
+ 2640              0.002865         endfor
+                            
+                                    "swap this nodes children out for the children we just read/refreshed
+  270              0.002028         let self.children = newChildNodes
+  270   1.792103   0.002065         call self.sortChildren()
+                            
+  270              0.000487         if invalidFilesFound
+                                        call nerdtree#echoWarning("some files could not be loaded into the NERD tree")
+                                    endif
+  270              0.000260     endif
+
+FUNCTION  155()
+Called 270 times
+Total time:   1.790038
+ Self time:   0.025210
+
+count  total (s)   self (s)
+  270              0.001693     let CompareFunc = function("nerdtree#compareNodes")
+  270   1.788036   0.023208     call sort(self.children, CompareFunc)
+
+FUNCTION  70()
+Called 3 times
+Total time:   8.515484
+ Self time:   0.000092
+
+count  total (s)   self (s)
+    3              0.000029     let Callback = function(self.callback)
+    3              0.000005     if a:0
+                                    call Callback(a:1)
+                                else
+    3   8.515423   0.000031         call Callback()
+    3              0.000003     endif
+
+FUNCTION  71()
+Called 3 times
+Total time:   8.691186
+ Self time:   0.001140
+
+count  total (s)   self (s)
+                            
+                                "required because clicking the command window below another window still
+                                "invokes the <LeftRelease> mapping - but changes the window cursor
+                                "is in first
+                                "
+                                "TODO: remove this check when the vim bug is fixed
+    3   0.000482   0.000135     if !g:NERDTree.ExistsForBuf()
+                                    return {}
+                                endif
+                            
+    3   0.170601   0.000396     let node = g:NERDTreeFileNode.GetSelected()
+    3              0.000011     if !empty(node)
+                            
+                                    "try file node
+    3              0.000009         if !node.path.isDirectory
+    3   0.002177   0.000051             let km = s:KeyMap.FindFor(a:key, "FileNode")
+    3              0.000011             if !empty(km)
+                                            return km.invoke(node)
+                                        endif
+    3              0.000003         endif
+                            
+                                    "try dir node
+    3              0.000008         if node.path.isDirectory
+                                        let km = s:KeyMap.FindFor(a:key, "DirNode")
+                                        if !empty(km)
+                                            return km.invoke(node)
+                                        endif
+                                    endif
+                            
+                                    "try generic node
+    3   0.001191   0.000082         let km = s:KeyMap.FindFor(a:key, "Node")
+    3              0.000012         if !empty(km)
+                                        return km.invoke(node)
+                                    endif
+                            
+    3              0.000003     endif
+                            
+                                "try bookmark
+    3   0.000220   0.000041     let bm = g:NERDTreeBookmark.GetSelected()
+    3              0.000008     if !empty(bm)
+                                    let km = s:KeyMap.FindFor(a:key, "Bookmark")
+                                    if !empty(km)
+                                        return km.invoke(bm)
+                                    endif
+                                endif
+                            
+                                "try all
+    3   0.000635   0.000039     let km = s:KeyMap.FindFor(a:key, "all")
+    3              0.000010     if !empty(km)
+    3   8.515523   0.000039         return km.invoke()
+                                endif
+
+FUNCTION  76()
+Called 2103 times
+Total time:   0.019962
+ Self time:   0.019962
+
+count  total (s)   self (s)
+ 2103              0.008591     if !exists("g:NERDTreeBookmarks")
+                                    let g:NERDTreeBookmarks = []
+                                endif
+ 2103              0.004059     return g:NERDTreeBookmarks
+
+FUNCTION  86()
+Called 3 times
+Total time:   0.000179
+ Self time:   0.000179
+
+count  total (s)   self (s)
+    3              0.000022     let line = getline(".")
+    3              0.000096     let name = substitute(line, '^>\(.\{-}\) .\+$', '\1', '')
+    3              0.000013     if name != line
+                                    try
+                                        return s:Bookmark.BookmarkFor(name)
+                                    catch /^NERDTree.BookmarkNotFoundError/
+                                        return {}
+                                    endtry
+                                endif
+    3              0.000004     return {}
+
+FUNCTION  nerdtree#echo()
+Called 6 times
+Total time:   0.010817
+ Self time:   0.010817
+
+count  total (s)   self (s)
+    6              0.010396     redraw
+    6              0.000406     echomsg "NERDTree: " . a:msg
+
+FUNCTION  197()
+Called 2103 times
+Total time:   0.029227
+ Self time:   0.029227
+
+count  total (s)   self (s)
+ 2103              0.017900     let newObj = copy(self)
+ 2103              0.005494     let newObj._flags = {}
+ 2103              0.003448     return newObj
+
+FUNCTION  199()
+Called 2103 times
+Total time:   0.036253
+ Self time:   0.036253
+
+count  total (s)   self (s)
+ 2103              0.004608     let flagstring = ""
+ 2103              0.009144     for i in values(self._flags)
+                                    let flagstring .= join(i)
+                                endfor
+                            
+ 2103              0.006811     if len(flagstring) == 0
+ 2103              0.002534         return ""
+                                endif
+                            
+                                return '[' . flagstring . ']'
+
+FUNCTION  23()
+Called 273 times
+Total time:   0.094876
+ Self time:   0.021681
+
+count  total (s)   self (s)
+                                "filter out the user specified paths to ignore
+  273              0.000415     if b:NERDTreeIgnoreEnabled
+ 2184              0.002619         for i in g:NERDTreeIgnore
+ 1911   0.080314   0.007119             if self._ignorePatternMatches(i)
+                                            return 1
+                                        endif
+ 1911              0.001323         endfor
+  273              0.000189     endif
+                            
+                                "dont show hidden files unless instructed to
+  273              0.000833     if b:NERDTreeShowHidden ==# 0 && self.isUnixHiddenFile()
+                                    return 1
+                                endif
+                            
+  273              0.000687     if b:NERDTreeShowFiles ==# 0 && self.isDirectory ==# 0
+                                    return 1
+                                endif
+                            
+  273              0.001256     if exists("*NERDTreeCustomIgnoreFilter") && NERDTreeCustomIgnoreFilter(self)
+                                    return 1
+                                endif
+                            
+  273              0.000205     return 0
+
+FUNCTION  nerdtree#treeWid()
+Called 84 times
+Total time:   0.000236
+ Self time:   0.000236
+
+count  total (s)   self (s)
+   84              0.000137     return 2
+
+FUNCTION  nerdtree#runningWindows()
+Called 44496 times
+Total time:   0.532989
+ Self time:   0.532989
+
+count  total (s)   self (s)
+44496              0.509321     return has("win16") || has("win32") || has("win64")
+
+FUNCTION  <SNR>171_create_matches()
+Called 3 times
+Total time:   0.000034
+ Self time:   0.000034
+
+count  total (s)   self (s)
+    3              0.000031 	if ! &l:cursorline | return | endif
+                            	" adds matches based that duplicate the highlighted colors on the current line
+                            	let lnr = line('.')
+                            	let group = ''
+                            	let groupstart = 0
+                            	let endcol = col('$')
+                            	let w:color_match_id = []
+                            	for col in range( 1, endcol )
+                            		let nextgroup = col < endcol ? synIDattr( synID( lnr, col, 1 ), 'name' ) : ''
+                            		if group == nextgroup | continue | endif
+                            		if group =~ '^BG\x\{6}$'
+                            			let regex = '\%'.lnr.'l\%'.groupstart.'c'.repeat( '.', col - groupstart )
+                            			let match = matchadd( group, regex, -1 )
+                            			let w:color_match_id += [ match ]
+                            		endif
+                            		let group = nextgroup
+                            		let groupstart = col
+                            	endfor
+
+FUNCTION  nerdtree#ui_glue#invokeKeyMap()
+Called 3 times
+Total time:   8.691292
+ Self time:   0.000106
+
+count  total (s)   self (s)
+    3   8.691274   0.000088     call g:NERDTreeKeyMap.Invoke(a:key)
+
+FUNCTION  nerdtree#treeUpDirLine()
+Called 6 times
+Total time:   0.000070
+ Self time:   0.000070
+
+count  total (s)   self (s)
+    6              0.000016     return '.. (up a dir)'
+
+FUNCTION  nerdtree#has_opt()
+Called 11153 times
+Total time:   0.061551
+ Self time:   0.061551
+
+count  total (s)   self (s)
+11153              0.054905     return has_key(a:options, a:name) && a:options[a:name] == 1
+
+FUNCTION  <SNR>171_parse_css_screen()
+Called 3 times
+Total time:   0.000560
+ Self time:   0.000490
+
+count  total (s)   self (s)
+    3              0.000418 	call substitute( join( getline('w0','w$'), "\n" ), s:_csscolor, '\=s:create_syn_match()', 'g' )
+    3   0.000064   0.000028 	call s:clear_matches()
+    3   0.000050   0.000016 	call s:create_matches()
+
+FUNCTION  125()
+Called 276 times
+Total time:   0.448960
+ Self time:   0.442582
+
+count  total (s)   self (s)
+  276              0.000422     let output = ""
+  276              0.000439     if a:drawText ==# 1
+                            
+  273              0.000419         let treeParts = ''
+                            
+                                    "get all the leading spaces and vertical tree parts for this line
+  273              0.000331         if a:depth > 1
+  750              0.001190             for j in a:vertMap[0:-2]
+  531              0.000683                 if g:NERDTreeDirArrows
+  531              0.001279                     let treeParts = treeParts . '  '
+  531              0.000363                 else
+                                                if j ==# 1
+                                                    let treeParts = treeParts . '| '
+                                                else
+                                                    let treeParts = treeParts . '  '
+                                                endif
+                                            endif
+  531              0.000480             endfor
+  219              0.000158         endif
+                            
+                                    "get the last vertical tree part for this line which will be different
+                                    "if this node is the last child of its parent
+  273              0.000416         if !g:NERDTreeDirArrows
+                                        if a:isLastChild
+                                            let treeParts = treeParts . '`'
+                                        else
+                                            let treeParts = treeParts . '|'
+                                        endif
+                                    endif
+                            
+                                    "smack the appropriate dir/file symbol on the line before the file/dir
+                                    "name itself
+  273              0.000440         if self.path.isDirectory
+  183              0.000202             if self.isOpen
+   21              0.000029                 if g:NERDTreeDirArrows
+   21              0.000048                     let treeParts = treeParts . '▾ '
+   21              0.000011                 else
+                                                let treeParts = treeParts . '~'
+                                            endif
+   21              0.000010             else
+  162              0.000225                 if g:NERDTreeDirArrows
+  162              0.000393                     let treeParts = treeParts . '▸ '
+  162              0.000107                 else
+                                                let treeParts = treeParts . '+'
+                                            endif
+  162              0.000108             endif
+  183              0.000101         else
+   90              0.000121             if g:NERDTreeDirArrows
+   90              0.000228                 let treeParts = treeParts . '  '
+   90              0.000063             else
+                                            let treeParts = treeParts . '-'
+                                        endif
+   90              0.000059         endif
+  273   0.004364   0.001338         let line = treeParts . self.displayString()
+                            
+  273              0.000803         let output = output . line . "\n"
+  273              0.000192     endif
+                            
+                                "if the node is an open dir, draw its children
+  276              0.000504     if self.path.isDirectory ==# 1 && self.isOpen ==# 1
+                            
+   24   0.098394   0.000151         let childNodesToDraw = self.getVisibleChildren()
+   24              0.000058         if len(childNodesToDraw) > 0
+                            
+                                        "draw all the nodes children except the last
+   24              0.000074             let lastIndx = len(childNodesToDraw)-1
+   24              0.000033             if lastIndx > 0
+  270              0.000442                 for i in childNodesToDraw[0:lastIndx-1]
+  249              0.001824                     let output = output . i._renderToString(a:depth + 1, 1, add(copy(a:vertMap), 1), 0)
+  249              0.000201                 endfor
+   21              0.000019             endif
+                            
+                                        "draw the last child, indicating that it IS the last
+   24              0.000206             let output = output . childNodesToDraw[lastIndx]._renderToString(a:depth + 1, 1, add(copy(a:vertMap), 0), 1)
+   24              0.000013         endif
+   24              0.000013     endif
+                            
+  276              0.000312     return output
+
+FUNCTION  nerdtree#stripMarkupFromLine()
+Called 114 times
+Total time:   0.053643
+ Self time:   0.052870
+
+count  total (s)   self (s)
+  114              0.001261     let line = a:line
+                                "remove the tree parts and the leading space
+  114   0.006552   0.005779     let line = substitute (line, nerdtree#treeMarkupReg(),"","")
+                            
+                                "strip off any read only flag
+  114              0.032995     let line = substitute (line, ' \[RO\]', "","")
+                            
+                                "strip off any bookmark flags
+  114              0.000960     let line = substitute (line, ' {[^}]*}', "","")
+                            
+                                "strip off any executable flags
+  114              0.001123     let line = substitute (line, '*\ze\($\| \)', "","")
+                            
+                                "strip off any generic flags
+  114              0.001000     let line = substitute (line, '\[[^]]*\]', "","")
+                            
+  114              0.000248     let wasdir = 0
+  114              0.000774     if line =~# '/$'
+   84              0.000194         let wasdir = 1
+   84              0.000129     endif
+  114              0.000895     let line = substitute (line,' -> .*',"","") " remove link to
+  114              0.000187     if wasdir ==# 1
+   84              0.001038         let line = substitute (line, '/\?$', '/', "")
+   84              0.000084     endif
+                            
+  114              0.000280     if a:removeLeadingSpaces
+  111              0.000977         let line = substitute (line, '^ *', '', '')
+  111              0.000097     endif
+                            
+  114              0.000186     return line
+
+FUNCTION  200()
+Called 3 times
+Total time:   0.000347
+ Self time:   0.000347
+
+count  total (s)   self (s)
+    3              0.000332     return exists("b:NERDTreeRoot")
+
+FUNCTION  204()
+Called 3 times
+Total time:   0.138539
+ Self time:   0.000033
+
+count  total (s)   self (s)
+    3   0.138536   0.000030     call self.ui.render()
+
+FUNCTION  208()
+Called 3 times
+Total time:   0.077856
+ Self time:   0.011992
+
+count  total (s)   self (s)
+    3              0.000047     let line = getline(a:ln)
+                            
+    3   0.000998   0.000366     let rootLine = self.getRootLineNum()
+                            
+                                "check to see if we have the root node
+    3              0.000008     if a:ln == rootLine
+                                    return b:NERDTreeRoot.path
+                                endif
+                            
+    3              0.000023     if !g:NERDTreeDirArrows
+                                    " in case called from outside the tree
+                                    if line !~# '^ *[|`▸▾ ]' || line =~# '^$'
+                                        return {}
+                                    endif
+                                endif
+                            
+    3   0.000230   0.000168     if line ==# nerdtree#treeUpDirLine()
+                                    return b:NERDTreeRoot.path.getParent()
+                                endif
+                            
+    3   0.000479   0.000037     let indent = self._indentLevelFor(line)
+                            
+                                "remove the tree parts and the leading space
+    3   0.001068   0.000193     let curFile = nerdtree#stripMarkupFromLine(line, 0)
+                            
+    3              0.000007     let wasdir = 0
+    3              0.000110     if curFile =~# '/$'
+                                    let wasdir = 1
+                                    let curFile = substitute(curFile, '/\?$', '/', "")
+                                endif
+                            
+    3              0.000006     let dir = ""
+    3              0.000009     let lnum = a:ln
+  111              0.000195     while lnum > 0
+  111              0.000381         let lnum = lnum - 1
+  111              0.003613         let curLine = getline(lnum)
+  111   0.053801   0.001033         let curLineStripped = nerdtree#stripMarkupFromLine(curLine, 1)
+                            
+                                    "have we reached the top of the tree?
+  111              0.000230         if lnum == rootLine
+    3   0.000752   0.000192             let dir = b:NERDTreeRoot.path.str({'format': 'UI'}) . dir
+    3              0.000005             break
+                                    endif
+  108              0.000595         if curLineStripped =~# '/$'
+   81   0.004860   0.000821             let lpindent = self._indentLevelFor(curLine)
+   81              0.000180             if lpindent < indent
+   15              0.000037                 let indent = indent - 1
+                            
+   15              0.000150                 let dir = substitute (curLineStripped,'^\\', "", "") . dir
+   15              0.000030                 continue
+                                        endif
+   66              0.000058         endif
+   93              0.000171     endwhile
+    3              0.000023     let curFile = b:NERDTreeRoot.path.drive . dir . curFile
+    3   0.006576   0.000090     let toReturn = g:NERDTreePath.New(curFile)
+    3              0.000008     return toReturn
+
+FUNCTION  210()
+Called 3 times
+Total time:   0.000632
+ Self time:   0.000632
+
+count  total (s)   self (s)
+    3              0.000029     let rootLine = 1
+   12              0.000516     while getline(rootLine) !~# '^\(/\|<\)'
+    9              0.000038         let rootLine = rootLine + 1
+    9              0.000016     endwhile
+    3              0.000008     return rootLine
+
+FUNCTION  211()
+Called 84 times
+Total time:   0.004481
+ Self time:   0.004245
+
+count  total (s)   self (s)
+   84   0.002234   0.001998     let level = match(a:line, '[^ \-+~▸▾`|]') / nerdtree#treeWid()
+                                " check if line includes arrows
+   84              0.000924     if match(a:line, '[▸▾]') > -1
+                                    " decrement level as arrow uses 3 ascii chars
+   81              0.000279         let level = level - 1
+   81              0.000073     endif
+   84              0.000175     return level
+
+FUNCTION  214()
+Called 3 times
+Total time:   0.138506
+ Self time:   0.001015
+
+count  total (s)   self (s)
+    3              0.000040     setlocal modifiable
+                            
+                                "remember the top line of the buffer and the current line so we can
+                                "restore the view exactly how it was
+    3              0.000011     let curLine = line(".")
+    3              0.000014     let curCol = col(".")
+    3              0.000010     let topLine = line("w0")
+                            
+                                "delete all lines in the buffer (being careful not to clobber a register)
+    3              0.000289     silent 1,$delete _
+                            
+    3   0.000547   0.000035     call nerdtree#dumpHelp()
+                            
+                                "delete the blank line before the help and add one after it
+    3              0.000006     if g:NERDTreeMinimalUI == 0
+    3              0.000025         call setline(line(".")+1, "")
+    3              0.000015         call cursor(line(".")+1, col("."))
+    3              0.000004     endif
+                            
+    3              0.000008     if b:NERDTreeShowBookmarks
+                                    call nerdtree#renderBookmarks()
+                                endif
+                            
+                                "add the 'up a dir' line
+    3              0.000006     if !g:NERDTreeMinimalUI
+    3   0.000035   0.000027         call setline(line(".")+1, nerdtree#treeUpDirLine())
+    3              0.000014         call cursor(line(".")+1, col("."))
+    3              0.000001     endif
+                            
+                                "draw the header line
+    3   0.000322   0.000044     let header = b:NERDTreeRoot.path.str({'format': 'UI', 'truncateTo': winwidth(0)})
+    3              0.000025     call setline(line(".")+1, header)
+    3              0.000015     call cursor(line(".")+1, col("."))
+                            
+                                "draw the tree
+    3              0.000009     let old_o = @o
+    3   0.136761   0.000068     let @o = b:NERDTreeRoot.renderToString()
+    3              0.000071     silent put o
+    3              0.000034     let @o = old_o
+                            
+                                "delete the blank line at the top of the buffer
+    3              0.000023     silent 1,1delete _
+                            
+                                "restore the view
+    3              0.000027     let old_scrolloff=&scrolloff
+    3              0.000016     let &scrolloff=0
+    3              0.000012     call cursor(topLine, 1)
+    3              0.000078     normal! zt
+    3              0.000010     call cursor(curLine, curCol)
+    3              0.000010     let &scrolloff = old_scrolloff
+                            
+    3              0.000013     setlocal nomodifiable
+
+FUNCTION  <SNR>117_Highlight_Matching_Pair()
+Called 3 times
+Total time:   0.000585
+ Self time:   0.000585
+
+count  total (s)   self (s)
+                              " Remove any previous match.
+    3              0.000020   if exists('w:paren_hl_on') && w:paren_hl_on
+                                3match none
+                                let w:paren_hl_on = 0
+                              endif
+                            
+                              " Avoid that we remove the popup menu.
+                              " Return when there are no colors (looks like the cursor jumps).
+    3              0.000043   if pumvisible() || (&t_Co < 8 && !has("gui_running"))
+                                return
+                              endif
+                            
+                              " Get the character under the cursor and check if it's in 'matchpairs'.
+    3              0.000014   let c_lnum = line('.')
+    3              0.000010   let c_col = col('.')
+    3              0.000005   let before = 0
+                            
+    3              0.000018   let c = getline(c_lnum)[c_col - 1]
+    3              0.000314   let plist = split(&matchpairs, '.\zs[:,]')
+    3              0.000019   let i = index(plist, c)
+    3              0.000007   if i < 0
+                                " not found, in Insert mode try character before the cursor
+    3              0.000018     if c_col > 1 && (mode() == 'i' || mode() == 'R')
+                                  let before = 1
+                                  let c = getline(c_lnum)[c_col - 2]
+                                  let i = index(plist, c)
+                                endif
+    3              0.000004     if i < 0
+                                  " not found, nothing to do
+    3              0.000005       return
+                                endif
+                              endif
+                            
+                              " Figure out the arguments for searchpairpos().
+                              if i % 2 == 0
+                                let s_flags = 'nW'
+                                let c2 = plist[i + 1]
+                              else
+                                let s_flags = 'nbW'
+                                let c2 = c
+                                let c = plist[i - 1]
+                              endif
+                              if c == '['
+                                let c = '\['
+                                let c2 = '\]'
+                              endif
+                            
+                              " Find the match.  When it was just before the cursor move it there for a
+                              " moment.
+                              if before > 0
+                                let save_cursor = winsaveview()
+                                call cursor(c_lnum, c_col - before)
+                              endif
+                            
+                              " When not in a string or comment ignore matches inside them.
+                              " We match "escape" for special items, such as lispEscapeSpecial.
+                              let s_skip ='synIDattr(synID(line("."), col("."), 0), "name") ' . '=~?  "string\\|character\\|singlequote\\|escape\\|comment"'
+                              execute 'if' s_skip '| let s_skip = 0 | endif'
+                            
+                              " Limit the search to lines visible in the window.
+                              let stoplinebottom = line('w$')
+                              let stoplinetop = line('w0')
+                              if i % 2 == 0
+                                let stopline = stoplinebottom
+                              else
+                                let stopline = stoplinetop
+                              endif
+                            
+                              " Limit the search time to 300 msec to avoid a hang on very long lines.
+                              " This fails when a timeout is not supported.
+                              if mode() == 'i' || mode() == 'R'
+                                let timeout = exists("b:matchparen_insert_timeout") ? b:matchparen_insert_timeout : g:matchparen_insert_timeout
+                              else
+                                let timeout = exists("b:matchparen_timeout") ? b:matchparen_timeout : g:matchparen_timeout
+                              endif
+                              try
+                                let [m_lnum, m_col] = searchpairpos(c, '', c2, s_flags, s_skip, stopline, timeout)
+                              catch /E118/
+                                " Can't use the timeout, restrict the stopline a bit more to avoid taking
+                                " a long time on closed folds and long lines.
+                                " The "viewable" variables give a range in which we can scroll while
+                                " keeping the cursor at the same position.
+                                " adjustedScrolloff accounts for very large numbers of scrolloff.
+                                let adjustedScrolloff = min([&scrolloff, (line('w$') - line('w0')) / 2])
+                                let bottom_viewable = min([line('$'), c_lnum + &lines - adjustedScrolloff - 2])
+                                let top_viewable = max([1, c_lnum-&lines+adjustedScrolloff + 2])
+                                " one of these stoplines will be adjusted below, but the current values are
+                                " minimal boundaries within the current window
+                                if i % 2 == 0
+                                  if has("byte_offset") && has("syntax_items") && &smc > 0
+                            	let stopbyte = min([line2byte("$"), line2byte(".") + col(".") + &smc * 2])
+                            	let stopline = min([bottom_viewable, byte2line(stopbyte)])
+                                  else
+                            	let stopline = min([bottom_viewable, c_lnum + 100])
+                                  endif
+                                  let stoplinebottom = stopline
+                                else
+                                  if has("byte_offset") && has("syntax_items") && &smc > 0
+                            	let stopbyte = max([1, line2byte(".") + col(".") - &smc * 2])
+                            	let stopline = max([top_viewable, byte2line(stopbyte)])
+                                  else
+                            	let stopline = max([top_viewable, c_lnum - 100])
+                                  endif
+                                  let stoplinetop = stopline
+                                endif
+                                let [m_lnum, m_col] = searchpairpos(c, '', c2, s_flags, s_skip, stopline)
+                              endtry
+                            
+                              if before > 0
+                                call winrestview(save_cursor)
+                              endif
+                            
+                              " If a match is found setup match highlighting.
+                              if m_lnum > 0 && m_lnum >= stoplinetop && m_lnum <= stoplinebottom 
+                                exe '3match MatchParen /\(\%' . c_lnum . 'l\%' . (c_col - before) . 'c\)\|\(\%' . m_lnum . 'l\%' . m_col . 'c\)/'
+                                let w:paren_hl_on = 1
+                              endif
+
+FUNCTION  221()
+Called 2103 times
+Total time:   0.040198
+ Self time:   0.040198
+
+count  total (s)   self (s)
+ 2103              0.009776     let newObj = copy(self)
+ 2103              0.006160     let newObj.nerdtree = a:nerdtree
+ 2103              0.005355     let newObj.subject = a:subject
+ 2103              0.006157     let newObj.action = a:action
+ 2103              0.005197     let newObj.params = a:params
+ 2103              0.003063     return newObj
+
+FUNCTION  223()
+Called 2103 times
+Total time:   0.139731
+ Self time:   0.053900
+
+count  total (s)   self (s)
+ 2103   0.062065   0.021867     let event = g:NERDTreeEvent.New(b:NERDTree, a:path, a:event, a:params)
+                            
+ 2103   0.062880   0.017247     for listener in s:Notifier.GetListenersForEvent(a:event)
+                                    call {listener}(event)
+                                endfor
+
+FUNCTION  224()
+Called 2103 times
+Total time:   0.021759
+ Self time:   0.021759
+
+count  total (s)   self (s)
+ 2103              0.010016     if !exists("s:refreshListenersMap")
+                                    let s:refreshListenersMap = {}
+                                endif
+ 2103              0.003960     return s:refreshListenersMap
+
+FUNCTION  225()
+Called 2103 times
+Total time:   0.045633
+ Self time:   0.023874
+
+count  total (s)   self (s)
+ 2103   0.034597   0.012838     let listenersMap = s:Notifier.GetListenersMap()
+ 2103              0.008919     return get(listenersMap, a:name, [])
+
+FUNCTION  fugitive#reload_status()
+Called 3 times
+Total time:   0.001477
+ Self time:   0.001477
+
+count  total (s)   self (s)
+    3              0.000077   if exists('s:reloading_status')
+                                return
+                              endif
+    3              0.000006   try
+    3              0.000022     let s:reloading_status = 1
+    3              0.000041     let mytab = tabpagenr()
+    9              0.000086     for tab in [mytab] + range(1,tabpagenr('$'))
+   18              0.000100       for winnr in range(1,tabpagewinnr(tab,'$'))
+   12              0.000208         if getbufvar(tabpagebuflist(tab)[winnr-1],'fugitive_type') ==# 'index'
+                                      execute 'tabnext '.tab
+                                      if winnr != winnr()
+                                        execute winnr.'wincmd w'
+                                        let restorewinnr = 1
+                                      endif
+                                      try
+                                        if !&modified
+                                          call s:BufReadIndex()
+                                        endif
+                                      finally
+                                        if exists('restorewinnr')
+                                          wincmd p
+                                        endif
+                                        execute 'tabnext '.mytab
+                                      endtry
+                                    endif
+   12              0.000015       endfor
+    6              0.000020     endfor
+    3              0.000006   finally
+    3              0.000011     unlet! s:reloading_status
+    3              0.000018   endtry
+
+FUNCTION  260()
+Called 52 times
+Total time:   0.001239
+ Self time:   0.001239
+
+count  total (s)   self (s)
+   52              0.000668     if !exists("b:syntastic_loclist") || empty(b:syntastic_loclist)
+                                    let b:syntastic_loclist = g:SyntasticLoclist.New([])
+                                endif
+   52              0.000130     return b:syntastic_loclist
+
+FUNCTION  269()
+Called 52 times
+Total time:   0.006512
+ Self time:   0.006512
+
+count  total (s)   self (s)
+   52              0.000859     if !exists("self._stl_format")
+                                    let self._stl_format = ''
+                                endif
+   52              0.000264     if !exists("self._stl_flag")
+                                    let self._stl_flag = ''
+                                endif
+                            
+   52              0.000262     if g:syntastic_stl_format !=# self._stl_format
+                                    let self._stl_format = g:syntastic_stl_format
+                            
+                                    if !empty(self._rawLoclist)
+                                        let errors = self.errors()
+                                        let warnings = self.warnings()
+                            
+                                        let num_errors = len(errors)
+                                        let num_warnings = len(warnings)
+                                        let num_issues = len(self._rawLoclist)
+                            
+                                        let output = self._stl_format
+                            
+                                        "hide stuff wrapped in %E(...) unless there are errors
+                                        let output = substitute(output, '\m\C%E{\([^}]*\)}', num_errors ? '\1' : '' , 'g')
+                            
+                                        "hide stuff wrapped in %W(...) unless there are warnings
+                                        let output = substitute(output, '\m\C%W{\([^}]*\)}', num_warnings ? '\1' : '' , 'g')
+                            
+                                        "hide stuff wrapped in %B(...) unless there are both errors and warnings
+                                        let output = substitute(output, '\m\C%B{\([^}]*\)}', (num_warnings && num_errors) ? '\1' : '' , 'g')
+                            
+                                        "sub in the total errors/warnings/both
+                                        let output = substitute(output, '\m\C%w', num_warnings, 'g')
+                                        let output = substitute(output, '\m\C%e', num_errors, 'g')
+                                        let output = substitute(output, '\m\C%t', num_issues, 'g')
+                            
+                                        "first error/warning line num
+                                        let output = substitute(output, '\m\C%F', num_issues ? self._rawLoclist[0]['lnum'] : '', 'g')
+                            
+                                        "first error line num
+                                        let output = substitute(output, '\m\C%fe', num_errors ? errors[0]['lnum'] : '', 'g')
+                            
+                                        "first warning line num
+                                        let output = substitute(output, '\m\C%fw', num_warnings ? warnings[0]['lnum'] : '', 'g')
+                            
+                                        let self._stl_flag = output
+                                    else
+                                        let self._stl_flag = ''
+                                    endif
+                                endif
+                            
+   52              0.000200     return self._stl_flag
+
+FUNCTION  nerdtree#dumpHelp()
+Called 3 times
+Total time:   0.000512
+ Self time:   0.000512
+
+count  total (s)   self (s)
+    3              0.000009     let old_h = @h
+    3              0.000005     if b:treeShowHelp ==# 1
+                                    let @h=   "\" NERD tree (" . nerdtree#version() . ") quickhelp~\n"
+                                    let @h=@h."\" ============================\n"
+                                    let @h=@h."\" File node mappings~\n"
+                                    let @h=@h."\" ". (g:NERDTreeMouseMode ==# 3 ? "single" : "double") ."-click,\n"
+                                    let @h=@h."\" <CR>,\n"
+                                    if b:NERDTreeType ==# "primary"
+                                        let @h=@h."\" ". g:NERDTreeMapActivateNode .": open in prev window\n"
+                                    else
+                                        let @h=@h."\" ". g:NERDTreeMapActivateNode .": open in current window\n"
+                                    endif
+                                    if b:NERDTreeType ==# "primary"
+                                        let @h=@h."\" ". g:NERDTreeMapPreview .": preview\n"
+                                    endif
+                                    let @h=@h."\" ". g:NERDTreeMapOpenInTab.": open in new tab\n"
+                                    let @h=@h."\" ". g:NERDTreeMapOpenInTabSilent .": open in new tab silently\n"
+                                    let @h=@h."\" middle-click,\n"
+                                    let @h=@h."\" ". g:NERDTreeMapOpenSplit .": open split\n"
+                                    let @h=@h."\" ". g:NERDTreeMapPreviewSplit .": preview split\n"
+                                    let @h=@h."\" ". g:NERDTreeMapOpenVSplit .": open vsplit\n"
+                                    let @h=@h."\" ". g:NERDTreeMapPreviewVSplit .": preview vsplit\n"
+                            
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Directory node mappings~\n"
+                                    let @h=@h."\" ". (g:NERDTreeMouseMode ==# 1 ? "double" : "single") ."-click,\n"
+                                    let @h=@h."\" ". g:NERDTreeMapActivateNode .": open & close node\n"
+                                    let @h=@h."\" ". g:NERDTreeMapOpenRecursively .": recursively open node\n"
+                                    let @h=@h."\" ". g:NERDTreeMapCloseDir .": close parent of node\n"
+                                    let @h=@h."\" ". g:NERDTreeMapCloseChildren .": close all child nodes of\n"
+                                    let @h=@h."\"    current node recursively\n"
+                                    let @h=@h."\" middle-click,\n"
+                                    let @h=@h."\" ". g:NERDTreeMapOpenExpl.": explore selected dir\n"
+                            
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Bookmark table mappings~\n"
+                                    let @h=@h."\" double-click,\n"
+                                    let @h=@h."\" ". g:NERDTreeMapActivateNode .": open bookmark\n"
+                                    let @h=@h."\" ". g:NERDTreeMapOpenInTab.": open in new tab\n"
+                                    let @h=@h."\" ". g:NERDTreeMapOpenInTabSilent .": open in new tab silently\n"
+                                    let @h=@h."\" ". g:NERDTreeMapDeleteBookmark .": delete bookmark\n"
+                            
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Tree navigation mappings~\n"
+                                    let @h=@h."\" ". g:NERDTreeMapJumpRoot .": go to root\n"
+                                    let @h=@h."\" ". g:NERDTreeMapJumpParent .": go to parent\n"
+                                    let @h=@h."\" ". g:NERDTreeMapJumpFirstChild  .": go to first child\n"
+                                    let @h=@h."\" ". g:NERDTreeMapJumpLastChild   .": go to last child\n"
+                                    let @h=@h."\" ". g:NERDTreeMapJumpNextSibling .": go to next sibling\n"
+                                    let @h=@h."\" ". g:NERDTreeMapJumpPrevSibling .": go to prev sibling\n"
+                            
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Filesystem mappings~\n"
+                                    let @h=@h."\" ". g:NERDTreeMapChangeRoot .": change tree root to the\n"
+                                    let @h=@h."\"    selected dir\n"
+                                    let @h=@h."\" ". g:NERDTreeMapUpdir .": move tree root up a dir\n"
+                                    let @h=@h."\" ". g:NERDTreeMapUpdirKeepOpen .": move tree root up a dir\n"
+                                    let @h=@h."\"    but leave old root open\n"
+                                    let @h=@h."\" ". g:NERDTreeMapRefresh .": refresh cursor dir\n"
+                                    let @h=@h."\" ". g:NERDTreeMapRefreshRoot .": refresh current root\n"
+                                    let @h=@h."\" ". g:NERDTreeMapMenu .": Show menu\n"
+                                    let @h=@h."\" ". g:NERDTreeMapChdir .":change the CWD to the\n"
+                                    let @h=@h."\"    selected dir\n"
+                                    let @h=@h."\" ". g:NERDTreeMapCWD .":change tree root to CWD\n"
+                            
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Tree filtering mappings~\n"
+                                    let @h=@h."\" ". g:NERDTreeMapToggleHidden .": hidden files (" . (b:NERDTreeShowHidden ? "on" : "off") . ")\n"
+                                    let @h=@h."\" ". g:NERDTreeMapToggleFilters .": file filters (" . (b:NERDTreeIgnoreEnabled ? "on" : "off") . ")\n"
+                                    let @h=@h."\" ". g:NERDTreeMapToggleFiles .": files (" . (b:NERDTreeShowFiles ? "on" : "off") . ")\n"
+                                    let @h=@h."\" ". g:NERDTreeMapToggleBookmarks .": bookmarks (" . (b:NERDTreeShowBookmarks ? "on" : "off") . ")\n"
+                            
+                                    "add quickhelp entries for each custom key map
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Custom mappings~\n"
+                                    for i in g:NERDTreeKeyMap.All()
+                                        if !empty(i.quickhelpText)
+                                            let @h=@h."\" ". i.key .": ". i.quickhelpText ."\n"
+                                        endif
+                                    endfor
+                            
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Other mappings~\n"
+                                    let @h=@h."\" ". g:NERDTreeMapQuit .": Close the NERDTree window\n"
+                                    let @h=@h."\" ". g:NERDTreeMapToggleZoom .": Zoom (maximize-minimize)\n"
+                                    let @h=@h."\"    the NERDTree window\n"
+                                    let @h=@h."\" ". g:NERDTreeMapHelp .": toggle help\n"
+                                    let @h=@h."\"\n\" ----------------------------\n"
+                                    let @h=@h."\" Bookmark commands~\n"
+                                    let @h=@h."\" :Bookmark [<name>]\n"
+                                    let @h=@h."\" :BookmarkToRoot <name>\n"
+                                    let @h=@h."\" :RevealBookmark <name>\n"
+                                    let @h=@h."\" :OpenBookmark <name>\n"
+                                    let @h=@h."\" :ClearBookmarks [<names>]\n"
+                                    let @h=@h."\" :ClearAllBookmarks\n"
+                                    silent! put h
+                                elseif g:NERDTreeMinimalUI == 0
+    3              0.000020         let @h="\" Press ". g:NERDTreeMapHelp ." for help\n"
+    3              0.000025         silent! put h
+    3              0.000001     endif
+                            
+    3              0.000007     let @h = old_h
+
+FUNCTION  132()
+Called 78 times
+Total time:   0.342018
+ Self time:   0.018067
+
+count  total (s)   self (s)
+   78   0.050509   0.000702     if a:path.equals(self.path)
+                                    return self
+                                endif
+   78   0.030848   0.001716     if stridx(a:path.str(), self.path.str(), 0) ==# -1
+   60              0.000270         return {}
+                                endif
+                            
+   18              0.000037     if self.path.isDirectory
+   84              0.000596         for i in self.children
+   84   0.006187   0.001079             let retVal = i.findNode(a:path)
+   84              0.000355             if retVal != {}
+   18              0.000027                 return retVal
+                                        endif
+   66              0.000094         endfor
+                                endif
+                                return {}
+
+FUNCTION  SyntasticStatuslineFlag()
+Called 52 times
+Total time:   0.009040
+ Self time:   0.001289
+
+count  total (s)   self (s)
+   52   0.008947   0.001196     return g:SyntasticLoclist.current().getStatuslineFlag()
+
+FUNCTION  <SNR>132_UpdateNERDTree()
+Called 3 times
+Total time:   8.715711
+ Self time:   0.024419
+
+count  total (s)   self (s)
+    3              0.000015     let stay = 0
+                            
+    3              0.000018     if(exists("a:1"))
+                                  let stay = a:1
+                                end
+                            
+    3              0.000032     if exists("t:NERDTreeBufName")
+    3              0.022346       let nr = bufwinnr(t:NERDTreeBufName)
+    3              0.000030       if nr != -1
+    3              0.000587         exe nr . "wincmd w"
+    3   8.692558   0.001266         exe substitute(mapcheck("R"), "<CR>", "", "")
+    3              0.000006         if !stay
+    3              0.000061           wincmd p
+    3              0.000004         end
+    3              0.000003       endif
+    3              0.000001     endif
+
+FUNCTION  nerdtree#treeMarkupReg()
+Called 114 times
+Total time:   0.000773
+ Self time:   0.000773
+
+count  total (s)   self (s)
+  114              0.000273     if g:NERDTreeDirArrows
+  114              0.000357         return '^\([▾▸] \| \+[▾▸] \| \+\)'
+                                endif
+                            
+                                return '^[ `|]*[\-+~]'
+
+FUNCTIONS SORTED ON TOTAL TIME
+count  total (s)   self (s)  function
+  603  31.486244  22.134160  150()
+    3   8.715711   0.024419  <SNR>132_UpdateNERDTree()
+    3   8.691292   0.000106  nerdtree#ui_glue#invokeKeyMap()
+    3   8.691186   0.001140  71()
+    3   8.515484   0.000092  70()
+    3   8.515392   0.052723  <SNR>86_refreshRoot()
+11769   3.519055   0.617692  5()
+ 2100   3.285396   0.070854  134()
+ 2100   2.627043   0.246513  136()
+19338   2.485770   1.466484  20()
+  270   1.790038   0.025210  155()
+ 5019   1.764828   0.040966  nerdtree#compareNodes()
+11153   1.645600   0.749247  35()
+107892   1.562601             19()
+ 2103   1.434633   0.060195  32()
+ 4206   1.396213   0.701713  31()
+ 1500   1.028049   0.011714  121()
+ 2103   0.976892   0.141567  28()
+10877   0.793098   0.289727  40()
+44496   0.532989             nerdtree#runningWindows()
+
+FUNCTIONS SORTED ON SELF TIME
+count  total (s)   self (s)  function
+  603  31.486244  22.134160  150()
+107892              1.562601  19()
+19338   2.485770   1.466484  20()
+11153   1.645600   0.749247  35()
+ 4206   1.396213   0.701713  31()
+11769   3.519055   0.617692  5()
+44496              0.532989  nerdtree#runningWindows()
+  276   0.448960   0.442582  125()
+ 8412              0.309288  30()
+10877   0.793098   0.289727  40()
+ 2100   2.627043   0.246513  136()
+ 2103   0.976892   0.141567  28()
+ 2103   0.217064   0.124837  3()
+22294   0.389977   0.118243  29()
+ 4206   0.163747   0.113706  14()
+ 2103   0.105823   0.078545  1()
+ 2100   3.285396   0.070854  134()
+ 4206              0.062189  41()
+11153              0.061551  nerdtree#has_opt()
+ 2103   1.434633   0.060195  32()
+

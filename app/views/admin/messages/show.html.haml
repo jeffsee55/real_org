@@ -1,5 +1,11 @@
 = render "admin/nav"
 %h3= @message.name
 %h4= @message.email
-%p= @message.body
+%p= "Message: #{ @message.body }"
+%p= "Main concerns: #{ @message.concerns }" if @message.concerns
+%ul
+  %li= "Spaces of concern: #{ @message.spaces.join(", ") }" if @message.spaces
+  %li= "Days available: #{ @message.days.join(", ") }" if @message.days
+  %li= "Times available: #{ @message.times.join(", ") }" if @message.times
+%hr
 =button_to "Delete", admin_message_path(@message), class: "item button", method: :delete

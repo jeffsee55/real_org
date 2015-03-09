@@ -32,7 +32,7 @@ gem "instagram"
 gem "font-awesome-rails"
 gem "nokogiri"
 gem "mini_magick"
-gem "aws-sdk"
+gem "aws-sdk", '< 2.0'
 gem "refile", require: ["refile/rails", "refile/image_processing"]
 gem 'kaminari'
 gem 'ransack', '~> 1.6.3'

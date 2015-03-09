@@ -1,0 +1,22 @@
+.container
+  = render "nav"
+  .card.blog.new-message
+    %h3 Work With Me
+    %hr.thick
+    = simple_form_for @message do |f|
+      =f.input :name, label: false, placeholder: "Name"
+      =f.input :email, as: :email, label: false, placeholder: "Email"
+      =f.input :phone, as: :tel, label: false, placeholder: "or Phone"
+      =f.input :body, label: false, placeholder: "What are your main areas of concern?"
+      .check_boxes
+        .days
+          What days work best for you?
+          =f.input :days, collection: Date::DAYNAMES, as: :check_boxes, label: false
+        .times
+          What times work best for you?
+          =f.input :times, collection: MessageOptions.last.times, as: :check_boxes, label: false
+        .areas
+          What areas are you hoping to organize?
+          =f.input :spaces, collection: MessageOptions.last.spaces, as: :check_boxes, label: false
+      %hr
+      =f.submit "Submit"

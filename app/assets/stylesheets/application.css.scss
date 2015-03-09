@@ -6,7 +6,8 @@
 @import 'neat';
 @import 'base/base';
 @import "font-awesome";
-
+@import "shared/components";
 @import 'application/pages/pages';
+@import 'application/pages/messages';
 @import 'application/pages/clearance';
 @import 'application/components/components';

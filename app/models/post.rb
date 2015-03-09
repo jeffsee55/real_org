@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
   scope :site_post, -> { where(site_post: true) }
   scope :regular_post, -> { where(site_post: false) }
   scope :published, -> { where.not(published_at: nil).where(site_post: false).order('published_at DESC') }
-  scope :published_non_projects, -> { joins(:categories).where.not("categories.name" => "Recent Projects") }
+  scope :published_non_projects, -> { joins(:categories).where.not("categories.name" => "Recent Projects").published }
 
   accepts_nested_attributes_for :post_categories
 
@@ -43,9 +43,6 @@ class Post < ActiveRecord::Base
   def publish!
     update(published_at: Time.now)
     self.save
-  end
-
-  def pinterest_image
   end
 
   def save_as_draft!
@@ -84,6 +81,14 @@ class Post < ActiveRecord::Base
     doc = Nokogiri::HTML(self.body)
     body = doc.xpath("//text()").to_s
     body[0...length]
+  end
+
+  def shared_image
+    if pinterest_image_id?
+      pinterest_image
+    else
+      image
+    end
   end
 
   def send_email

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
   resources :categories
-  resources :messages, only: :create
+  resources :messages, only: [:new, :create]
   resources :subscribers, only: [:create, :destroy]
 
   namespace :admin do
