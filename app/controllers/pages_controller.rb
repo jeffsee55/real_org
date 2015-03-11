@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def home
     @welcome_post = Post.find_by_title("Welcome Message")
     @post = Post.published_non_projects.first
-    @posts = Post.published_non_projects.first(5)[1..-1]
+    @posts = Post.published_non_projects.uniq.first(5)[1..-1]
     @categories = Category.all
     @subscriber = Subscriber.new
   end

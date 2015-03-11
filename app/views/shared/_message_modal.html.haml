@@ -1,15 +1,10 @@
 %input#modal-message.modal-state{:type => "checkbox"}/
 .modal-window
   .modal-inner
-    %h2 Get in Touch
     %label.modal-close{:for => "modal-message"}
-    =link_to new_message_path do
-      Fill out our more
-      %em detailed form
-      for work inquiries
-    %br
-    \-OR-
-    %br
+    For work inquiries please fill out our more detailed form.
+    =link_to "Detailed Form", new_message_path, class: "btn"
+    %hr
     =simple_form_for :message, url: messages_path , method: :post do |f|
       =f.input :name, label: false, placeholder: "Name"
       =f.input :email, label: false, placeholder: "Email"

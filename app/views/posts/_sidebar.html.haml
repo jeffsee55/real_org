@@ -11,21 +11,18 @@
       =render "shared/message_modal"
   .spacer
   .icon-list
-    -if @theme.pinterest
-      =link_to @theme.pinterest do
+    -unless @theme.pinterest.blank?
+      =link_to @theme.pinterest, target: "_blank" do
         .fa.fa-pinterest-square.fa-3x
-    -if @theme.facebook
-      =link_to @theme.facebook do
+    -unless @theme.facebook.blank?
+      =link_to @theme.facebook, target: "_blank" do
         .fa.fa-facebook-square.fa-3x
-    -if @theme.instagram
-      =link_to @theme.instagram do
+    -unless @theme.instagram.blank?
+      =link_to @theme.instagram, target: "_blank" do
         .fa.fa-instagram.fa-3x
-    -if @theme.google_plus
-      =link_to @theme.google_plus do
+    -unless @theme.google_plus.blank?
+      =link_to @theme.google_plus, target: "_blank" do
         .fa.fa-google-plus-square.fa-3x
-    -if @theme.rss
-      =link_to @theme.rss do
-        .fa.fa-rss-square.fa-3x
     .spacer
     %h3 NEVER MISS A POST
     = simple_form_for @subscriber do |f|

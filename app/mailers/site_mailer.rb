@@ -12,41 +12,40 @@ class SiteMailer < ActionMailer::Base
       to: [
         {email: "jeffsee.55@gmail.com"},
       ],
-      subject: "New Message from #{message.name}",
-      merge_vars: [
-        {rcpt: "jeffsee.55@gmail.com",
-          vars: [
-            {name: "NAME", content: message.name},
-            {name: "EMAIL", content: message.email},
-            {name: "BODY", content: message.body},
-          ]
-        }
-      ]
+      subject: "New Message from #{ message.name }",
+      global_merge_vars: [
+        { name: "NAME", content: message.name },
+        { name: "EMAIL", content: message.email },
+        { name: "BODY", content: message.body },
+        { name: "MESSAGE_URL", content: admin_message_url(message.id) }
+      ],
     }
 
     mandrill_client.messages.send_template template_name, template_content, message
   end
 
   def post_notification(post)
-    template_name = "post-notification"
+    template_name = "new-post"
     template_content = []
     message = {
-      to:
-        Subscriber.all.map do |s|
-          {email: "#{s.email}"}
-        end,
-      subject: "RO:#{post.title}",
-      merge_vars: [
-        {rcpt: "jeffsee.55@gmail.com",
-          vars: [
-            {name: "TITLE", content: post.title},
-            {name: "IMAGE_URL", content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{post.image.id}"},
-            {name: "POST_URL", content: ""},
-            {name: "UNSUBSCRIBE_URL", content: "http://localhost:5000"},
-            {name: "EXCERPT", content: post.strip_and_truncate(200) }
-          ]
-        }
-      ]
+      to: Subscriber.all.map { |s| { email: "#{s.email}" } },
+      subject: "Realistic Organizer:#{ post.title }",
+      global_merge_vars: [
+        { name: "TITLE", content: post.title },
+        { name: "LOGO_IMAGE_URL", content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{ Theme.last.logo_image.id }" },
+        { name: "IMAGE_URL", content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{ post.image.id }" },
+        { name: "POST_URL", content: post_url(post) },
+        { name: "EXCERPT", content: post.strip_and_truncate(200) }
+      ],
+      merge_vars:
+        Subscriber.all.map do |subscriber|
+          {
+            rcpt: subscriber.email,
+            vars: [
+             { name: "UNSUBSCRIBE_URL", content: unsubscribe_url(subscriber.access_token) }
+            ]
+          }
+        end
     }
 
     mandrill_client.messages.send_template template_name, template_content, message

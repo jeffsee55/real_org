@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308070433) do
+ActiveRecord::Schema.define(version: 20150311054348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,7 +173,6 @@ ActiveRecord::Schema.define(version: 20150308070433) do
     t.string   "facebook"
     t.string   "instagram"
     t.string   "pinterest"
-    t.string   "rss"
     t.string   "google_plus"
     t.string   "tagline"
     t.string   "footer_color",        default: "#575454"

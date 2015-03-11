@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :messages, only: [:new, :create]
   resources :subscribers, only: [:create, :destroy]
+  get '/subscribers/unsubscribe/:signature' => 'subscribers#unsubscribe', as: 'unsubscribe'
 
   namespace :admin do
     get '/', to: 'dashboard#home'
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :images
     resources :messages, only: [:index, :show, :destroy]
+    resources :message_options, only: [:new, :show, :create]
     resources :subscribers, only: [:index, :show, :destroy]
     resources :stylesheets
     resources :themes, except: [:index]

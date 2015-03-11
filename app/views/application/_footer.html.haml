@@ -2,27 +2,32 @@
   .container(style="margin-bottom: 0;")
     .footer-header
       .title
-        %span.thin THE
-        %span.fat REALISTIC
-        %span.fat ORGANIZER
+        -if @theme.logo_image_id?
+          =attachment_image_tag @theme, :logo_image
+        -else
+          %span.thin THE
+          %span.fat REALISTIC
+          %span.fat ORGANIZER
+      %hr.thick{style: "border-color: #{ @theme.footer_color }"}
       %ul
         %li
           =link_to "ABOUT", about_path
         %li
+          =link_to "WORK WITH ME", contact_path
+        %li
+          =link_to "REPORT A PROBLEM", "mailto:jeffsee.55@gmail.com?Subject=ProblemReport%20Realistic%20Organizer"
+        %li
           =link_to "SITE MAP", about_path
-        %li
-          =link_to "REPORT A PROBLEM", about_path
       %ul
-        %li
-          =link_to "WORK WITH ME", about_path
-        %li
-          =link_to "PARTNERS", about_path
-        %li
-          =link_to "CONTACT", about_path
-      %ul
-        %li
-          =link_to "PINTEREST", @theme.pinterest
-        %li
-          =link_to "FACEBOOK", @theme.facebook
-        %li
-          =link_to "INSTAGRAM", @theme.instagram
+        -unless @theme.pinterest.blank?
+          %li
+            =link_to "PINTEREST", @theme.pinterest
+        -unless @theme.facebook.blank?
+          %li
+            =link_to "FACEBOOK", @theme.facebook
+        -unless @theme.instagram.blank?
+          %li
+            =link_to "INSTAGRAM", @theme.instagram
+        -unless @theme.google_plus.blank?
+          %li
+            =link_to "GOOGLE PLUS", @theme.google_plus

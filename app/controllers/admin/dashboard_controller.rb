@@ -1,5 +1,4 @@
 class Admin::DashboardController < AdminController
-
   def home
     @unpublished_posts = Post.where(published_at: nil)
     @user = User.last
@@ -8,5 +7,4 @@ class Admin::DashboardController < AdminController
   def site_posts
     @site_posts = Post.site_post.all
   end
-
 end

@@ -11,8 +11,6 @@ class Admin::PostsController < AdminController
     @post = Post.new(post_params)
 
     if @post.save
-      @post.publish! if publishing?
-      @post.save_as_draft! if drafting?
       if params[:category_ids]
         params[:category_ids].each do |category_id|
           PostCategory.create(
@@ -21,6 +19,8 @@ class Admin::PostsController < AdminController
           )
         end
       end
+      @post.publish! if publishing?
+      @post.save_as_draft! if drafting?
       redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully created"
     else
       redirect_to :back, notice: "Post could not be saved"

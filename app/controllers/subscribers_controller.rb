@@ -15,6 +15,15 @@ class SubscribersController < ApplicationController
     redirect_to root_path, notice: "You've successfully unsubscribed."
   end
 
+  def unsubscribe
+    if subscriber = Subscriber.read_access_token(params[:signature])
+      subscriber.delete
+      redirect_to root_url, notice: "Sorry to see you go! You have successfully unsubscribed"
+    else
+      render text: "Invalid Link"
+    end
+  end
+
   private
 
     def subscriber_params

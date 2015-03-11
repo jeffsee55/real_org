@@ -1,0 +1,12 @@
+=render "nav"
+%h3 Message Options
+%h3 Time Slots
+%ul
+-@message_option.times.each do |time|
+  %li=time
+%h3 Spaces
+%ul
+-@message_option.spaces.each do |space|
+  %li=space
+
+=link_to "Edit", new_admin_message_option_path

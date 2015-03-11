@@ -10,4 +10,5 @@
         =link_to category do
           %span.tag.poster-tag{style: "background: #{category.tag_color}"}= category.nice_name.upcase
       .text
-        %h2= @post.title
+        =link_to @post do
+          %h2{style: "color: white"}= @post.title

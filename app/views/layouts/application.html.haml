@@ -1,16 +1,18 @@
 !!!
 %html
 %head
-%meta{:charset => "utf-8"}/
-%meta{:content => "NOODP", :name => "ROBOTS"}/
-%meta{:content => "initial-scale=1", :name => "viewport"}/
-%title= title
-= stylesheet_link_tag :application, media: "all"
-= render partial: "application/theme"
-= csrf_meta_tags
+  %meta{:charset => "utf-8"}/
+  %meta{:content => "NOODP", :name => "ROBOTS"}/
+  %meta{:content => "initial-scale=1", :name => "viewport"}/
+  %title= title
+  = stylesheet_link_tag :application, media: "all"
+  = render partial: "application/theme"
+  = csrf_meta_tags
+  %meta{content: "Post Title", :property => "og:title"}/
+  %meta{content: "http://www.imdb.com/title/tt0117500/", property: "og:url"}/
+  %meta{content: "http://ia.media-imdb.com/images/rock.jpg", property: "og:image"}/
+  %meta{content: "714905915289688", property: "fb:app_id"}/
 %body{ class: body_class}
--#.load
-  -#.fa.fa-circle-o-notch.fa-spin.fa-4x
 = render "flashes"
 .header-bg
 = yield
@@ -20,4 +22,4 @@
 -#%ins.adsbygoogle{"data-ad-client" => "ca-pub-7600043945930923", "data-ad-format" => "auto", "data-ad-slot" => "8976265896", :style => "display:block"}
 -#:javascript
   -#(adsbygoogle = window.adsbygoogle || []).push({});
--#= render "javascript"
+= render "javascript"

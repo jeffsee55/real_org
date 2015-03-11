@@ -45,6 +45,7 @@ gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'friendly_id', '~> 5.1.0'
+gem 'sitemap_generator'
 
 gem "bundler-audit"
 

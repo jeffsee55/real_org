@@ -14,9 +14,9 @@
           =f.input :days, collection: Date::DAYNAMES, as: :check_boxes, label: false
         .times
           What times work best for you?
-          =f.input :times, collection: MessageOptions.last.times, as: :check_boxes, label: false
+          =f.input :times, collection: MessageOption.last.times, as: :check_boxes, label: false
         .areas
           What areas are you hoping to organize?
-          =f.input :spaces, collection: MessageOptions.last.spaces, as: :check_boxes, label: false
+          =f.input :spaces, collection: MessageOption.last.spaces, as: :check_boxes, label: false
       %hr
       =f.submit "Submit"

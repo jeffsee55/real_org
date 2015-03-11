@@ -19,6 +19,9 @@
     height: 200px;
     background: $light-gray;
   }
+  .title {
+    margin-left: 10px;
+  }
   .btn {
     @include position(absolute, 25% 10% null 10%);
     text-align: center;

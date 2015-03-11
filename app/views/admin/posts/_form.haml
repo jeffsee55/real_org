@@ -9,12 +9,12 @@
     .manage-images
       %div
         %h4 Poster Image
-        #image.post_image= image_tag attachment_url(@post, :image, :fit, 408, 250) if @post.image_id?
+        #image.post_image{style: "background: url(#{attachment_url(@post, :image, :fit, 408, 250) if @post.image_id?}) no-repeat center; background-size: cover"}
         = p.input :remove_image, as: :boolean
         = p.attachment_field :image, direct: true, class: "image_upload"
       %div
         %h4 Pinterest Image
-        #image.pinterest_image= image_tag attachment_url(@post, :pinterest_image) if @post.pinterest_image_id?
+        #image.pinterest_image{style: "background: url(#{attachment_url(@post, :pinterest_image, :fit, 408, 250) if @post.pinterest_image_id?}) no-repeat center; background-size: cover"}
         = p.input :remove_pinterest_image, as: :boolean if @post.pinterest_image_id?
         = p.attachment_field :pinterest_image, direct: true, class: "image_upload"
     .manage-categories
@@ -29,7 +29,7 @@
             = cat.nice_name
   .toolbar
     = p.input :title, placeholder: "Title", label: false
-    #image.post_image= image_tag attachment_url(@post, :image, :limit, 400, 600) if @post.image_id?
+    #image.post_image{style: "background: url(#{attachment_url(@post, :image, :fit, 408, 250) if @post.image_id?}) no-repeat center; background-size: cover"}
     %hr
     %h5 Categories
     = @post.categories.map(&:name).join(", ")

@@ -1,0 +1,6 @@
+=render "nav"
+%h3 Message Options
+=simple_form_for [:admin, @message_option] do |f|
+  =f.input :spaces, label: "Spaces - Eg. 'Living Room', 'Kitchen'", placeholder: "Spaces (comma separated)"
+  =f.input :times, label: "Times - Eg. '8a to 12p', '12p to 4p'", placeholder: "Times (comma separated)"
+  =f.submit "Save"

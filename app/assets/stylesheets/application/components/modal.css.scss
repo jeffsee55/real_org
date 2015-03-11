@@ -140,9 +140,11 @@
   }
 
   .message_name, .message_email {
-    @include span-columns(5);
+    @include span-columns(6);
   }
-
+  .message_email {
+    @include omega();
+  }
 }
 
 // Based on code by Kasper Mikiewicz
