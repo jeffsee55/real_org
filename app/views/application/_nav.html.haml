@@ -15,7 +15,7 @@
       .title
         = attachment_image_tag @theme, :logo_image
       .tagline
-        -unless @theme.tagline.empty?
+        -unless @theme.tagline.nil?
           =@theme.tagline
         -else
           ADVENTURES IN ORGANIZING AND ATTEMPTS AT CREATIVITY
@@ -23,7 +23,7 @@
 %header.centered-navigation{:role => "banner"}
   .centered-navigation-wrapper
     .title.mobile-logo
-      -if @theme.logo_image_id.empty?
+      -if @theme.logo_image_id.nil?
         %span.thin THE
         %span.fat REALISTIC
         %br
