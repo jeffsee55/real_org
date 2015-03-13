@@ -1,0 +1,18 @@
+= javascript_include_tag :application
+
+= yield :javascript
+
+= render "analytics"
+
+-#-if Rails.env.test?
+  -#=javascript_tag do
+    -#$.fx.off = true;
+    -#$.ajaxSetup({ async: false });
+
+:coffee
+  $ ->
+    $(".facebook").click ->
+      FB.ui {
+      method: 'share'
+      href: "#{post_url(@post)}"
+      }, (response) ->
