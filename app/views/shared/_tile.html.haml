@@ -7,9 +7,11 @@
   %span.plus{style: "background-color:  #{cat.tag_color unless cat.nil? }"}
     %span.plus-inner +
   .popout{style: "background-color: #{cat.tag_color unless cat.nil? }"}
-    =link_to "https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=#{request.original_url}", target: "_blank" do
-      %i.fa.fa-facebook-square
-    =link_to ("http://pinterest.com/pin/create/button/?url=#{request.original_url}&media=#{root_url}/attachments/store/fill/400/400/#{p.image.id}/image?fit=crop&fm=jpg&h=700&q=75&w=1050&description=#{p.title}"), target: "_blank" do
-      %i.fa.fa-pinterest-square
+    =link_to ("http://pinterest.com/pin/create/button/?url=#{request.original_url}&media=https://s3-us-west-2.amazonaws.com/real-org-images/store/#{@post.shared_image.id}?fit=crop&fm=jpg&h=1200&w=750&description=#{@post.title}"), target: "_blank" do
+      .fa.fa-pinterest-square
+    =link_to "javascript:void(0)", target: "_blank" do
+      .fa.fa-facebook-square.facebook
+    =link_to "https://plus.google.com/share?url=#{post_url(@post)}", target: "_blank" do
+      .fa.fa-google-plus-square
     =link_to p do
       Read
