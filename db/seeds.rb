@@ -26,6 +26,8 @@ cat.root.css('category').each do |c|
       p.title = title.text
       p.body = body.text
       p.created_at = published.text
+      p.published_at = published.text
+      p.email_sent_at = published.text
       p.updated_at = updated.text
       p.unique_number = post_id
       backend = Refile.backends["store"]

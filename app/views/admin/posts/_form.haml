@@ -31,8 +31,9 @@
     = p.input :title, placeholder: "Title", label: false
     #image.post_image{style: "background: url(#{attachment_url(@post, :image, :fit, 408, 250) if @post.image_id?}) no-repeat center; background-size: cover"}
     %hr
-    %h5 Categories
-    = @post.categories.map(&:name).join(", ")
+    -if @post.categories.present?
+      %h5 Categories
+      = @post.categories.map(&:name).join(", ")
     %hr
     =link_to "Manage Categories and Images", "javascript:void(0)", id: "options"
     %hr
