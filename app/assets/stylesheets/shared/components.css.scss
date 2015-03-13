@@ -4,7 +4,7 @@ body {
 
 p {
   @include media($large-screen) {
-    line-height: 2;
+    line-height: 1.5;
   }
 }
 
@@ -22,6 +22,22 @@ hr {
     top: 50%;
     left: 45%;
     color: white;
+  }
+}
+
+.small {
+  display: block;
+
+  @include media($large-screen) {
+    display: none;
+  }
+}
+
+.no-small {
+  display: none;
+
+  @include media($large-screen) {
+    display: block;
   }
 }
 

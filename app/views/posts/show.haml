@@ -1,10 +1,33 @@
 .container
   = render "nav"
   .main
+    :erb
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '714905915289688',
+            xfbml      : true,
+            version    : 'v2.2'
+          });
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
     =render partial: "poster", locals: { post: @post }
     .blog.card
       = @post.body.html_safe
-      = attachment_image_tag @theme, :signature_image
+      -if @post.published_at > Date.new(2015/3/1)
+        = attachment_image_tag @theme, :signature_image
+    .index
+      %ul.index_row_wide
+        = render partial: "shared/ad_tile"
+        = render partial: "shared/ad_tile"
     .comment.card
       .comment-header
         %h2 COMMENTS

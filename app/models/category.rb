@@ -15,4 +15,8 @@ class Category < ActiveRecord::Base
   def image
     posts.last.image unless self.posts.empty?
   end
+
+  def generate_link
+    "link_to '#{self.name}', category_path(#{self.id})"
+  end
 end

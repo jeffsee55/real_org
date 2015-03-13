@@ -28,27 +28,27 @@
     %nav{:role => "navigation"}
       -if @menu
         %ul#js-centered-navigation-menu.centered-navigation-menu.show
-          -@menu.menu_items.each do |item|
-            -if item.sub_items.empty?
-              %li.nav-link
-                =link_to item.name, item.link
-            -else
-              %li.nav-link.more
-                =link_to item.name, item.link
-                -if item.sub_items
-                  %ul.submenu
-                    -item.sub_items.each do |sub_item|
-                      -if sub_item.sub_items.empty?
-                        %li
-                          =link_to sub_item.name, ""
-                      -else
-                        %li.more
-                          =link_to sub_item.name, ""
-                          -if sub_item.sub_items
-                            %ul.submenu
-                              -sub_item.sub_items.each do |sub_item|
-                                %li
-                                  =link_to sub_item.name, ""
+          %li.nav-link
+            =link_to "HOME", root_url
+          %li.nav-link
+            =link_to "ABOUT ME", about_path
+          %li.nav-link
+            =link_to "WORK WITH ME", contact_path
+          %li.nav-link.more
+            %a{:href => "javascript:void(0)" }= @menu.slot_1.upcase
+            %ul.submenu
+              -@slot_1.each do |item|
+                %li= eval item.generate_link
+          %li.nav-link.more
+            %a{:href => "javascript:void(0)" }= @menu.slot_2.upcase
+            %ul.submenu
+              -@slot_2.each do |item|
+                %li= eval item.generate_link
+          %li.nav-link.more
+            %a{:href => "javascript:void(0)" }= @menu.slot_3.upcase
+            %ul.submenu
+              -@slot_3.each do |item|
+                %li= eval item.generate_link
           %li.nav-link
             = search_form_for @q, class: "search-bar", url: search_posts_path, html: { method: :post } do |f|
               = f.search_field :title_or_body_cont

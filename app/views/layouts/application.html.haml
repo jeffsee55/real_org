@@ -4,22 +4,24 @@
   %meta{:charset => "utf-8"}/
   %meta{:content => "NOODP", :name => "ROBOTS"}/
   %meta{:content => "initial-scale=1", :name => "viewport"}/
-  %title= title
+  %title= "The Realistic Organizer"
   = stylesheet_link_tag :application, media: "all"
   = render partial: "application/theme"
   = csrf_meta_tags
-  %meta{content: "Post Title", :property => "og:title"}/
-  %meta{content: "http://www.imdb.com/title/tt0117500/", property: "og:url"}/
-  %meta{content: "http://ia.media-imdb.com/images/rock.jpg", property: "og:image"}/
-  %meta{content: "714905915289688", property: "fb:app_id"}/
+  -if @post
+    %meta{content: @post.title, :property => "og:title"}/
+    %meta{content: truncate_html(@post.strip_body_tags), :property => "og:description"}/
+    %meta{content: post_url(@post), property: "og:url"}/
+    %meta{content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{@post.shared_image.id}", property: "og:image"}/
+    %meta{content: "714905915289688", property: "fb:app_id"}/
 %body{ class: body_class}
-= render "flashes"
-.header-bg
-= yield
--#.card
--#%script{:async => "", :src => "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
--#/ RealisticOranizerFooterAd
--#%ins.adsbygoogle{"data-ad-client" => "ca-pub-7600043945930923", "data-ad-format" => "auto", "data-ad-slot" => "8976265896", :style => "display:block"}
--#:javascript
-  -#(adsbygoogle = window.adsbygoogle || []).push({});
-= render "javascript"
+  = render "flashes"
+  .header-bg
+  = yield
+  -#.card
+  -#%script{:async => "", :src => "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
+  -#/ RealisticOranizerFooterAd
+  -#%ins.adsbygoogle{"data-ad-client" => "ca-pub-7600043945930923", "data-ad-format" => "auto", "data-ad-slot" => "8976265896", :style => "display:block"}
+  -#:javascript
+    -#(adsbygoogle = window.adsbygoogle || []).push({});
+  = render "javascript"

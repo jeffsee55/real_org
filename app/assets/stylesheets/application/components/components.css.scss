@@ -115,6 +115,12 @@ input[type="submit"] {
       color: darken($pinterest, 15);
     }
   }
+  .google-plus {
+    color: $google_plus;
+    &:hover {
+      color: darken($google_plus, 15);
+    }
+  }
 }
 
 .comment {

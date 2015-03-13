@@ -3,6 +3,7 @@
     @include span-columns(4);
     padding: 0 1em;
   }
+
   text-align: center;
   .welcome-picture {
     height: 150px;
@@ -12,9 +13,11 @@
     border-radius: 50%;
   }
   .body {
+    h3 {
+      text-align: center;
+    }
     margin-top: 1em;
     text-align: justify;
-    padding-bottom: 80px;
     @include media($large-screen) {
       position: relative;
       .btn {
@@ -24,4 +27,8 @@
       }
     }
   }
+}
+
+#work-with-me {
+  @include omega()
 }

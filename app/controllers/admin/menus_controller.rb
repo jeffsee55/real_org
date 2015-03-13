@@ -1,12 +1,11 @@
 class Admin::MenusController < AdminController
 
-  def new
-    @menu = Menu.create
-    redirect_to admin_menu_path(@menu)
+  def show
   end
 
-  def create
-    @menu = Menu.create
+  def update
+    @menu.update(menu_params)
+    redirect_to :back, notice: "Menu options updated."
   end
 
   def edit
@@ -15,19 +14,13 @@ class Admin::MenusController < AdminController
   def index
   end
 
-  def update
-  end
-
   def destroy
-  end
-
-  def show
-    @menu_item = MenuItem.new
   end
 
   private
 
     def menu_params
+      params.require(:menu).permit(:slot_1, :slot_2, :slot_3)
     end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311054348) do
+ActiveRecord::Schema.define(version: 20150313040252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150311054348) do
     t.datetime "updated_at"
     t.string   "tag_color",   default: "#477DCA"
     t.string   "slug"
+    t.integer  "menu_slot"
   end
 
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
@@ -87,18 +88,12 @@ ActiveRecord::Schema.define(version: 20150311054348) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
-  create_table "menu_items", force: true do |t|
-    t.integer  "menu_id"
-    t.string   "name"
-    t.string   "link"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "parent_id"
-  end
-
   create_table "menus", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slot_1"
+    t.string   "slot_2"
+    t.string   "slot_3"
   end
 
   create_table "message_options", force: true do |t|
@@ -145,12 +140,6 @@ ActiveRecord::Schema.define(version: 20150311054348) do
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
-
-  create_table "stylesheets", force: true do |t|
-    t.text     "variables"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "subscribers", force: true do |t|
     t.string   "email"

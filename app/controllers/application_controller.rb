@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
 
   def set_menu
     @menu ||= Menu.last
+    @slot_1 = Category.where(menu_slot: 1)
+    @slot_2 = Category.where(menu_slot: 2)
+    @slot_3 = Category.where(menu_slot: 3)
   end
 
   def set_theme
