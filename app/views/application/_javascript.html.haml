@@ -11,8 +11,8 @@
 
 :coffee
   $ ->
-    $(".facebook").click ->
+    $(".facebook").click -> 
       FB.ui {
       method: 'share'
-      href: "#{post_url(@post)}"
+      href: $(@).attr('id')
       }, (response) ->

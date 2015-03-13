@@ -12,6 +12,6 @@
     =link_to ("http://pinterest.com/pin/create/button/?url=#{request.original_url}&media=https://s3-us-west-2.amazonaws.com/real-org-images/store/#{@post.shared_image.id}?fit=crop&fm=jpg&h=1200&w=750&description=#{@post.title}"), target: "_blank" do
       .fa.fa-pinterest-square.fa-3x.pinterest
     =link_to "javascript:void(0)", target: "_blank" do
-      .fa.fa-3x.fa-facebook-square.facebook.facebook-link
+      .fa.fa-3x.fa-facebook-square.facebook.facebook-link{ id: "#{ post_url(@post) }" }
     =link_to "https://plus.google.com/share?url=#{post_url(@post)}", target: "_blank" do
       .fa.fa-3x.fa-google-plus-square.google-plus
