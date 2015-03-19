@@ -21,13 +21,13 @@
       </script>
     =render partial: "poster", locals: { post: @post }
     .blog.card
-      = @post.body.html_safe
+      = sanitize @post.body
       -if @post.published_at > Date.new(2015/3/1)
         = attachment_image_tag @theme, :signature_image
     .index
       %ul.index_row_wide
-        = render partial: "shared/ad_tile"
-        = render partial: "shared/ad_tile"
+        = render partial: "shared/ad_tile_footer_1"
+        = render partial: "shared/ad_tile_footer_2"
     .comment.card
       .comment-header
         %h2 COMMENTS
@@ -37,7 +37,7 @@
           ### * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * ###
           # Required - Replace example with your forum shortname
           disqus_shortname = "therealisticorganizer"
-          disqus_identifier = '/organized-weekly-dinners/';
+          disqus_identifier = '/organized-weekly-dinners/'
 
           ### * * DON'T EDIT BELOW THIS LINE * * ###
           do ->

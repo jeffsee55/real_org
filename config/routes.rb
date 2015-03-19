@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       end
       member do
         patch 'publish' => 'posts#update'
+        patch 'auto_save' => 'posts#update'
       end
     end
     resources :users
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
     resources :themes, except: [:index]
     resources :menus
     get "contact", to: "pages#contact"
+    patch 'auto_update_post' => 'posts#auto_update'
     post "create_image", to: "images#create"
     post "destroy_image", to: "images#destroy"
   end

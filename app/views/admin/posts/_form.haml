@@ -40,3 +40,75 @@
     .submit-actions
       = p.submit "Save as Draft", class: "button"
       = p.submit "Publish", class: "button btn-primary"
+
+=content_for :javascript do
+  -@save_url = Rails.application.routes.url_helpers.admin_auto_update_post_path
+  -@request_type = "PATCH"
+  :javascript
+      $("#post_body").editable({
+        inlineMode: false,
+        fontList: {
+          "Lato,Arial,Helvetica": "Normal",
+          "Pompiere": "Pompiere",
+          "Quicksand": "Quicksand",
+          "Shadows Into Light": "Shadows Into Light",
+          "Josefin Slab": "Josefin Slab",
+          "Sacramento": "Sacramento"
+        },
+        imageUploadURL: "#{ Rails.application.routes.url_helpers.admin_create_image_path }",
+        imageDeleteURL: "#{ Rails.application.routes.url_helpers.admin_destroy_image_path }",
+        defaultImageWidth: 600,
+        spellcheck: true,
+        autoSave: true,
+        autosaveInterval: 2000,
+        saveURL: "#{ @save_url }",
+        saveParams: {post: { #{ "id:#{@post.id}" if @post.id } } },
+        saveRequestType: "#{ @request_type }",
+        buttons: ["bold", "italic", "underline", "strikeThrough", "fontFamily", "fontSize", "color", "formatBlock", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", "selectAll", "createLink", "insertImage", "insertVideo", "table", "undo", "redo", "html", "save", "insertHorizontalRule"],
+        imageButtons: ['floatImageLeft', 'floatImageNone', 'floatImageRight', 'linkImage', 'info', 'removeImage'], 
+        customImageButtons: {
+          info: {
+            title: 'Image source',
+            icon: {
+              type: 'font',
+              value: 'fa fa-info'
+            },
+            callback: function ($img){
+              alert ($img.attr('src'));
+            },
+            refresh: function ($img) {
+              console.log ('Refresh image button');
+              console.log ($img);
+            }
+          }
+        }
+      }).on("editable.imageError", function(e, editor, error) {
+        if (error.code === 0) {
+          return console.log(error);
+        } else if (error.code === 1) {
+          return console.log(error);
+        } else if (error.code === 2) {
+          return console.log(error);
+        } else if (error.code === 3) {
+          return console.log(error);
+        } else if (error.code === 4) {
+          return console.log(error);
+        } else if (error.code === 5) {
+          return console.log(error);
+        } else if (error.code === 6) {
+          return console.log(error);
+        }
+      }).on("editable.afterRemoveImage", function(e, editor, $img) {
+        editor.options.imageDeleteParams = {
+          src: $img.attr('src')
+        };
+        return editor.deleteImage($img);
+      }).on('editable.imageDeleteSuccess', function(e, editor, data) {
+        return console.log(data);
+      }).on('editable.imageDeleteError', function(e, editor, error) {
+        return console.log(error);
+      });
+    $("#post_body").editable("option", "autosave", true);
+    var customImageButtons = $("#post_body").editable("option", "customImageButtons");
+    var imageButtons = $("#post_body").editable("option", "imageButtons");
+

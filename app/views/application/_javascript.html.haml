@@ -11,8 +11,10 @@
 
 :coffee
   $ ->
-    $(".facebook").click -> 
+    $(".facebook").click ->
       FB.ui {
       method: 'share'
       href: $(@).attr('id')
       }, (response) ->
+
+

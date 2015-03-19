@@ -1,9 +1,12 @@
 class Admin::PostsController < AdminController
   layout 'post', only: [:new, :edit]
   before_action :set_post, only: [:edit, :update, :updatish, :show, :destroy]
+  skip_before_filter :verify_authenticity_token, only: [:auto_save, :auto_update]
+
 
   def new
-    @post = Post.new
+    # Create the post so that autosave has an id to save to
+    @post = Post.create(title: "Draft", body: "")
     @categories = Category.all
   end
 
@@ -81,6 +84,12 @@ class Admin::PostsController < AdminController
       format.json { head :no_content }
       format.js   { render :layout => false }
     end
+  end
+
+  def auto_update
+    post = Post.find(params[:post][:id])
+    post.update(body: params[:body])
+    render nothing: true, notice: "Post autosaved"
   end
 
   private
