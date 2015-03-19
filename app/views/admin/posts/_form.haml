@@ -58,14 +58,15 @@
         imageUploadURL: "#{ Rails.application.routes.url_helpers.admin_create_image_path }",
         imageDeleteURL: "#{ Rails.application.routes.url_helpers.admin_destroy_image_path }",
         defaultImageWidth: 600,
+        minHeight: 400,
         spellcheck: true,
         autoSave: true,
         autosaveInterval: 2000,
         saveURL: "#{ @save_url }",
-        saveParams: {post: { #{ "id:#{@post.id}" if @post.id } } },
+        saveParams: { #{ "id:#{@post.id}" if @post.id } },
         saveRequestType: "#{ @request_type }",
         buttons: ["bold", "italic", "underline", "strikeThrough", "fontFamily", "fontSize", "color", "formatBlock", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", "selectAll", "createLink", "insertImage", "insertVideo", "table", "undo", "redo", "html", "save", "insertHorizontalRule"],
-        imageButtons: ['floatImageLeft', 'floatImageNone', 'floatImageRight', 'linkImage', 'info', 'removeImage'], 
+        imageButtons: ['floatImageLeft', 'floatImageNone', 'floatImageRight', 'linkImage', 'info', 'removeImage'],
         customImageButtons: {
           info: {
             title: 'Image source',

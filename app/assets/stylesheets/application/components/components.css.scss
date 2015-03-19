@@ -25,15 +25,6 @@ input {
   line-height: 2em;
 }
 
-#flash {
-  background: $brick;
-  & > div {
-    padding: 10px 0;
-    color: white;
-    @include outer-container;
-  }
-}
-
 hr {
   margin: 1em 0;
 }

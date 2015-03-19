@@ -6,7 +6,8 @@ class Admin::PostsController < AdminController
 
   def new
     # Create the post so that autosave has an id to save to
-    @post = Post.create(title: "Draft", body: "")
+    @post = Post.new
+    @post.body = session[:auto_saved_post] if session[:auto_saved_post]
     @categories = Category.all
   end
 
@@ -22,11 +23,12 @@ class Admin::PostsController < AdminController
           )
         end
       end
+      session[:auto_saved_post] = nil
       @post.publish! if publishing?
       @post.save_as_draft! if drafting?
       redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully created"
     else
-      redirect_to :back, notice: "Post could not be saved"
+      redirect_to :back, alert: "Post could not be saved"
     end
   end
 
@@ -39,6 +41,10 @@ class Admin::PostsController < AdminController
       @posts = posts.regular_post
     else
       @posts = Post.regular_post.page params[:page]
+    end
+    if session[:auto_saved_post]
+      @session_post = Post.new(title: "Autosaved Draft", body: session[:auto_saved_post])
+      @posts.unshift(@session_post)
     end
   end
 
@@ -72,6 +78,7 @@ class Admin::PostsController < AdminController
           )
         end
       end
+      session[:auto_saved_post] = nil
       redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully updated"
     end
   end
@@ -80,16 +87,28 @@ class Admin::PostsController < AdminController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_posts_path, notice: "#{@post.title} was successfully deleted" }
+      format.html { redirect_to admin_posts_path, alert: "#{@post.title} was successfully deleted" }
       format.json { head :no_content }
       format.js   { render :layout => false }
     end
   end
 
   def auto_update
-    post = Post.find(params[:post][:id])
-    post.update(body: params[:body])
-    render nothing: true, notice: "Post autosaved"
+    if params[:id]
+      post = Post.find(params[:id])
+      post.update(body: params[:body])
+    else
+      # If there is no id save the body to the session
+      puts "Autosaved"
+      session[:auto_saved_post] = params[:body]
+      puts session[:auto_saved_post]
+    end
+    render nothing: true, status: 200
+  end
+
+  def clear_auto_saved_post
+    session[:auto_saved_post] = nil
+    redirect_to :back, alert: "Autosaved Draft deleted"
   end
 
   private

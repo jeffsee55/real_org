@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :menus
     get "contact", to: "pages#contact"
     patch 'auto_update_post' => 'posts#auto_update'
+    patch 'clear_auto_saved_post' => 'posts#clear_auto_saved_post'
     post "create_image", to: "images#create"
     post "destroy_image", to: "images#destroy"
   end

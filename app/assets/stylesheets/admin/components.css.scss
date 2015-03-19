@@ -2,15 +2,6 @@
   @include clearfix();
 }
 
-#flash {
-  background: $brick;
-  & > div {
-    padding: 10px 0;
-    color: white;
-    @include outer-container;
-  }
-}
-
 #image {
   height: 200px;
   width: 100%;
