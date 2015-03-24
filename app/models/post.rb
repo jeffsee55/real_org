@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  require "uri"
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -35,6 +36,10 @@ class Post < ActiveRecord::Base
 
   def short_title
     title.truncate(100)
+  end
+
+  def encoded_title
+    URI.encode self.title
   end
 
   def publish!

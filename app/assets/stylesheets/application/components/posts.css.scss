@@ -14,6 +14,21 @@
     margin: 1em 0;
     height: auto !important;
   }
+  .fr-tag {
+    position: relative;
+
+    &:hover {
+      .pinterest-tag {
+        display: block;
+      }
+    }
+  }
+  .pinterest-tag {
+    position: absolute;
+    display: none;
+    left: 1em;
+    top: 2em;
+  }
 }
 
 .pagination {

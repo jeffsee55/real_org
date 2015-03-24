@@ -54,3 +54,13 @@
     =render partial: "archives", locals: { p: @post }
 = render "social_card"
 = render "footer"
+
+=content_for :javascript do
+  :javascript
+    $('[title*=\'Pin\']').each(function() {
+      var array, source, url;
+      array = $(this).attr('src').split('/');
+      source = array[array.length - 2];
+      url = 'http://pinterest.com/pin/create/button/?url=#{request.original_url}&media=https://s3-us-west-2.amazonaws.com/real-org-images/store/' + source + '?fit=crop&fm=jpg&h=1200&w=750&description=#{@post.encoded_title}';
+      return $(this).parent('.fr-tag').append('<a class=\'pinterest-tag\' target=\'_blank\' href=\'' + url + '\'><i class=\'fa fa-pinterest-square pinterest fa-3x\'></i></a>');
+    });

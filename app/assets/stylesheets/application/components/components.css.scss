@@ -21,6 +21,7 @@ body {
   width: 100%;
 }
 
+
 input {
   line-height: 2em;
 }
@@ -94,23 +95,24 @@ input[type="submit"] {
       color: $theme-hover-accent-color;
     }
   }
-  .facebook {
-    color: $facebook;
-    &:hover {
-      color: darken($facebook, 15);
-    }
+}
+
+.facebook {
+  color: $facebook;
+  &:hover {
+    color: darken($facebook, 15);
   }
-  .pinterest {
-    color: $pinterest;
-    &:hover {
-      color: darken($pinterest, 15);
-    }
+}
+.pinterest {
+  color: $pinterest;
+  &:hover {
+    color: darken($pinterest, 15);
   }
-  .google-plus {
-    color: $google_plus;
-    &:hover {
-      color: darken($google_plus, 15);
-    }
+}
+.google-plus {
+  color: $google_plus;
+  &:hover {
+    color: darken($google_plus, 15);
   }
 }
 

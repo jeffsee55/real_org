@@ -7,3 +7,4 @@ $ ->
       $(".social_card").show('slide', 300)
     else
       $(".social_card").hide('slide', 300)
+
