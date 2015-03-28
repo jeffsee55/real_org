@@ -21,7 +21,7 @@
       </script>
     =render partial: "poster", locals: { post: @post }
     .blog.card
-      = sanitize @post.body
+      =@post.body.html_safe
       -if @post.published_at > Date.new(2015/3/1)
         = attachment_image_tag @theme, :signature_image
     .index
