@@ -2,6 +2,8 @@ class Category < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  attachment :image
+
   has_many :post_categories
   has_many :posts, through: :post_categories
 
@@ -12,7 +14,7 @@ class Category < ActiveRecord::Base
     name.gsub(/%20/, " ")
   end
 
-  def image
+  def post_image
     posts.last.image unless self.posts.empty?
   end
 

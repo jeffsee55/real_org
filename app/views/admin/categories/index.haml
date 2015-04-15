@@ -2,15 +2,18 @@
 .body
   .index
     - @categories.each do |c|
-      .card{style: "background: #{c.tag_color}"}
+      .card
         =link_to edit_admin_category_path(c), style: "color: white;" do
-          -if c.image
+          -if c.image_id?
+            .image{style: "background: url('#{attachment_url(c, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
+          -elsif c.post_image
             .image{style: "background: url('#{attachment_url(c.posts.last, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
           -else
-            .image
+            .image{style: "background: url('http://placehold.it/200x200&text=No%20Image') no-repeat center; background-size: cover"}
           .content
             .title
               %strong=c.nice_name
+            %hr.thick{style: "border-color: #{c.tag_color}"}
             = "#{c.posts.count} posts"
         %ul.action
           %li

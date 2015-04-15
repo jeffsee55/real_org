@@ -12,6 +12,10 @@ hr {
   margin: 1em 0;
 }
 
+.clear {
+  @include clearfix();
+}
+
 #flash {
 
   & > div {

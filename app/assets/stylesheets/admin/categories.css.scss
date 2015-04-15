@@ -1,3 +1,18 @@
 .category-form {
   @include clearfix();
 }
+
+.category_remove_image {
+  padding: 0.2em 0.5em;
+}
+
+.admin-categories-index {
+
+  div.card {
+
+    .content {
+      color: $medium-gray;
+      min-height: 0;
+    }
+  }
+}

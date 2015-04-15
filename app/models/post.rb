@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   attachment :pinterest_image
   is_impressionable :counter_cache => true
 
+  validates :title, presence: true
+
   default_scope -> { order('created_at DESC') }
   scope :site_post, -> { where(site_post: true) }
   scope :regular_post, -> { where(site_post: false) }

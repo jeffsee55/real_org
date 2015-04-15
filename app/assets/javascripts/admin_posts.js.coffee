@@ -10,8 +10,8 @@ $ ->
     console.log "Source: #{source}"
   $(document).on "upload:start", "form", (e) ->
     $(this).find("input[type=submit]").attr "disabled", true
-  $(document).on "upload:progress", "form", (e) ->
     image_placeholder.html $("<div class='image-loading'><i class='fa fa-circle-o-notch fa-spin fa-3x'></i></div>")
+  $(document).on "upload:progress", "form", (e) ->
   $(document).on "upload:success", "form", (e) ->
     $(@).find("input[type=submit]").removeAttr "disabled" unless $(@).find("input.uploading").length
     image_id = JSON.parse(source.val()).id

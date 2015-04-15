@@ -1,6 +1,6 @@
 .post {
   @include clearfix();
-  height: 754px;
+  height: 100vh;
   #post_body {
     width: 100%;
   }
@@ -67,6 +67,18 @@
   }
   .manage-categories {
     padding-top: 2em;
+
+    .categories {
+      @include clearfix();
+
+      li {
+        @include span-columns(3);
+
+        &:nth-child(4n) {
+          @include omega();
+        }
+      }
+    }
   }
   .manage-images {
     @include clearfix();

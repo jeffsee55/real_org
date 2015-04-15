@@ -50,7 +50,7 @@ class Admin::CategoriesController < AdminController
   end
 
   def category_params
-    params.require(:category).permit(:name, :menu_slot, :tag_color)
+    params.require(:category).permit(:name, :menu_slot, :tag_color, :image, :remove_image)
   end
 
 end

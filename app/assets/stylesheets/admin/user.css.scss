@@ -1,4 +1,8 @@
+.user_remove_image, .image_upload {
+  padding: 0.5em 0.5em 0em;
+}
+
 .user_form {
   @include span-columns(8);
-  padding: 1em;
+  padding: 0em 1em;
 }

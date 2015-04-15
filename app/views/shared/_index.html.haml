@@ -1,3 +1,4 @@
 %ul.index_row
-  - cat.posts.limit(limit).each do |post|
-    = render partial: "shared/tile", locals: { p: post, cat: cat }
+  -if cat.posts
+    - cat.posts.published.limit(limit).each do |post|
+      = render partial: "shared/tile", locals: { p: post, cat: cat }

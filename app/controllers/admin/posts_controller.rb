@@ -28,7 +28,8 @@ class Admin::PostsController < AdminController
       @post.save_as_draft! if drafting?
       redirect_to admin_post_path(@post), notice: "#{@post.title} was susccessfully created"
     else
-      redirect_to :back, alert: "Post could not be saved"
+
+      redirect_to new_admin_post_path,  alert: "Post could not be saved"
     end
   end
 

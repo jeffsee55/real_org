@@ -9,34 +9,45 @@
     .manage-images
       %div
         %h4 Poster Image
-        #image.post_image{style: "background: url(#{attachment_url(@post, :image, :fit, 408, 250) if @post.image_id?}) no-repeat center; background-size: cover"}
-        = p.input :remove_image, as: :boolean
-        = p.attachment_field :image, direct: true, class: "image_upload"
+        -if @post.image_id?
+          #image.post_image{style: "background: url(#{ attachment_url(@post, :image, :fit, 408, 250) }) no-repeat center; background-size: cover"}
+        -else
+          #image.post_image{style: "background: url('http://placehold.it/408x250&text=No%20Image') no-repeat center; background-size: cover"}
+        = p.input :remove_image, as: :boolean if @post.image_id?
+        = p.attachment_field :image, direct: true, presigned: true, class: "image_upload"
       %div
         %h4 Pinterest Image
-        #image.pinterest_image{style: "background: url(#{attachment_url(@post, :pinterest_image, :fit, 408, 250) if @post.pinterest_image_id?}) no-repeat center; background-size: cover"}
+        -if @post.pinterest_image_id?
+          #image.pinterest_image{style: "background: url(#{ attachment_url(@post, :pinterest_image, :fit, 408, 250) }) no-repeat center; background-size: cover"}
+        -else
+          #image.pinterest_image{style: "background: url('http://placehold.it/408x250&text=No%20Image')"}
         = p.input :remove_pinterest_image, as: :boolean if @post.pinterest_image_id?
-        = p.attachment_field :pinterest_image, direct: true, class: "image_upload"
+        = p.attachment_field :pinterest_image, direct: true, presigned: true, class: "image_upload"
     .manage-categories
       %h4 Categories
+      %hr.thick
       .categories
         - @categories.each do |cat|
-          %span
-            -if @post.categories.include?(cat)
-              = check_box_tag 'category_ids[]', cat.id, input_html: { checked: true }
-            -else
-              = check_box_tag 'category_ids[]', cat.id
-            = cat.nice_name
+          %ul
+            %li
+              -if @post.categories.include?(cat)
+                = check_box_tag 'category_ids[]', cat.id, input_html: { checked: true }
+              -else
+                = check_box_tag 'category_ids[]', cat.id
+              = cat.nice_name
   .toolbar
     = p.input :title, placeholder: "Title", label: false
-    #image.post_image{style: "background: url(#{attachment_url(@post, :image, :fit, 408, 250) if @post.image_id?}) no-repeat center; background-size: cover"}
-    %hr
+    %hr.thick
+    -if @post.image_id?
+      #image.post_image{style: "background: url(#{ attachment_url(@post, :image, :fit, 408, 250) }) no-repeat center; background-size: cover"}
+    -else
+      #image.post_image{style: "background: url('http://placehold.it/408x250&text=No%20Image') no-repeat center; background-size: cover"}
     -if @post.categories.present?
       %h5 Categories
       = @post.categories.map(&:name).join(", ")
-    %hr
-    =link_to "Manage Categories and Images", "javascript:void(0)", id: "options"
-    %hr
+    %hr.thick
+    =link_to "Categories and Images", "javascript:void(0)", id: "options", class: "btn btn-primary"
+    %hr.thick
     .submit-actions
       = p.submit "Save as Draft", class: "button"
       = p.submit "Publish", class: "button btn-primary"
@@ -45,44 +56,27 @@
   -@save_url = Rails.application.routes.url_helpers.admin_auto_update_post_path
   -@request_type = "PATCH"
   :javascript
-      $("#post_body").editable({
-        inlineMode: false,
-        fontList: {
-          "Lato,Arial,Helvetica": "Normal",
-          "Pompiere": "Pompiere",
-          "Quicksand": "Quicksand",
-          "Shadows Into Light": "Shadows Into Light",
-          "Josefin Slab": "Josefin Slab",
-          "Sacramento": "Sacramento"
-        },
-        imageUploadURL: "#{ Rails.application.routes.url_helpers.admin_create_image_path }",
-        imageDeleteURL: "#{ Rails.application.routes.url_helpers.admin_destroy_image_path }",
-        defaultImageWidth: 600,
-        minHeight: 400,
-        spellcheck: true,
-        autoSave: true,
-        autosaveInterval: 2000,
-        saveURL: "#{ @save_url }",
-        saveParams: { #{ "id:#{@post.id}" if @post.id } },
-        saveRequestType: "#{ @request_type }",
-        buttons: ["bold", "italic", "underline", "strikeThrough", "fontFamily", "fontSize", "color", "formatBlock", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", "selectAll", "createLink", "insertImage", "insertVideo", "table", "undo", "redo", "html", "save", "insertHorizontalRule"],
-        customImageButtons: {
-          info: {
-            title: 'Image source',
-            icon: {
-              type: 'font',
-              value: 'fa fa-info'
-            },
-            callback: function ($img){
-              alert ($img.attr('src'));
-            },
-            refresh: function ($img) {
-              console.log ('Refresh image button');
-              console.log ($img);
-            }
-          }
-        },
-        imageButtons: ['floatImageLeft', 'floatImageNone', 'floatImageRight', 'linkImage', 'info', 'removeImage']
+    $("#post_body").editable({
+      inlineMode: false,
+      fontList: {
+        "Lato,Arial,Helvetica": "Normal",
+        "Pompiere": "Pompiere",
+        "Quicksand": "Quicksand",
+        "Shadows Into Light": "Shadows Into Light",
+        "Josefin Slab": "Josefin Slab",
+        "Sacramento": "Sacramento"
+      },
+      imageUploadURL: "#{ Rails.application.routes.url_helpers.admin_create_image_path }",
+      imageDeleteURL: "#{ Rails.application.routes.url_helpers.admin_destroy_image_path }",
+      defaultImageWidth: 600,
+      height: 500,
+      spellcheck: true,
+      autoSave: true,
+      autosaveInterval: 2000,
+      saveURL: "#{ @save_url }",
+      saveParams: { #{ "id:#{@post.id}" if @post.id } },
+      saveRequestType: "#{ @request_type }",
+      buttons: ["bold", "italic", "underline", "strikeThrough", "fontFamily", "fontSize", "color", "formatBlock", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", "selectAll", "createLink", "insertImage", "insertVideo", "table", "undo", "redo", "html", "insertHorizontalRule"],
       }).on("editable.imageError", function(e, editor, error) {
         if (error.code === 0) {
           return console.log(error);
