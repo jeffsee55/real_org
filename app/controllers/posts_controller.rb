@@ -2,9 +2,9 @@ class PostsController < ApplicationController
   before_filter :verify_and_set_post, only: :show
 
   def show
+    @post = Post.friendly.find(params[:id])
     @categories = Category.regular
     @subscriber = Subscriber.new
-    @posts = Post.published.group_by { |post| post.published_at.beginning_of_month }
 
     impressionist(@post)
     @post.impressionist_count(filter: :session_hash)
@@ -14,8 +14,15 @@ class PostsController < ApplicationController
     if params[:posts]
       posts = params[:posts]
       @posts = posts.published_non_projects.page params[:page]
+    elsif params[:month]
+      @posts = Post.published.group_by { |p| p.published_at.strftime("%B") }[params[:month]]
     else
       @posts = Post.published_non_projects.page params[:page]
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

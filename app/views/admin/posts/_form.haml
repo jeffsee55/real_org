@@ -42,9 +42,6 @@
       #image.post_image{style: "background: url(#{ attachment_url(@post, :image, :fit, 408, 250) }) no-repeat center; background-size: cover"}
     -else
       #image.post_image{style: "background: url('http://placehold.it/408x250&text=No%20Image') no-repeat center; background-size: cover"}
-    -if @post.categories.present?
-      %h5 Categories
-      = @post.categories.map(&:name).join(", ")
     %hr.thick
     =link_to "Categories and Images", "javascript:void(0)", id: "options", class: "btn btn-primary"
     %hr.thick

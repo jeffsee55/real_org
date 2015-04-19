@@ -27,8 +27,7 @@ class Admin::CategoriesController < AdminController
   end
 
   def index
-    @categories = Category.alphabetical
-    @category = Category.new
+    @categories = Category.alphabetical.includes(:posts)
   end
 
   def edit

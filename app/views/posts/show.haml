@@ -34,7 +34,6 @@
       %hr
       #disqus_thread
         :coffee
-          ### * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * ###
           # Required - Replace example with your forum shortname
           disqus_shortname = "therealisticorganizer"
           disqus_identifier = '/organized-weekly-dinners/'
@@ -51,7 +50,7 @@
   .sidebar
     =render partial: "sidebar", locals: { p: @post }
     =render partial: "related_block", locals: { p: @post }
-    =render partial: "archives", locals: { p: @post }
+    =render partial: "archives", locals: { posts: @posts }
 = render "social_card"
 = render "footer"
 

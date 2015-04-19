@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
 
   def show
     @q = Post.ransack(params[:q])
-    @category = Category.includes(:posts).friendly.find(params[:id])
+    @category = Category.friendly.find(params[:id])
   end
 
   def index

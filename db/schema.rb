@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415001110) do
+ActiveRecord::Schema.define(version: 20150419212440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150415001110) do
     t.string   "slug"
     t.integer  "menu_slot"
     t.string   "image_id"
+    t.integer  "posts_count", default: 0
   end
 
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree

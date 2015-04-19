@@ -1,1 +1,1 @@
-$("<%= j(render partial: "archives_list", locals: { posts: @posts }) %>").appendTo(".archive_list")
+$("<%= j(render partial: "archives_list", locals: { posts: @posts }) %>").appendTo("#<%= Date::MONTHNAMES[@posts.first.published_at.month] %>")

@@ -47,6 +47,8 @@ gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'friendly_id', '~> 5.1.0'
 gem 'sitemap_generator'
 
+gem 'rack-mini-profiler'
+
 gem "bundler-audit"
 
 group :development do
@@ -66,6 +68,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.0.0"
+  gem "bullet"
 end
 
 group :test do

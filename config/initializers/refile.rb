@@ -8,4 +8,4 @@ aws = {
 
 Refile.cache = Refile::Backend::S3.new(max_size: 2.megabytes, prefix: "cache", **aws)
 Refile.store = Refile::Backend::S3.new(prefix: "store", **aws)
-Refile.host = "//d86br80dxqfuj.cloudfront.net" if Rails.env.production?
+Refile.host = "//d86br80dxqfuj.cloudfront.net"

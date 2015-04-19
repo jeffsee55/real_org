@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   has_many :post_categories
-  has_many :categories, through: :post_categories
+  has_many :categories, through: :post_categories, counter_cache: true
   attachment :image
   attachment :pinterest_image
   is_impressionable :counter_cache => true

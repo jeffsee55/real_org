@@ -11,7 +11,6 @@ class PagesController < ApplicationController
     @post = Post.find_by_title("About Me")
     @subscriber = Subscriber.new
     @categories = Category.all
-    @posts = Post.published.group_by { |post| post.published_at.beginning_of_month }
   end
 
   def contact
