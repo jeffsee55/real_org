@@ -2,6 +2,13 @@
   @include clearfix();
 }
 
+.tag-color {
+  @include span-columns(4);
+}
+.menu-slot {
+  @include span-columns(4);
+}
+
 .category_remove_image {
   padding: 0.2em 0.5em;
 }

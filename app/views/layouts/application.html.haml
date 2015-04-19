@@ -8,6 +8,7 @@
   = stylesheet_link_tag :application, media: "all"
   = render partial: "application/theme"
   = csrf_meta_tags
+  %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", :rel => "stylesheet"}
   -if @post
     %meta{content: @post.title, :property => "og:title"}/
     %meta{content: truncate_html(@post.strip_body_tags), :property => "og:description"}/

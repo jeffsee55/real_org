@@ -1,20 +1,21 @@
 .category-form
-= simple_form_for [:admin, @category] do |f|
-  .clearfix
-    .card
-      -if @category.image_id?
-        #image.card_image{style: "background: url(#{ attachment_url(@category, :image, :fit, 300, 300) }) no-repeat center; background-size: cover"}
-      -else
-        #image.card_image{style: "background: url('http://placehold.it/300x300&text=No%20Image) no-repeat center; background-size: cover"}
-      = f.input :remove_image, as: :boolean, label: "Remove Image" if @category.image_id?
-      = f.attachment_field :image, direct: true, presigned: true, class: "image_upload"
-    .post_info
-      = f.input :name
-      = f.input :tag_color
-      = f.input :menu_slot, collection: Menu.last.slots.each_with_index.map { |slot, index| [slot, (index + 1) ]}
-      = f.submit "Update", class: "button btn-inline", style: "margin-right: 10px;"
--if @category.id
-  .clear
-    = button_to "Delete Category", admin_category_path(@category), class: "clear button btn-inline btn-warning", method: :delete, data: { confirm: "Are you sure" }
-  %hr.thick
+  = simple_form_for [:admin, @category] do |f|
+    .clearfix
+      .card
+        -if @category.image_id?
+          #image.card_image{style: "background: url(#{ attachment_url(@category, :image, :fit, 300, 300) }) no-repeat center; background-size: cover"}
+        -else
+          #image.card_image{style: "background: url('http://placehold.it/300x300&text=No%20Image) no-repeat center; background-size: cover"}
+        = f.input :remove_image, as: :boolean, label: "Remove Image" if @category.image_id?
+        = f.attachment_field :image, direct: true, presigned: true, class: "image_upload"
+      .post_info
+        = f.input :name
+        .clear
+          .tag-color= f.input :tag_color
+          .menu-slot= f.input :menu_slot, collection: Menu.last.slots.each_with_index.map { |slot, index| [slot, (index + 1) ]}
+        = f.submit "Update", class: "button btn-inline", style: "margin-right: 10px;"
+  -if @category.id
+    .clear
+      = button_to "Delete Category", admin_category_path(@category), class: "clear button btn-inline btn-warning", method: :delete, data: { confirm: "Are you sure" }
+    %hr.thick
 
