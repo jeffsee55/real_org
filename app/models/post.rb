@@ -60,7 +60,7 @@ class Post < ActiveRecord::Base
   end
 
   def check_for_categories
-    if self.categories.empty?
+    if self.categories.empty? && self.site_post == false
       uncategorized = Category.find_by_name("Uncategorized")
       PostCategory.create(post_id: self.id, category_id: uncategorized.id)
     end
