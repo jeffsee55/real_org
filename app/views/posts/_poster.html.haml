@@ -8,9 +8,9 @@
       =link_to "https://plus.google.com/share?url=#{post_url(@post)}", target: "_blank" do
         .fa.fa-3x.fa-google-plus-square.google-plus
     .content
-      - post.categories.each do |category|
-        =link_to category do
-          %span.tag.poster-tag{style: "background: #{category.tag_color}"}= category.nice_name.upcase
       .text
         =link_to @post do
           %h2{style: "color: white"}= @post.title
+      - post.categories.each do |category|
+        =link_to category do
+          %span.tag.poster-tag{style: "background: #{category.tag_color}"}= category.nice_name.upcase

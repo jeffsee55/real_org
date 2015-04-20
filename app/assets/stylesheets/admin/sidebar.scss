@@ -22,11 +22,11 @@
     height: 50px;
     vertical-align: middle;
     cursor: pointer;
-    .toggle_menu_inner {
-      position: relative;
-      top: -6px;
-      color: white;
-      font-size: 40px
+
+    svg {
+      width: 25px;
+      height: 25px;
+      margin: 12.5px;
     }
   }
   .spin {

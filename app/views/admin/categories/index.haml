@@ -6,8 +6,6 @@
         =link_to edit_admin_category_path(c), style: "color: white;" do
           -if c.image_id?
             .image{style: "background: url('#{attachment_url(c, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
-          -elsif c.post_image
-            .image{style: "background: url('#{attachment_url(c.posts.last, :image, :fill, 200, 200)}') no-repeat center; background-size: cover"}
           -else
             .image{style: "background: url('http://placehold.it/200x200&text=No%20Image') no-repeat center; background-size: cover"}
           .content

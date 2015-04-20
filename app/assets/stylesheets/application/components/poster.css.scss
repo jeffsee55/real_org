@@ -32,7 +32,7 @@
     padding: 2em;
     & > .text {
       position: relative;
-      margin-top: 0.5em;
+      margin-bottom: 1em;
       font-size: 1em;
       @include media($large-screen) {
         font-size: 2em
