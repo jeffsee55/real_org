@@ -1,6 +1,6 @@
 $ ->
   $(".archive-month").click ->
-    $(@).find(".archive-list").slideToggle()
+    $(@).find('a').css('disabled', 'disabled')
   $(window).scroll ->
     distance_from_top = ( $(window).scrollTop() )
     if distance_from_top > 200
