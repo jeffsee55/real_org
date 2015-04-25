@@ -83,6 +83,13 @@ div.card {
   }
 }
 
+div.card {
+
+  .inputs {
+    padding: 0 10px;
+  }
+}
+
 .post_info {
   @include span-columns(9);
 
