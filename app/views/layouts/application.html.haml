@@ -15,7 +15,7 @@
     %meta{content: post_url(@post), property: "og:url"}/
     %meta{content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{@post.shared_image.id}", property: "og:image"}/
     %meta{content: "714905915289688", property: "fb:app_id"}/
-%body{ class: body_class}
+%body{class: body_class}
   = render "flashes"
   .header-bg
   = yield
