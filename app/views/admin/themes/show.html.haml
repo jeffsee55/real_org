@@ -19,20 +19,20 @@
         %td= f.input :google_plus, label: false, placeholder: "Google_plus"
     .index
       .card
-        #image.card_image{style: "background: url(#{attachment_url(@theme, :logo_image, :fit, 300, 200) if @theme.logo_image_id?}) no-repeat center; background-size: cover"}
-        .title
-          %strong Logo
-        = f.attachment_field :logo_image, direct: true, class: "image_upload"
+        #image.card_image{style: "background: url(#{attachment_url(@theme, :logo_image, :fit, 300, 300) if @theme.logo_image_id?}) no-repeat center; background-size: cover"}
+        %strong Logo
+        = f.input :remove_logo_image, as: :boolean, label: "Remove Image" if @theme.logo_image_id?
+        = f.attachment_field :logo_image, direct: true, presigned: true, class: "image_upload"
       .card
         #image.card_image{style: "background: url(#{attachment_url(@theme, :signature_image, :fit, 300, 300) if @theme.signature_image_id?}) no-repeat center; background-size: cover"}
-        .title
-          %strong Post Signature
-        = f.attachment_field :signature_image, direct: true
+        %strong Post Signature
+        = f.input :remove_signature_image, as: :boolean, label: "Remove Image" if @theme.signature_image_id?
+        = f.attachment_field :signature_image, direct: true, presigned: true, class: "image_upload"
       .card
         #image.card_image{style: "background: url(#{attachment_url(@theme, :background_image, :fit, 300, 300) if @theme.background_image_id?}) no-repeat center; background-size: cover"}
-        .title
-          %strong Background Image
-        = f.attachment_field :background_image, direct: true
+        %strong Background Image
+        = f.input :remove_background_image, as: :boolean, label: "Remove Image" if @theme.background_image_id?
+        = f.attachment_field :background_image, direct: true, presigned: true, class: "image_upload"
       .card
         .image
           .icon.item.fa.fa-facebook-square.fa-4x{style: "color: #{@theme.icon_color}"}
