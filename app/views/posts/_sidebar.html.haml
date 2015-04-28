@@ -1,9 +1,10 @@
 .welcome.card
-  = image_tag attachment_url(@user, :image, :fill, 300, 300), class: 'welcome-picture'
-  .greeting
-    %span.meet MEET
-    %span.name= @user.first_name.upcase
-    %p= @user.bio
+  =link_to about_path do
+    = image_tag attachment_url(@user, :image, :fill, 300, 300), class: 'welcome-picture'
+    .greeting
+      %span.meet MEET
+      %span.name= @user.first_name.upcase
+      %p= @user.bio
   .call-to-action
   .modal
     %label{:for => "modal-message"}
