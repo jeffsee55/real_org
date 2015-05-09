@@ -1,1 +1,6 @@
-$("<%= j(render partial: "archives_list", locals: { posts: @posts }) %>").appendTo("#<%= Date::MONTHNAMES[@posts.first.published_at.month] %>")
+var month = "#<%= Date::MONTHNAMES[@posts.first.published_at.month] %>"
+if ($(month).parent('li').find('.archive_list li').length > 0 ) {
+  $(month).parent('li').find('.archive_list li').remove()
+} else {
+  $("<%= j(render partial: "archives_list", locals: { posts: @posts }) %>").appendTo(month)
+}

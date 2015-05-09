@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
 
+  get 'feed' => 'posts#feed'
+
   resources :posts, only: [:show, :index] do
     collection do
       match 'search' => 'posts#search', via: [:get, :post], as: :search

@@ -12,6 +12,7 @@
       =render "shared/message_modal"
   .spacer
   .icon-list
+    =link_to 'RSS', "/feed?format=rss", type: "application/rss+xml"
     -unless @theme.pinterest.blank?
       =link_to @theme.pinterest, target: "_blank" do
         .fa.fa-pinterest-square.fa-3x

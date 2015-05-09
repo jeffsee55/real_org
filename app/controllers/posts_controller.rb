@@ -1,6 +1,13 @@
 class PostsController < ApplicationController
   before_filter :verify_and_set_post, only: :show
 
+  def feed
+    @posts= Post.all
+    respond_to do |format|
+      format.rss { render :layout => false }
+    end
+  end
+
   def show
     @post = Post.friendly.find(params[:id])
     @categories = Category.regular

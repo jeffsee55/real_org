@@ -7,10 +7,3 @@
         %strong
           =link_to m, posts_path(month: m), remote: true
         %ul.archive_list{id: m}
-    -#-posts.each do |month, post|
-      -#%li.archive-month
-        -#%strong= month
-        -#%ul.archive-list
-          -#-post.each do |p|
-            -#%li
-              -#=link_to p.title, p
