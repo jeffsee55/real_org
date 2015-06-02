@@ -19,7 +19,7 @@ class PagesController < ApplicationController
     @recent_projects = Post.find_by_title("Recent Projects")
     @about_me = User.last
     @work_with_me = Post.find_by_title("Work With Me")
-    @posts = Post.published.first(3)
+    @posts = Post.joins(:categories).where(categories: { name: "Recent Projects" }).published.limit(3)
     @categories = Category.all
   end
 end

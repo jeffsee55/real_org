@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   def new
     @message = Message.new
+    @posts = Post.joins(:categories).where(categories: { name: "Recent Projects" }).published.limit(3)
   end
 
   def create

@@ -12,7 +12,8 @@
       =render "shared/message_modal"
   .spacer
   .icon-list
-    =link_to 'RSS', "/feed?format=rss", type: "application/rss+xml"
+    =link_to "http://feeds.feedburner.com/therealisticorganizer/lDaA", rel: "alternate", type: "application/rss+xml", target: "_blank" do
+      .fa.fa-rss.fa-3x
     -unless @theme.pinterest.blank?
       =link_to @theme.pinterest, target: "_blank" do
         .fa.fa-pinterest-square.fa-3x
@@ -25,6 +26,9 @@
     -unless @theme.google_plus.blank?
       =link_to @theme.google_plus, target: "_blank" do
         .fa.fa-google-plus-square.fa-3x
+    -unless @theme.blog_lovin.blank?
+      =link_to @theme.blog_lovin, target: "_blank" do
+        .fa.fa-heart.fa-3x
     .spacer
     %h3 NEVER MISS A POST
     = simple_form_for @subscriber do |f|

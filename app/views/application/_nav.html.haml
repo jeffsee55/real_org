@@ -34,21 +34,6 @@
             =link_to "ABOUT ME", about_path
           %li.nav-link
             =link_to "WORK WITH ME", contact_path
-          %li.nav-link.more
-            %a{:href => "javascript:void(0)" }= @menu.slot_1.upcase
-            %ul.submenu
-              -@slot_1.each do |item|
-                %li= eval item.generate_link
-          %li.nav-link.more
-            %a{:href => "javascript:void(0)" }= @menu.slot_2.upcase
-            %ul.submenu
-              -@slot_2.each do |item|
-                %li= eval item.generate_link
-          %li.nav-link.more
-            %a{:href => "javascript:void(0)" }= @menu.slot_3.upcase
-            %ul.submenu
-              -@slot_3.each do |item|
-                %li= eval item.generate_link
           %li.nav-link
             = search_form_for @q, class: "search-bar", url: search_posts_path, html: { method: :post } do |f|
               = f.search_field :title_or_body_cont

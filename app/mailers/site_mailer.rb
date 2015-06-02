@@ -35,7 +35,7 @@ class SiteMailer < ActionMailer::Base
         { name: "LOGO_IMAGE_URL", content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{ Theme.last.logo_image.id }" },
         { name: "IMAGE_URL", content: "https://s3-us-west-2.amazonaws.com/real-org-images/store/#{ post.image.id }" },
         { name: "POST_URL", content: post_url(post) },
-        { name: "EXCERPT", content: post.body }
+        { name: "BODY", content: post.body }
       ],
       merge_vars:
         Subscriber.all.map do |subscriber|

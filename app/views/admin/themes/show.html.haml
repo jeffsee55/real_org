@@ -17,6 +17,9 @@
       %tr
         %td Google Plus
         %td= f.input :google_plus, label: false, placeholder: "Google_plus"
+      %tr
+        %td BlogLovin'
+        %td= f.input :blog_lovin, label: false, placeholder: "BlogLovin'"
     .index
       .card
         #image.card_image{style: "background: url(#{attachment_url(@theme, :logo_image, :fit, 300, 300) if @theme.logo_image_id?}) no-repeat center; background-size: cover"}

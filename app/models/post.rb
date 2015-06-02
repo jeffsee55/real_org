@@ -46,8 +46,8 @@ class Post < ActiveRecord::Base
 
   def publish!
     update(published_at: Time.now)
-    check_for_categories
     self.save
+    check_for_categories
   end
 
   def save_as_draft!

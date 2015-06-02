@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419212440) do
+ActiveRecord::Schema.define(version: 20150601235100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 20150419212440) do
     t.string   "button_color"
     t.string   "signature_image_id"
     t.string   "logo_image_id"
+    t.string   "blog_lovin"
   end
 
   create_table "users", force: true do |t|

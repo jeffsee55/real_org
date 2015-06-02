@@ -20,3 +20,8 @@
           =f.input :spaces, collection: MessageOption.last.spaces, as: :check_boxes, label: false
       %hr
       =f.submit "Submit"
+  = render partial: "shared/page_header", locals: { title: "Recent Projects", q: @q }
+  .index
+    %ul.index_row
+      - @posts.each do |p|
+        =render partial: "shared/tile", locals: { p: p, cat: p.categories.first }
